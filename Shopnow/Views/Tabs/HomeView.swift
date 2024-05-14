@@ -12,23 +12,34 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 0) {
-                    Image("man")
-                        .resizable()
-                        .scaledToFit()
-                    
-                    Image("woman")
-                        .resizable()
-                        .scaledToFit()
-                    
-                    Image("kid")
-                        .resizable()
-                        .scaledToFit()
+                    HomeCardView(title: "İLKBAHAR/YAZ '24", image: "ilkbahar:yaz")
+                    HomeCardView(title: "KADIN", image: "woman")
+                    HomeCardView(title: "ERKEK", image: "man")
                 }
             }
             .ignoresSafeArea()
             .scrollIndicators(.hidden)
             .frame(maxWidth: .infinity)
         }
+    }
+}
+
+struct HomeCardView: View {
+    let title: String
+    let image: String
+    
+    var body: some View {
+        Image(image)
+            .resizable()
+            .scaledToFill()
+            .frame(height: 330)
+            .overlay {
+                Text(title)
+                    .font(.title)
+                    .fontWeight(.light)
+                    .foregroundColor(.white)
+                    .shadow(color: .black, radius: 5)
+            }
     }
 }
 

@@ -10,36 +10,46 @@ import SwiftUI
 struct LandingView: View {
     var body: some View {
         TabView {
-            HomeView()
-                .tabItem {
-                    Image(systemName: "house")
-                    Text("Anasayfa")
-                }
+            NavigationStack {
+                HomeView()
+                    
+            }
+            .tabItem {
+                Image(systemName: "house")
+                Text("Shopnow")
+            }
+            .toolbarBackground(.white, for: .tabBar)
             
-            SearchView()
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Arama")
-                }
             
-            MenuView()
+            CategoriesView()
                 .tabItem {
-                    Image(systemName: "line.horizontal.3")
+                    Image(systemName: "list.bullet")
                     Text("Menü")
                 }
+                .toolbarBackground(.white, for: .tabBar)
             
-            CartView()
+            FavoriesView()
                 .tabItem {
-                    Image(systemName: "cart")
+                    Image(systemName: "heart")
+                    Text("Favorilerim")
+                }
+                .toolbarBackground(.white, for: .tabBar)
+            
+            BasketView()
+                .tabItem {
+                    Image(systemName: "basket")
                     Text("Sepetim")
                 }
+                .toolbarBackground(.white, for: .tabBar)
             
             ProfileView()
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profilim")
                 }
+                .toolbarBackground(.white, for: .tabBar)
         }
+        
     }
 }
 
