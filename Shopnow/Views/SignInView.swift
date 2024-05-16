@@ -10,66 +10,112 @@ import SwiftUI
 struct SignInView: View {
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 20) {
                 emailSection
+                
+                registerSection
             }
+            .padding(.top)
         }
         .navigationTitle("Giriş")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 extension SignInView {
     var emailSection: some View {
         Section {
-            VStack(spacing: 8) {
+            VStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("E-posta")
                         .font(.subheadline)
-                    
+                        .fontWeight(.light)
+
                     TextField("", text: .constant(""))
-                        .padding()
-                        .background(Color(.systemGray6))
+                        .padding(12)
+                        .border(Color.gray, width: 1)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                        .textContentType(.emailAddress)
+                        .disableAutocorrection(true)
                 }
-                .padding(.horizontal)
                 
+
                 VStack(alignment: .leading, spacing: 4) {
-                    
                     Text("Şifre")
                         .font(.subheadline)
-                    
-                    SecureField("Şifre", text: .constant(""))
-                        .padding()
-                        .background(Color(.systemGray6))
+                        .fontWeight(.light)
+
+                    SecureField("", text: .constant(""))
+                        .padding(12)
+                        .border(Color.gray, width: 1)
+                        .textContentType(.password)
+                        .disableAutocorrection(true)
+                        .keyboardType(.default)
                 }
-                .padding(.horizontal)
                 
+                .padding(.bottom)
+
                 Button(action: {
                     print("Giriş Yapıldı")
                 }, label: {
-                    Text("Giriş Yap")
+                    Text("GİRİŞ YAP")
+                        .font(.headline)
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color(.systemBlue))
-                        .cornerRadius(8)
-                        .padding(.horizontal)
+                        .background(Color.accentColor)
+                        
+                })
+                
+                Button(action: {
+                    print("Şifremi Unuttum")
+                }, label: {
+                    Text("Şifremi Unuttum")
+                        .foregroundColor(.primary)
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                        .padding(4)
                 })
             }
-            
-
-            
-            
-            
-            
-            
-            // Forgot password
-            Button(action: {
-                print("Şifremi Unuttum")
-            }, label: {
-                Text("Şifremi Unuttum")
-                    .foregroundColor(.blue)
-                    .padding(.top)
-            })
+            .padding()
+            .padding(.top)
+            .border(Color(.gray.opacity(0.4)), width: 1)
+            .padding(.horizontal)
+        }
+    }
+    
+    var registerSection: some View {
+        Section {
+            VStack(spacing: 10) {
+                Text("ARAMIZA KATILMAK İSTER MİSİN?")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .padding(.bottom)
+                
+                Text("Sipariş takibi, kolay iade ve daha fazlası için bir hesap oluşturun.")
+                    .font(.subheadline)
+                    .multilineTextAlignment(.center)
+                    .fontWeight(.light)
+                    .padding(.bottom)
+                
+                Button(action: {
+                    
+                }, label: {
+                    Text("ÜYE OL")
+                        .fontWeight(.bold)
+                        .font(.headline)
+                        .foregroundColor(.accentColor)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .border(Color.accentColor, width: 1)
+                })
+            }
+            .padding()
+            .padding(.top)
+            .border(Color(.gray.opacity(0.4)), width: 1)
+            .padding(.horizontal)
         }
     }
 }
