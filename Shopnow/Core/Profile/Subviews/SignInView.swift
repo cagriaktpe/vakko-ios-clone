@@ -81,7 +81,7 @@ extension SignInView {
             }
             .padding()
             .padding(.top)
-            .border(Color(.gray.opacity(0.4)), width: 1)
+            .border(Color.gray.opacity(0.4), width: 1)
             .padding(.horizontal)
         }
     }
@@ -114,7 +114,7 @@ extension SignInView {
             }
             .padding()
             .padding(.top)
-            .border(Color(.gray.opacity(0.4)), width: 1)
+            .border(Color.gray.opacity(0.4), width: 1)
             .padding(.horizontal)
         }
     }
