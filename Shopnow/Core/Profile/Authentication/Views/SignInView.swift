@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SignInView: View {
+    
+    @StateObject private var vm = AuthenticationViewModel()
+    @Binding var showSignedInView: Bool
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
@@ -31,7 +35,7 @@ extension SignInView {
                         .font(.subheadline)
                         .fontWeight(.light)
 
-                    TextField("", text: .constant(""))
+                    TextField("", text: $vm.email)
                         .padding(12)
                         .border(Color.gray, width: 1)
                         .keyboardType(.emailAddress)
@@ -46,7 +50,7 @@ extension SignInView {
                         .font(.subheadline)
                         .fontWeight(.light)
 
-                    SecureField("", text: .constant(""))
+                    SecureField("", text: $vm.password)
                         .padding(12)
                         .border(Color.gray, width: 1)
                         .textContentType(.password)
@@ -56,9 +60,7 @@ extension SignInView {
                 
                 .padding(.bottom)
 
-                Button(action: {
-                    print("Giriş Yapıldı")
-                }, label: {
+                Button(action: handleSignInButtonTap) {
                     Text("GİRİŞ YAP")
                         .font(.headline)
                         .fontWeight(.bold)
@@ -67,7 +69,7 @@ extension SignInView {
                         .frame(maxWidth: .infinity)
                         .background(Color.accentColor)
                         
-                })
+                }
                 
                 Button(action: {
                     print("Şifremi Unuttum")
@@ -120,8 +122,30 @@ extension SignInView {
     }
 }
 
+extension SignInView {
+    func handleSignInButtonTap() {
+        Task {
+            do {
+                try await vm.signUp()
+                showSignedInView = false
+                return
+            } catch {
+                print("Error: \(error.localizedDescription)")
+            }
+            
+            do {
+                try await vm.signIn()
+                showSignedInView = false
+                return
+            } catch {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
 #Preview {
     NavigationStack {
-        SignInView()
+        SignInView(showSignedInView: .constant(false))
     }
 }

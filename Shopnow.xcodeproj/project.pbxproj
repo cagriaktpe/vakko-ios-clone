@@ -24,6 +24,12 @@
 		81B35B922C00CAFE008BBF21 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 81B35B912C00CAFE008BBF21 /* FirebaseFirestore */; };
 		81B35B962C00CAFE008BBF21 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 81B35B952C00CAFE008BBF21 /* FirebaseFirestoreSwift */; };
 		81B35BB22C00CB76008BBF21 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B35BB12C00CB76008BBF21 /* AuthenticationManager.swift */; };
+		81B35BBE2C00CD7C008BBF21 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B35BBD2C00CD7C008BBF21 /* Utilities.swift */; };
+		81B35BC22C00CE07008BBF21 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B35BC12C00CE07008BBF21 /* ProfileViewModel.swift */; };
+		81B35BC52C00CE3C008BBF21 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B35BC42C00CE3C008BBF21 /* UserManager.swift */; };
+		81B35BC92C00D0A8008BBF21 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B35BC82C00D0A8008BBF21 /* AuthenticationViewModel.swift */; };
+		81B35BCD2C00D3E4008BBF21 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B35BCC2C00D3E4008BBF21 /* SettingsViewModel.swift */; };
+		81B35BCF2C00D407008BBF21 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B35BCE2C00D407008BBF21 /* SettingsView.swift */; };
 		81C4E55C2BF4BDBB00CEC557 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C4E55B2BF4BDBB00CEC557 /* CategoryModel.swift */; };
 		81C4E55E2BF4BE0C00CEC557 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C4E55D2BF4BE0C00CEC557 /* ProductModel.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +48,12 @@
 		81269E152BF3940600A2137D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		81B35B762C00C9B2008BBF21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81B35BB12C00CB76008BBF21 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		81B35BBD2C00CD7C008BBF21 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		81B35BC12C00CE07008BBF21 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		81B35BC42C00CE3C008BBF21 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		81B35BC82C00D0A8008BBF21 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		81B35BCC2C00D3E4008BBF21 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		81B35BCE2C00D407008BBF21 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		81C4E55B2BF4BDBB00CEC557 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		81C4E55D2BF4BE0C00CEC557 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +101,8 @@
 		81269DFD2BF38F3900A2137D /* Shopnow */ = {
 			isa = PBXGroup;
 			children = (
+				81B35BC32C00CE2C008BBF21 /* Firestore */,
+				81B35BBC2C00CD6D008BBF21 /* Utilities */,
 				8123BAAC2BF628EF0005434D /* Authentication */,
 				81B35BB32C00CC12008BBF21 /* Core */,
 				81B35B762C00C9B2008BBF21 /* GoogleService-Info.plist */,
@@ -132,18 +146,12 @@
 		81B35BB52C00CC3D008BBF21 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				81269E152BF3940600A2137D /* ProfileView.swift */,
-				81B35BB62C00CCBC008BBF21 /* Subviews */,
+				81B35BCB2C00D3D8008BBF21 /* Settings */,
+				81B35BC62C00D07D008BBF21 /* Authentication */,
+				81B35BC02C00CDD3008BBF21 /* ViewModels */,
+				81B35BBF2C00CDCA008BBF21 /* Views */,
 			);
 			path = Profile;
-			sourceTree = "<group>";
-		};
-		81B35BB62C00CCBC008BBF21 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				8123BAAD2BF6291B0005434D /* SignInView.swift */,
-			);
-			path = Subviews;
 			sourceTree = "<group>";
 		};
 		81B35BB72C00CCD9008BBF21 /* Favories */ = {
@@ -185,6 +193,72 @@
 				81C4E55D2BF4BE0C00CEC557 /* ProductModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		81B35BBC2C00CD6D008BBF21 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				81B35BBD2C00CD7C008BBF21 /* Utilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		81B35BBF2C00CDCA008BBF21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				81269E152BF3940600A2137D /* ProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		81B35BC02C00CDD3008BBF21 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				81B35BC12C00CE07008BBF21 /* ProfileViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		81B35BC32C00CE2C008BBF21 /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				81B35BC42C00CE3C008BBF21 /* UserManager.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
+		81B35BC62C00D07D008BBF21 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				81B35BC72C00D09D008BBF21 /* ViewModels */,
+				81B35BCA2C00D103008BBF21 /* Views */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		81B35BC72C00D09D008BBF21 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				81B35BC82C00D0A8008BBF21 /* AuthenticationViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		81B35BCA2C00D103008BBF21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8123BAAD2BF6291B0005434D /* SignInView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		81B35BCB2C00D3D8008BBF21 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				81B35BCC2C00D3E4008BBF21 /* SettingsViewModel.swift */,
+				81B35BCE2C00D407008BBF21 /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,15 +344,21 @@
 			files = (
 				81269E122BF393C100A2137D /* CategoriesView.swift in Sources */,
 				81269E102BF393B100A2137D /* FavoriesView.swift in Sources */,
+				81B35BC52C00CE3C008BBF21 /* UserManager.swift in Sources */,
 				81B35BB22C00CB76008BBF21 /* AuthenticationManager.swift in Sources */,
 				81269E0E2BF3939800A2137D /* HomeView.swift in Sources */,
+				81B35BCF2C00D407008BBF21 /* SettingsView.swift in Sources */,
 				81269E012BF38F3900A2137D /* LandingView.swift in Sources */,
+				81B35BC92C00D0A8008BBF21 /* AuthenticationViewModel.swift in Sources */,
 				8123BAAE2BF6291B0005434D /* SignInView.swift in Sources */,
+				81B35BBE2C00CD7C008BBF21 /* Utilities.swift in Sources */,
 				81C4E55E2BF4BE0C00CEC557 /* ProductModel.swift in Sources */,
 				81269E142BF393DD00A2137D /* BasketView.swift in Sources */,
 				81269E162BF3940600A2137D /* ProfileView.swift in Sources */,
+				81B35BC22C00CE07008BBF21 /* ProfileViewModel.swift in Sources */,
 				81269DFF2BF38F3900A2137D /* ShopnowApp.swift in Sources */,
 				81C4E55C2BF4BDBB00CEC557 /* CategoryModel.swift in Sources */,
+				81B35BCD2C00D3E4008BBF21 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

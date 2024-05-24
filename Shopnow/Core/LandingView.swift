@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LandingView: View {
+    
+    @State var showSignInView: Bool = false
+    
     var body: some View {
         TabView {
             NavigationStack {
@@ -41,7 +44,7 @@ struct LandingView: View {
                 .toolbarBackground(.white, for: .tabBar)
 
             NavigationStack {
-                ProfileView()
+                ProfileView(showSignInView: $showSignInView)
             }
             .tabItem {
                 Image(systemName: "person")
