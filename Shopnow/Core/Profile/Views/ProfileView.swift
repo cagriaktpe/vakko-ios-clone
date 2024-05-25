@@ -18,48 +18,145 @@ struct ProfileView: View {
             header
                 .listRowInsets(EdgeInsets())
 
-            NavigationLink(destination: Text("SİPARİŞLERİM")) {
-                Text("SİPARİŞLERİM")
+            ZStack {
+                NavigationLink(destination: Text("SİPARİŞLERİM")) {
+                    EmptyView()
+                }
+
+                HStack {
+                    Text("SİPARİŞLERİM")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.gray)
+                }
             }
 
-            NavigationLink(destination: Text("İPTAL ve İADE İŞLEMLERİ")) {
-                Text("İPTAL ve İADE İŞLEMLERİ")
+            ZStack {
+                NavigationLink(destination: Text("İPTAL ve İADE İŞLEMLERİ")) {
+                    EmptyView()
+                }
+
+                HStack {
+                    Text("İPTAL ve İADE İŞLEMLERİ")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.gray)
+                }
             }
 
-            NavigationLink(destination: Text("FAVORİLERİM")) {
-                Text("FAVORİLERİM")
+            ZStack {
+                NavigationLink(destination: Text("FAVORİLERİM")) {
+                    EmptyView()
+                }
+
+                HStack {
+                    Text("FAVORİLERİM")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.gray)
+                }
             }
 
-            NavigationLink(destination: Text("HESABIM")) {
-                Text("HESABIM")
+            ZStack {
+                NavigationLink(destination: Text("HESABIM")) {
+                    EmptyView()
+                }
+
+                HStack {
+                    Text("HESABIM")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.gray)
+                }
             }
 
-            NavigationLink(destination: Text("SHOPNOW CARD")) {
-                Text("SHOPNOW CARD")
+            ZStack {
+                NavigationLink(destination: Text("SHOPNOW CARD")) {
+                    EmptyView()
+                }
+
+                HStack {
+                    Text("SHOPNOW CARD")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.gray)
+                }
             }
 
-            NavigationLink(destination: Text("ADRESLERİM")) {
-                Text("ADRESLERİM")
+            ZStack {
+                NavigationLink(destination: Text("ADRESLERİM")) {
+                    EmptyView()
+                }
+
+                HStack {
+                    Text("ADRESLERİM")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.gray)
+                }
             }
 
-            NavigationLink(destination: Text("EPOSTA DEĞİŞTİRME")) {
-                Text("EPOSTA DEĞİŞTİRME")
+            ZStack {
+                NavigationLink(destination: Text("EPOSTA DEĞİŞTİRME")) {
+                    EmptyView()
+                }
+
+                HStack {
+                    Text("EPOSTA DEĞİŞTİRME")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.gray)
+                }
             }
 
-            NavigationLink(destination: Text("ŞİFRE DEĞİŞTİRME")) {
-                Text("ŞİFRE DEĞİŞTİRME")
+            ZStack {
+                NavigationLink(destination: Text("ŞİFRE DEĞİŞTİRME")) {
+                    EmptyView()
+                }
+
+                HStack {
+                    Text("ŞİFRE DEĞİŞTİRME")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.gray)
+                }
             }
 
-            NavigationLink(destination: Text("KUPONLARIM")) {
-                Text("KUPONLARIM")
+            ZStack {
+                NavigationLink(destination: Text("KUPONLARIM")) {
+                    EmptyView()
+                }
+
+                HStack {
+                    Text("KUPONLARIM")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.gray)
+                }
             }
 
-            NavigationLink(destination: Text("İLETİŞİM İZİNLERİ")) {
-                Text("İLETİŞİM İZİNLERİ")
+            ZStack {
+                NavigationLink(destination: Text("İLETİŞİM İZİNLERİ")) {
+                    EmptyView()
+                }
+
+                HStack {
+                    Text("İLETİŞİM İZİNLERİ")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.gray)
+                }
             }
 
-            NavigationLink(destination: Text("ÇIKIŞ YAP")) {
-                Text("ÇIKIŞ YAP")
+            HStack {
+                Button(action: handleSignOut) {
+                    Text("ÇIKIŞ YAP")
+                }
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(.gray)
             }
         }
         .listStyle(.plain)
@@ -109,6 +206,17 @@ extension ProfileView {
         .frame(maxHeight: .infinity, alignment: .center)
         .padding(.vertical, 5)
         .background(Color.accentColor)
+    }
+}
+
+extension ProfileView {
+    func handleSignOut() {
+        do {
+            try viewModel.signOut()
+            showSignInView = true
+        } catch {
+            print("Error signing out: \(error.localizedDescription)")
+        }
     }
 }
 
