@@ -185,6 +185,7 @@
 		81B35BBA2C00CD0F008BBF21 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				81F8C6DF2C020F28005C701B /* Views */,
 				81B35BBB2C00CD13008BBF21 /* Models */,
 			);
 			path = Shared;
@@ -265,6 +266,13 @@
 				81B35BCE2C00D407008BBF21 /* SettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		81F8C6DF2C020F28005C701B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

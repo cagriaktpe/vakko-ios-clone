@@ -20,7 +20,11 @@ final class AuthenticationViewModel: ObservableObject {
     @Published var surname: String = ""
     @Published var phoneNumber: String = ""
     @Published var birthDate: Date? = nil
-    
+    @Published var selectedDate: Date = Date() {
+        didSet {
+            birthDate = selectedDate
+        }
+    }
     
     // Sign Up with Anonymously
     func signInWithAnonymous() async throws {

@@ -8,26 +8,42 @@
 import SwiftUI
 
 struct SignUpView: View {
-    
     @ObservedObject var vm: AuthenticationViewModel
-    
+
     @Binding var showSignedInView: Bool
     @Binding var tabSelection: Int
-    
+
     @State private var showDatePicker = false
+
     @State private var firstCheckBox = false
     @State private var secondCheckBox = false
     @State private var thirdCheckBox = false
     @State private var fourthCheckBox = false
     @State private var fifthCheckBox = false
-    
-    
+
     var body: some View {
         ScrollView {
             signInSection
         }
         .navigationTitle("Üye Ol")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showDatePicker) {
+            NavigationStack {
+                datePicker
+                    
+                    .toolbar {
+                        
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("TAMAM") {
+                                showDatePicker.toggle()
+                            }
+                        }
+                    }
+            }
+            .presentationDetents(
+                [.small])
+            
+        }
     }
 }
 
@@ -44,7 +60,7 @@ extension SignUpView {
                     .padding(.bottom, 5)
                 agreementPart
                 signUpButton
-                .padding(.bottom)
+                    .padding(.bottom)
             }
             .padding()
             .padding(.top)
@@ -52,7 +68,7 @@ extension SignUpView {
             .padding(.horizontal)
         }
     }
-    
+
     var nameRow: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Ad")
@@ -68,7 +84,7 @@ extension SignUpView {
                 .disableAutocorrection(true)
         }
     }
-    
+
     var surnameRow: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Soyad")
@@ -84,7 +100,7 @@ extension SignUpView {
                 .disableAutocorrection(true)
         }
     }
-    
+
     var phoneNumberRow: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Telefon")
@@ -100,7 +116,7 @@ extension SignUpView {
                 .disableAutocorrection(true)
         }
     }
-    
+
     var emailRow: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("E-posta")
@@ -116,7 +132,7 @@ extension SignUpView {
                 .disableAutocorrection(true)
         }
     }
-    
+
     var passwordRow: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Şifre")
@@ -131,7 +147,7 @@ extension SignUpView {
                 .keyboardType(.default)
         }
     }
-    
+
     var birthDayRow: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Doğum Tarihi")
@@ -145,7 +161,7 @@ extension SignUpView {
                     Text(vm.birthDate == nil ? "Seçiniz" : vm.birthDate!.toStringMiddle())
                         .foregroundStyle(Color.primary)
                         .fontWeight(.light)
-                    
+
                     Spacer()
                     Image(systemName: "chevron.right")
                         .font(.headline)
@@ -155,7 +171,13 @@ extension SignUpView {
             }
         }
     }
-    
+
+    var datePicker: some View {
+        DatePicker("Doğum Tarihi", selection: $vm.selectedDate, in: ...Date(), displayedComponents: .date)
+            .datePickerStyle(.wheel)
+            .labelsHidden()
+    }
+
     var agreementPart: some View {
         VStack(spacing: 36) {
             Text("Üyelik olmadan önce lütfen Aydınlatma Metni'ni okuyunuz. Aydınlatma metnine her zaman bu link'ten veya mobil uygulama üzerinden ulaşabilirsiniz.")
@@ -163,8 +185,7 @@ extension SignUpView {
                 .font(.subheadline)
                 .fontWeight(.light)
                 .multilineTextAlignment(.leading)
-                
-            
+
             Toggle(isOn: $firstCheckBox) {
                 Text("Shopnow Tekstil ve Hazır Giyim San. İşi A.Ş. tarafından kampanya ve ürünler hakkında E-posta ile tarafımla iletişim kurulmasına izin veriyorum.")
                     .font(.subheadline)
@@ -174,7 +195,7 @@ extension SignUpView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundStyle(.primary)
             .toggleStyle(iOSCheckboxToggleStyle())
-            
+
             Toggle(isOn: $secondCheckBox) {
                 Text("Shopnow Tekstil ve Hazır Giyim San. İşi A.Ş. tarafından kampanya ve ürünler hakkında SMS ile tarafımla iletişim kurulmasına izin veriyorum.")
                     .font(.subheadline)
@@ -184,7 +205,7 @@ extension SignUpView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundStyle(.primary)
             .toggleStyle(iOSCheckboxToggleStyle())
-            
+
             Toggle(isOn: $thirdCheckBox) {
                 Text("Shopnow Tekstil ve Hazır Giyim San. İşi A.Ş. tarafından kampanya ve ürünler hakkında telefon ile tarafımla iletişim kurulmasına izin veriyorum.")
                     .font(.subheadline)
@@ -194,7 +215,7 @@ extension SignUpView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundStyle(.primary)
             .toggleStyle(iOSCheckboxToggleStyle())
-            
+
             Toggle(isOn: $fourthCheckBox) {
                 Text("Üyelik Sözleşmesi'ni okudum ve kabul ediyorum.")
                     .font(.subheadline)
@@ -204,7 +225,7 @@ extension SignUpView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundStyle(.primary)
             .toggleStyle(iOSCheckboxToggleStyle())
-            
+
             Toggle(isOn: $fifthCheckBox) {
                 Text("Açık Rıza Metni'ni okudum, onaylıyorum.")
                     .font(.subheadline)
@@ -214,14 +235,10 @@ extension SignUpView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundStyle(.primary)
             .toggleStyle(iOSCheckboxToggleStyle())
-            
-
-                
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        
     }
-    
+
     var signUpButton: some View {
         Button {
             Task {

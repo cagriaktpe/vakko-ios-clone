@@ -8,6 +8,7 @@
       "size" : "20x20"
     },
     {
+      "filename" : "60.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -34,6 +35,7 @@
       "size" : "38x38"
     },
     {
+      "filename" : "114.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -47,14 +49,14 @@
       "size" : "40x40"
     },
     {
-      "filename" : "120.png",
+      "filename" : "120 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
       "size" : "40x40"
     },
     {
-      "filename" : "120 1.png",
+      "filename" : "120.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
