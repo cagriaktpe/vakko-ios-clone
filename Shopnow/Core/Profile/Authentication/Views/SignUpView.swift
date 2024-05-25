@@ -15,6 +15,12 @@ struct SignUpView: View {
     @Binding var tabSelection: Int
     
     @State private var showDatePicker = false
+    @State private var firstCheckBox = false
+    @State private var secondCheckBox = false
+    @State private var thirdCheckBox = false
+    @State private var fourthCheckBox = false
+    @State private var fifthCheckBox = false
+    
     
     var body: some View {
         ScrollView {
@@ -35,6 +41,9 @@ extension SignUpView {
                 emailRow
                 passwordRow
                 birthDayRow
+                    .padding(.bottom, 5)
+                agreementPart
+                signUpButton
                 .padding(.bottom)
             }
             .padding()
@@ -145,6 +154,95 @@ extension SignUpView {
                 .border(Color.gray, width: 1)
             }
         }
+    }
+    
+    var agreementPart: some View {
+        VStack(spacing: 36) {
+            Text("Üyelik olmadan önce lütfen Aydınlatma Metni'ni okuyunuz. Aydınlatma metnine her zaman bu link'ten veya mobil uygulama üzerinden ulaşabilirsiniz.")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.subheadline)
+                .fontWeight(.light)
+                .multilineTextAlignment(.leading)
+                
+            
+            Toggle(isOn: $firstCheckBox) {
+                Text("Shopnow Tekstil ve Hazır Giyim San. İşi A.Ş. tarafından kampanya ve ürünler hakkında E-posta ile tarafımla iletişim kurulmasına izin veriyorum.")
+                    .font(.subheadline)
+                    .fontWeight(.light)
+                    .multilineTextAlignment(.leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(.primary)
+            .toggleStyle(iOSCheckboxToggleStyle())
+            
+            Toggle(isOn: $secondCheckBox) {
+                Text("Shopnow Tekstil ve Hazır Giyim San. İşi A.Ş. tarafından kampanya ve ürünler hakkında SMS ile tarafımla iletişim kurulmasına izin veriyorum.")
+                    .font(.subheadline)
+                    .fontWeight(.light)
+                    .multilineTextAlignment(.leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(.primary)
+            .toggleStyle(iOSCheckboxToggleStyle())
+            
+            Toggle(isOn: $thirdCheckBox) {
+                Text("Shopnow Tekstil ve Hazır Giyim San. İşi A.Ş. tarafından kampanya ve ürünler hakkında telefon ile tarafımla iletişim kurulmasına izin veriyorum.")
+                    .font(.subheadline)
+                    .fontWeight(.light)
+                    .multilineTextAlignment(.leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(.primary)
+            .toggleStyle(iOSCheckboxToggleStyle())
+            
+            Toggle(isOn: $fourthCheckBox) {
+                Text("Üyelik Sözleşmesi'ni okudum ve kabul ediyorum.")
+                    .font(.subheadline)
+                    .fontWeight(.light)
+                    .multilineTextAlignment(.leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(.primary)
+            .toggleStyle(iOSCheckboxToggleStyle())
+            
+            Toggle(isOn: $fifthCheckBox) {
+                Text("Açık Rıza Metni'ni okudum, onaylıyorum.")
+                    .font(.subheadline)
+                    .fontWeight(.light)
+                    .multilineTextAlignment(.leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(.primary)
+            .toggleStyle(iOSCheckboxToggleStyle())
+            
+
+                
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        
+    }
+    
+    var signUpButton: some View {
+        Button {
+            Task {
+                do {
+                    try await vm.signUp()
+                    showSignedInView = false
+                    return
+                } catch {
+                    print("Error: \(error.localizedDescription)")
+                }
+            }
+        } label: {
+            Text("ÜYE OL")
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.accentColor)
+        }
+        .padding(.top, 24)
     }
 }
 

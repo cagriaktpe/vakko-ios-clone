@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 final class Utilities {
     
@@ -33,4 +34,27 @@ final class Utilities {
         return controller
     }
 
+}
+
+struct iOSCheckboxToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        // 1
+        Button(action: {
+
+            // 2
+            configuration.isOn.toggle()
+
+        }, label: {
+            HStack(alignment: .top) {
+                // 3
+                Image(systemName: configuration.isOn ? "checkmark.square" : "square")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(configuration.isOn ? Color.accentColor : .gray)
+                
+                
+                configuration.label
+            }
+        })
+    }
 }
