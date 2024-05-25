@@ -10,7 +10,11 @@ import SwiftUI
 struct SignInView: View {
     
     @StateObject private var vm = AuthenticationViewModel()
+    
     @Binding var showSignedInView: Bool
+    @Binding var tabSelection: Int
+    
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ScrollView {
@@ -23,6 +27,17 @@ struct SignInView: View {
         }
         .navigationTitle("Giriş")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                    tabSelection = 0
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .font(.headline)
+                }
+            }
+        }
     }
 }
 
@@ -146,6 +161,6 @@ extension SignInView {
 
 #Preview {
     NavigationStack {
-        SignInView(showSignedInView: .constant(false))
+        SignInView(showSignedInView: .constant(false), tabSelection: .constant(5))
     }
 }

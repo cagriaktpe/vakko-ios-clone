@@ -10,7 +10,9 @@ import SwiftUI
 struct ProfileView: View {
     
     @StateObject private var viewModel = ProfileViewModel()
+    
     @Binding var showSignInView: Bool
+    @Binding var tabSelection: Int
     
     var body: some View {
         List {
@@ -51,7 +53,7 @@ struct ProfileView: View {
         }
         .fullScreenCover(isPresented: $showSignInView, content: {
             NavigationStack {
-                SignInView(showSignedInView: $showSignInView)
+                SignInView(showSignedInView: $showSignInView, tabSelection: $tabSelection)
             }
         })
         .task {
@@ -62,6 +64,6 @@ struct ProfileView: View {
 
 #Preview {
     NavigationStack {
-        ProfileView(showSignInView: .constant(false))
+        ProfileView(showSignInView: .constant(false), tabSelection: .constant(5))
     }
 }

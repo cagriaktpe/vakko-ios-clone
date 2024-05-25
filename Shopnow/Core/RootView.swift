@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  RootView.swift
 //  Shopnow
 //
 //  Created by Samet Çağrı Aktepe on 14.05.2024.
@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct LandingView: View {
+struct RootView: View {
     
     @State var showSignInView: Bool = false
+    @State private var tabSelection = 0
     
     var body: some View {
-        TabView {
+        TabView(selection: $tabSelection) {
             NavigationStack {
                 HomeView()
             }
@@ -20,6 +21,7 @@ struct LandingView: View {
                 Image(systemName: "house")
                 Text("Shopnow")
             }
+            .tag(0)
             .toolbarBackground(.white, for: .tabBar)
 
             CategoriesView()
@@ -27,6 +29,7 @@ struct LandingView: View {
                     Image(systemName: "list.bullet")
                     Text("Menü")
                 }
+                .tag(1)
                 .toolbarBackground(.white, for: .tabBar)
 
             FavoriesView()
@@ -34,6 +37,7 @@ struct LandingView: View {
                     Image(systemName: "heart")
                     Text("Favorilerim")
                 }
+                .tag(2)
                 .toolbarBackground(.white, for: .tabBar)
 
             BasketView()
@@ -41,20 +45,22 @@ struct LandingView: View {
                     Image(systemName: "basket")
                     Text("Sepetim")
                 }
+                .tag(3)
                 .toolbarBackground(.white, for: .tabBar)
 
             NavigationStack {
-                ProfileView(showSignInView: $showSignInView)
+                ProfileView(showSignInView: $showSignInView, tabSelection: $tabSelection)
             }
             .tabItem {
                 Image(systemName: "person")
                 Text("Profilim")
             }
+            .tag(4)
             .toolbarBackground(.white, for: .tabBar)
         }
     }
 }
 
 #Preview {
-    LandingView()
+    RootView()
 }

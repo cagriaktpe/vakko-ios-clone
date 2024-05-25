@@ -23,7 +23,7 @@ struct ShopnowApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LandingView()
+            RootView()
         }
     }
 }
