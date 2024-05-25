@@ -140,13 +140,13 @@ extension SignInView {
 extension SignInView {
     func handleSignInButtonTap() {
         Task {
-            do {
-                try await vm.signUp()
-                showSignedInView = false
-                return
-            } catch {
-                print("Error: \(error.localizedDescription)")
-            }
+//            do {
+//                try await vm.signUp()
+//                showSignedInView = false
+//                return
+//            } catch {
+//                print("Error: \(error.localizedDescription)")
+//            }
             
             do {
                 try await vm.signIn()
