@@ -11,8 +11,16 @@ import Foundation
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
     
+    // Shared
     @Published var email = ""
     @Published var password = ""
+    
+    // Sign Up
+    @Published var name: String = ""
+    @Published var surname: String = ""
+    @Published var phoneNumber: String = ""
+    @Published var birthDate: Date? = nil
+    
     
     // Sign Up with Anonymously
     func signInWithAnonymous() async throws {

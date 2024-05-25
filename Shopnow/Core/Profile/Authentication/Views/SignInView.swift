@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @StateObject private var vm = AuthenticationViewModel()
+    @StateObject var vm = AuthenticationViewModel()
     
     @Binding var showSignedInView: Bool
     @Binding var tabSelection: Int
@@ -19,7 +19,7 @@ struct SignInView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                emailSection
+                signInSection
                 
                 registerSection
             }
@@ -42,7 +42,7 @@ struct SignInView: View {
 }
 
 extension SignInView {
-    var emailSection: some View {
+    var signInSection: some View {
         Section {
             VStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
@@ -117,9 +117,10 @@ extension SignInView {
                     .fontWeight(.light)
                     .padding(.bottom)
                 
-                Button(action: {
-                    
-                }, label: {
+                NavigationLink {
+                    SignUpView(vm: vm, showSignedInView: $showSignedInView, tabSelection: $tabSelection)
+                        .toolbarRole(.editor)
+                } label: {
                     Text("ÜYE OL")
                         .fontWeight(.bold)
                         .font(.headline)
@@ -127,7 +128,8 @@ extension SignInView {
                         .padding()
                         .frame(maxWidth: .infinity)
                         .border(Color.accentColor, width: 1)
-                })
+                }
+               
             }
             .padding()
             .padding(.top)
