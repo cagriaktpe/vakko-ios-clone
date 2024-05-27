@@ -32,19 +32,21 @@ struct ProfileView: View {
                 }
             }
 
-            ZStack {
-                NavigationLink(destination: Text("İPTAL ve İADE İŞLEMLERİ")) {
-                    EmptyView()
-                }
-                .opacity(0)
-
-                HStack {
-                    Text("İPTAL ve İADE İŞLEMLERİ")
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundStyle(.gray)
-                }
-            }
+//            ZStack {
+//                NavigationLink(destination: Text("İPTAL ve İADE İŞLEMLERİ")) {
+//                    EmptyView()
+//                }
+//                .opacity(0)
+//
+//                HStack {
+//                    Text("İPTAL ve İADE İŞLEMLERİ")
+//                    Spacer()
+//                    Image(systemName: "chevron.right")
+//                        .foregroundStyle(.gray)
+//                }
+//            }
+//            .disabled(true)
+//            .foregroundStyle(Color.secondary)
 
             ZStack {
                 NavigationLink(destination: Text("FAVORİLERİM")) {
@@ -74,19 +76,21 @@ struct ProfileView: View {
                 }
             }
 
-            ZStack {
-                NavigationLink(destination: Text("SHOPNOW CARD")) {
-                    EmptyView()
-                }
-                .opacity(0)
-
-                HStack {
-                    Text("SHOPNOW CARD")
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundStyle(.gray)
-                }
-            }
+//            ZStack {
+//                NavigationLink(destination: Text("SHOPNOW CARD")) {
+//                    EmptyView()
+//                }
+//                .opacity(0)
+//
+//                HStack {
+//                    Text("SHOPNOW CARD")
+//                    Spacer()
+//                    Image(systemName: "chevron.right")
+//                        .foregroundStyle(.gray)
+//                }
+//            }
+//            .disabled(true)
+//            .foregroundStyle(Color.secondary)
 
             ZStack {
                 NavigationLink(destination: Text("ADRESLERİM")) {
@@ -102,61 +106,69 @@ struct ProfileView: View {
                 }
             }
 
-            ZStack {
-                NavigationLink(destination: UpdateEmailView(vm: viewModel, showSignedInView: $showSignInView, tabSelection: $tabSelection)) {
-                    EmptyView()
-                }
-                .opacity(0)
+//            ZStack {
+//                NavigationLink(destination: UpdateEmailView(vm: viewModel, showSignedInView: $showSignInView, tabSelection: $tabSelection)) {
+//                    EmptyView()
+//                }
+//                .opacity(0)
+//
+//                HStack {
+//                    Text("EPOSTA DEĞİŞTİRME")
+//                    Spacer()
+//                    Image(systemName: "chevron.right")
+//                        .foregroundStyle(.gray)
+//                }
+//            }
+//            .disabled(true)
+//            .foregroundStyle(Color.secondary)
 
-                HStack {
-                    Text("EPOSTA DEĞİŞTİRME")
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundStyle(.gray)
-                }
-            }
+//            ZStack {
+//                NavigationLink(destination: Text("ŞİFRE DEĞİŞTİRME")) {
+//                    EmptyView()
+//                }
+//                .opacity(0)
+//
+//                HStack {
+//                    Text("ŞİFRE DEĞİŞTİRME")
+//                    Spacer()
+//                    Image(systemName: "chevron.right")
+//                        .foregroundStyle(.gray)
+//                }
+//            }
+//            .disabled(true)
+//            .foregroundStyle(Color.secondary)
 
-            ZStack {
-                NavigationLink(destination: Text("ŞİFRE DEĞİŞTİRME")) {
-                    EmptyView()
-                }
-                .opacity(0)
+//            ZStack {
+//                NavigationLink(destination: Text("KUPONLARIM")) {
+//                    EmptyView()
+//                }
+//                .opacity(0)
+//
+//                HStack {
+//                    Text("KUPONLARIM")
+//                    Spacer()
+//                    Image(systemName: "chevron.right")
+//                        .foregroundStyle(.gray)
+//                }
+//            }
+//            .disabled(true)
+//            .foregroundStyle(Color.secondary)
 
-                HStack {
-                    Text("ŞİFRE DEĞİŞTİRME")
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundStyle(.gray)
-                }
-            }
-
-            ZStack {
-                NavigationLink(destination: Text("KUPONLARIM")) {
-                    EmptyView()
-                }
-                .opacity(0)
-
-                HStack {
-                    Text("KUPONLARIM")
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundStyle(.gray)
-                }
-            }
-
-            ZStack {
-                NavigationLink(destination: Text("İLETİŞİM İZİNLERİ")) {
-                    EmptyView()
-                }
-                .opacity(0)
-
-                HStack {
-                    Text("İLETİŞİM İZİNLERİ")
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundStyle(.gray)
-                }
-            }
+//            ZStack {
+//                NavigationLink(destination: Text("İLETİŞİM İZİNLERİ")) {
+//                    EmptyView()
+//                }
+//                .opacity(0)
+//
+//                HStack {
+//                    Text("İLETİŞİM İZİNLERİ")
+//                    Spacer()
+//                    Image(systemName: "chevron.right")
+//                        .foregroundStyle(.gray)
+//                }
+//            }
+//            .disabled(true)
+//            .foregroundStyle(Color.secondary)
 
             HStack {
                 Button(action: handleSignOut) {
@@ -213,17 +225,9 @@ extension ProfileView {
             }
 
             if let email = viewModel.user?.email {
-                HStack {
-                    Text(email)
-                        .font(.subheadline)
-                        .foregroundStyle(.white)
-
-                    if !AuthenticationManager.shared.checkIfEmailVerified() {
-                        Image(systemName: "envelope.badge.fill")
-                            .foregroundStyle(.yellow)
-                            .shadow(radius: 3)
-                    }
-                }
+                Text(email)
+                    .font(.subheadline)
+                    .foregroundStyle(.white)
             }
         }
         .frame(maxWidth: .infinity, alignment: .center)
