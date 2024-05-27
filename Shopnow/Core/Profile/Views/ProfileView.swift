@@ -190,9 +190,9 @@ extension ProfileView {
         VStack(spacing: 5) {
             if let name = viewModel.user?.name,
                let surname = viewModel.user?.surname {
-                Text("\(name) \(surname)")
+                Text("\(name) \(surname)".uppercased())
                     .foregroundStyle(.white)
-                    .font(.title3)
+                    .font(.headline)
                     .fontWeight(.bold)
             }
 
