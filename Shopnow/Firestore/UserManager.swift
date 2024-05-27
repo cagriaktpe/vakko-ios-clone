@@ -118,7 +118,7 @@ final class UserManager {
     }()
     
     func createNewUser(user: DBUser) async throws {
-        try userDocument(userId: user.userId).setData(from: user, merge: false)
+        try userDocument(userId: user.userId).setData(from: user, merge: false)        
     }
     
     func getUser(userId: String) async throws -> DBUser {

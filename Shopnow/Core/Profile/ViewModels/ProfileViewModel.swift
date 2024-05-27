@@ -72,6 +72,9 @@ final class ProfileViewModel: ObservableObject {
             try? await UserManager.shared.updateUser(userId: user.userId, newName: name, newSurname: surname, newPhoneNumber: phoneNumber)
             self.user = try await UserManager.shared.getUser(userId: user.userId)
         }
-        
+    }
+    
+    func verifyEmail() async throws {
+        try await AuthenticationManager.shared.verifyEmail()
     }
 }

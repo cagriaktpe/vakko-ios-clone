@@ -109,6 +109,18 @@ extension AuthenticationManager {
         try await user.sendEmailVerification(beforeUpdatingEmail: email)
         try await UserManager.shared.updateUserEmail(userId: user.uid, newEmail: email)
     }
+    
+    func checkIfEmailVerified() -> Bool {
+        return Auth.auth().currentUser?.isEmailVerified ?? false
+    }
+    
+    func verifyEmail() async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw NSError(domain: "AuthenticationManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found."])
+        }
+        
+        try await user.sendEmailVerification()
+    }
 }
 
 // MARK: - SIGN IN ANONYMOUS

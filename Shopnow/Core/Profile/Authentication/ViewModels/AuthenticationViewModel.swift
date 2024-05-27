@@ -42,6 +42,8 @@ final class AuthenticationViewModel: ObservableObject {
 
         let authDataResult = try await AuthenticationManager.shared.createUser(email: email, password: password)
         let user = DBUser(userId: authDataResult.uid, name: name, surname: surname, phoneNumber: phoneNumber, birthDate: birthDate, isAnonymous: false, email: email, photoURL: nil, dateCreated: Date())
+        
+        
         try await UserManager.shared.createNewUser(user: user)
     }
     

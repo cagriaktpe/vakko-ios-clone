@@ -12,7 +12,7 @@ struct ProfileView: View {
 
     @Binding var showSignInView: Bool
     @Binding var tabSelection: Int
-
+    
     var body: some View {
         List {
             header
@@ -197,6 +197,7 @@ struct ProfileView: View {
                 try? await viewModel.loadCurrentUser()
             }
         }
+        
     }
 }
 
@@ -212,9 +213,17 @@ extension ProfileView {
             }
 
             if let email = viewModel.user?.email {
-                Text(email)
-                    .font(.subheadline)
-                    .foregroundStyle(.white)
+                HStack {
+                    Text(email)
+                        .font(.subheadline)
+                        .foregroundStyle(.white)
+
+                    if !AuthenticationManager.shared.checkIfEmailVerified() {
+                        Image(systemName: "envelope.badge.fill")
+                            .foregroundStyle(.yellow)
+                            .shadow(radius: 3)
+                    }
+                }
             }
         }
         .frame(maxWidth: .infinity, alignment: .center)
