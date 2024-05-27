@@ -332,11 +332,11 @@
 			};
 			buildConfigurationList = 81269DF62BF38F3900A2137D /* Build configuration list for PBXProject "Shopnow" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = tr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				tr,
 			);
 			mainGroup = 81269DF22BF38F3900A2137D;
 			packageReferences = (
