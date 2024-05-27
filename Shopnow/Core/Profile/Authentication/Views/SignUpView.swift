@@ -30,6 +30,7 @@ struct SignUpView: View {
         }
         .navigationTitle("Üye Ol")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarRole(.editor)
         .sheet(isPresented: $showDatePicker) {
             NavigationStack {
                 datePicker

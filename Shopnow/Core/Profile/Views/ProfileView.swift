@@ -22,6 +22,7 @@ struct ProfileView: View {
                 NavigationLink(destination: Text("SİPARİŞLERİM")) {
                     EmptyView()
                 }
+                .opacity(0)
 
                 HStack {
                     Text("SİPARİŞLERİM")
@@ -35,6 +36,7 @@ struct ProfileView: View {
                 NavigationLink(destination: Text("İPTAL ve İADE İŞLEMLERİ")) {
                     EmptyView()
                 }
+                .opacity(0)
 
                 HStack {
                     Text("İPTAL ve İADE İŞLEMLERİ")
@@ -48,6 +50,7 @@ struct ProfileView: View {
                 NavigationLink(destination: Text("FAVORİLERİM")) {
                     EmptyView()
                 }
+                .opacity(0)
 
                 HStack {
                     Text("FAVORİLERİM")
@@ -58,9 +61,10 @@ struct ProfileView: View {
             }
 
             ZStack {
-                NavigationLink(destination: Text("HESABIM")) {
+                NavigationLink(destination: MyAccountView(vm: viewModel)) {
                     EmptyView()
                 }
+                .opacity(0)
 
                 HStack {
                     Text("HESABIM")
@@ -74,6 +78,7 @@ struct ProfileView: View {
                 NavigationLink(destination: Text("SHOPNOW CARD")) {
                     EmptyView()
                 }
+                .opacity(0)
 
                 HStack {
                     Text("SHOPNOW CARD")
@@ -87,6 +92,7 @@ struct ProfileView: View {
                 NavigationLink(destination: Text("ADRESLERİM")) {
                     EmptyView()
                 }
+                .opacity(0)
 
                 HStack {
                     Text("ADRESLERİM")
@@ -100,6 +106,7 @@ struct ProfileView: View {
                 NavigationLink(destination: Text("EPOSTA DEĞİŞTİRME")) {
                     EmptyView()
                 }
+                .opacity(0)
 
                 HStack {
                     Text("EPOSTA DEĞİŞTİRME")
@@ -113,6 +120,7 @@ struct ProfileView: View {
                 NavigationLink(destination: Text("ŞİFRE DEĞİŞTİRME")) {
                     EmptyView()
                 }
+                .opacity(0)
 
                 HStack {
                     Text("ŞİFRE DEĞİŞTİRME")
@@ -126,6 +134,7 @@ struct ProfileView: View {
                 NavigationLink(destination: Text("KUPONLARIM")) {
                     EmptyView()
                 }
+                .opacity(0)
 
                 HStack {
                     Text("KUPONLARIM")
@@ -139,6 +148,7 @@ struct ProfileView: View {
                 NavigationLink(destination: Text("İLETİŞİM İZİNLERİ")) {
                     EmptyView()
                 }
+                .opacity(0)
 
                 HStack {
                     Text("İLETİŞİM İZİNLERİ")

@@ -125,7 +125,7 @@ extension SignInView {
                 
                 NavigationLink {
                     SignUpView(vm: vm, showSignedInView: $showSignedInView, tabSelection: $tabSelection)
-                        .toolbarRole(.editor)
+                        
                 } label: {
                     Text("ÜYE OL")
                         .fontWeight(.bold)
