@@ -61,7 +61,7 @@ struct ProfileView: View {
             }
 
             ZStack {
-                NavigationLink(destination: MyAccountView(vm: viewModel, showSignedInView: $showSignInView)) {
+                NavigationLink(destination: MyAccountView(vm: viewModel, showSignedInView: $showSignInView, tabSelection: $tabSelection)) {
                     EmptyView()
                 }
                 .opacity(0)

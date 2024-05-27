@@ -9,9 +9,12 @@ import SwiftUI
 
 struct MyAccountView: View {
     
+    @Environment(\.dismiss) var dismiss
+    
     @ObservedObject var vm: ProfileViewModel
     
     @Binding var showSignedInView: Bool
+    @Binding var tabSelection: Int
     
     @State private var name: String = ""
     @State private var surname: String = ""
@@ -25,8 +28,11 @@ struct MyAccountView: View {
     
     var body: some View {
         ScrollView {
-            accountSection
-            deleteAccountButton
+            VStack {
+                accountSection
+                deleteAccountButton
+            }
+            .padding(.top)
         }
         .navigationTitle("Hesabım")
         .navigationBarTitleDisplayMode(.inline)
@@ -151,6 +157,7 @@ extension MyAccountView {
                 alertTitle = "Başarılı"
                 alertMessage = "Hesabınız başarıyla silindi."
                 showAlert = true
+                dismiss()
             } catch {
                 alertTitle = "Hata"
                 alertMessage = error.localizedDescription
@@ -162,6 +169,6 @@ extension MyAccountView {
 
 #Preview {
     NavigationStack {
-        MyAccountView(vm: ProfileViewModel(), showSignedInView: .constant(false))
+        MyAccountView(vm: ProfileViewModel(), showSignedInView: .constant(false), tabSelection: .constant(5))
     }
 }

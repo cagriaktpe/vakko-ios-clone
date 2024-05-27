@@ -28,10 +28,12 @@ final class ProfileViewModel: ObservableObject {
 
     func signOut() throws {
         try AuthenticationManager.shared.signOut()
+        user = nil
     }
     
     func deleteAccount() async throws {
         try await AuthenticationManager.shared.deleteAccount()
+        user = nil
     }
 
     func resetPassword() async throws {
