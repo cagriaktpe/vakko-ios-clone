@@ -12,6 +12,7 @@ struct SignInView: View {
     @StateObject var vm = AuthenticationViewModel()
     
     @State private var showAlert = false
+    @State private var alertTitle: String = ""
     @State private var alertMessage = ""
     
     @Binding var showSignedInView: Bool
@@ -42,7 +43,7 @@ struct SignInView: View {
             }
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("Hata"), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
         }
     }
 }

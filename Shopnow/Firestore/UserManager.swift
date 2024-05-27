@@ -124,4 +124,14 @@ final class UserManager {
     func getUser(userId: String) async throws -> DBUser {
         try await userDocument(userId: userId).getDocument(as: DBUser.self)
     }
+    
+    func updateUser(userId: String, newName name: String, newSurname surname: String, newPhoneNumber phoneNumber: String) async throws {
+        let data: [String: Any] = [
+            DBUser.CodingKeys.name.rawValue: name,
+            DBUser.CodingKeys.surname.rawValue: surname,
+            DBUser.CodingKeys.phoneNumber.rawValue: phoneNumber
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+    }
 }

@@ -15,6 +15,10 @@ struct MyAccountView: View {
     @State private var surname: String
     @State private var phoneNumber: String
     
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @State private var showAlert: Bool = false
+    
     init(vm: ProfileViewModel) {
         self.vm = vm
         self.name = ""
@@ -30,6 +34,9 @@ struct MyAccountView: View {
         .navigationTitle("Hesabım")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
+        }
         .onAppear {
             name = vm.user?.name ?? ""
             surname = vm.user?.surname ?? ""
@@ -125,6 +132,17 @@ extension MyAccountView {
 
 extension MyAccountView {
     func save() {
+        if name == vm.user?.name && surname == vm.user?.surname && phoneNumber == vm.user?.phoneNumber {
+            alertTitle = "Hata"
+            alertMessage = "Bir şey değişmedi"
+            showAlert = true
+            return
+        }
+        
+        vm.updateUser(newName: name, newSurname: surname, newPhoneNumber: phoneNumber)
+        alertTitle = "Başarılı"
+        alertMessage = "Değişiklikler başarıyla kaydedildi."
+        showAlert = true
         
     }
     

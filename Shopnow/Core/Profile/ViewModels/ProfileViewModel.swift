@@ -62,4 +62,14 @@ final class ProfileViewModel: ObservableObject {
         let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
         user = try await UserManager.shared.getUser(userId: authDataResult.uid)
     }    
+    
+    func updateUser(newName name: String, newSurname surname: String, newPhoneNumber phoneNumber: String) {
+        guard let user = user else { return }
+        
+        Task {
+            try? await UserManager.shared.updateUser(userId: user.userId, newName: name, newSurname: surname, newPhoneNumber: phoneNumber)
+            self.user = try await UserManager.shared.getUser(userId: user.userId)
+        }
+        
+    }
 }
