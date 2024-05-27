@@ -11,20 +11,17 @@ struct MyAccountView: View {
     
     @ObservedObject var vm: ProfileViewModel
     
-    @State private var name: String
-    @State private var surname: String
-    @State private var phoneNumber: String
+    @Binding var showSignedInView: Bool
+    
+    @State private var name: String = ""
+    @State private var surname: String = ""
+    @State private var phoneNumber: String = ""
     
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     @State private var showAlert: Bool = false
     
-    init(vm: ProfileViewModel) {
-        self.vm = vm
-        self.name = ""
-        self.surname = ""
-        self.phoneNumber = ""
-    }
+    
     
     var body: some View {
         ScrollView {
@@ -147,12 +144,24 @@ extension MyAccountView {
     }
     
     func deleteAccount() {
-        
+        Task {
+            do {
+                try await vm.deleteAccount()
+                showSignedInView = true
+                alertTitle = "Başarılı"
+                alertMessage = "Hesabınız başarıyla silindi."
+                showAlert = true
+            } catch {
+                alertTitle = "Hata"
+                alertMessage = error.localizedDescription
+                showAlert = true
+            }
+        }
     }
 }
 
 #Preview {
     NavigationStack {
-        MyAccountView(vm: ProfileViewModel())
+        MyAccountView(vm: ProfileViewModel(), showSignedInView: .constant(false))
     }
 }
