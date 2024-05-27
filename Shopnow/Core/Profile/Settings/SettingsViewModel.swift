@@ -46,9 +46,9 @@ final class SettingsViewModel: ObservableObject {
         try await AuthenticationManager.shared.updatePassword(newPassword: newPassword)
     }
 
-    func updateEmail() async throws {
-        try await AuthenticationManager.shared.updateEmail()
-    }
+//    func updateEmail() async throws {
+//        try await AuthenticationManager.shared.updateEmail(newEmail: <#String#>, password: <#String#>)
+//    }
 
     func linkEmailAccount() async throws {
         let email = "testtest@hello.com"

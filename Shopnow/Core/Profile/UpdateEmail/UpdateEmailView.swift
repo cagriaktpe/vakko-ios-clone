@@ -1,5 +1,5 @@
 //
-//  MyAccountView.swift
+//  UpdateEmailView.swift
 //  Shopnow
 //
 //  Created by Samet Çağrı Aktepe on 27.05.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MyAccountView: View {
+struct UpdateEmailView: View {
     
     @Environment(\.dismiss) var dismiss
     
@@ -16,9 +16,9 @@ struct MyAccountView: View {
     @Binding var showSignedInView: Bool
     @Binding var tabSelection: Int
     
-    @State private var name: String = ""
-    @State private var surname: String = ""
-    @State private var phoneNumber: String = ""
+    @State private var newEposta: String = ""
+    @State private var newEpostaAgain: String = ""
+    @State private var password: String = ""
     
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
@@ -28,75 +28,66 @@ struct MyAccountView: View {
         ScrollView {
             VStack {
                 accountSection
-                deleteAccountButton
             }
             .padding(.top)
         }
-        .navigationTitle("Hesabım")
+        .navigationTitle("E posta Güncelle")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
         .alert(isPresented: $showAlert) {
             Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam"), action: {
-                if alertMessage != "Bir şey değişmedi" {
-                    dismiss()
-                }
+                dismiss()
             }))
+                
         }
-        .onAppear {
-            name = vm.user?.name ?? ""
-            surname = vm.user?.surname ?? ""
-            phoneNumber = vm.user?.phoneNumber ?? ""
-        }
-        
     }
 }
 
-extension MyAccountView {
+extension UpdateEmailView {
     var accountSection: some View {
         Section {
             VStack(spacing: 0) {
                 VStack(spacing: 12) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Ad")
+                        Text("Yeni E postanız")
                             .font(.subheadline)
                             .fontWeight(.light)
 
-                        TextField("", text: $name)
+                        TextField("", text: $newEposta)
                             .padding(12)
                             .border(Color.gray, width: 1)
-                            .keyboardType(.default)
-                            .autocapitalization(.words)
-                            .textContentType(.name)
-                            .disableAutocorrection(true)
-                    }
-                    
-
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Soyad")
-                            .font(.subheadline)
-                            .fontWeight(.light)
-
-                        TextField("", text: $surname)
-                            .padding(12)
-                            .border(Color.gray, width: 1)
-                            .keyboardType(.default)
-                            .autocapitalization(.words)
-                            .textContentType(.familyName)
-                            .disableAutocorrection(true)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Telefon")
-                            .font(.subheadline)
-                            .fontWeight(.light)
-
-                        TextField("0 (555) 555 55 55", text: $phoneNumber)
-                            .padding(12)
-                            .border(Color.gray, width: 1)
-                            .keyboardType(.phonePad)
+                            .keyboardType(.emailAddress)
                             .autocapitalization(.none)
-                            .textContentType(.telephoneNumber)
+                            .textContentType(.emailAddress)
                             .disableAutocorrection(true)
+                    }
+                    
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Yeni E posta Tekrar")
+                            .font(.subheadline)
+                            .fontWeight(.light)
+
+                        TextField("", text: $newEpostaAgain)
+                            .padding(12)
+                            .border(Color.gray, width: 1)
+                            .keyboardType(.emailAddress)
+                            .autocapitalization(.none)
+                            .textContentType(.emailAddress)
+                            .disableAutocorrection(true)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Şifreniz")
+                            .font(.subheadline)
+                            .fontWeight(.light)
+
+                        SecureField("", text: $password)
+                            .padding(12)
+                            .border(Color.gray, width: 1)
+                            .textContentType(.password)
+                            .disableAutocorrection(true)
+                            .keyboardType(.default)
                     }
 
                 }
@@ -123,53 +114,56 @@ extension MyAccountView {
         }
         .padding(.top, 24)
     }
-    
-    var deleteAccountButton: some View {
-        Button(action: deleteAccount) {
-            Text("Hesabımı Sil")
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.top)
-        .padding(.leading)
-
-    }
 }
 
-extension MyAccountView {
+extension UpdateEmailView {
     func save() {
-        if name == vm.user?.name && surname == vm.user?.surname && phoneNumber == vm.user?.phoneNumber {
+        guard !newEposta.isEmpty else {
             alertTitle = "Hata"
-            alertMessage = "Bir şey değişmedi"
+            alertMessage = "Lütfen yeni e postanızı giriniz."
             showAlert = true
             return
         }
         
-        vm.updateUser(newName: name, newSurname: surname, newPhoneNumber: phoneNumber)
-        alertTitle = "Başarılı"
-        alertMessage = "Değişiklikler başarıyla kaydedildi."
-        showAlert = true
+        guard !newEpostaAgain.isEmpty else {
+            alertTitle = "Hata"
+            alertMessage = "Lütfen yeni e postanızı tekrar giriniz."
+            showAlert = true
+            return
+        }
         
-    }
-    
-    func deleteAccount() {
+        guard newEposta == newEpostaAgain else {
+            alertTitle = "Hata"
+            alertMessage = "Girdiğiniz e postalar birbirleri ile uyuşmuyor."
+            showAlert = true
+            return
+        }
+        
+        guard !password.isEmpty else {
+            alertTitle = "Hata"
+            alertMessage = "Lütfen şifrenizi giriniz."
+            showAlert = true
+            return
+        }
+        
         Task {
             do {
-                try await vm.deleteAccount()
+                try await vm.updateEmail(newEmail: newEposta, password: password)
                 alertTitle = "Başarılı"
-                alertMessage = "Hesabınız başarıyla silindi."
+                alertMessage = "E posta adresiniz başarıyla güncellendi."
                 showAlert = true
-                showSignedInView = true
             } catch {
                 alertTitle = "Hata"
                 alertMessage = error.localizedDescription
                 showAlert = true
             }
         }
+        
     }
 }
 
 #Preview {
     NavigationStack {
-        MyAccountView(vm: ProfileViewModel(), showSignedInView: .constant(false), tabSelection: .constant(5))
+        UpdateEmailView(vm: ProfileViewModel(), showSignedInView: .constant(false), tabSelection: .constant(5))
     }
 }

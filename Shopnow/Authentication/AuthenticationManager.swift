@@ -67,6 +67,7 @@ final class AuthenticationManager {
         }
         
         try await user.delete()
+        try await UserManager.shared.deleteUser(userId: user.uid)
     }
 }
 
@@ -96,12 +97,17 @@ extension AuthenticationManager {
         try await user.updatePassword(to: newPassword)
     }
     
-    func updateEmail() async throws {
+    func updateEmail(newEmail email: String, password: String) async throws {
         guard let user = Auth.auth().currentUser else {
             throw NSError(domain: "AuthenticationManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found."])
         }
         
-        try await user.sendEmailVerification(beforeUpdatingEmail: "412283@ogr.ktu.edu.tr")
+        // check if the password correct otherwise throw an errow
+        let credential = EmailAuthProvider.credential(withEmail: user.email!, password: password)
+        try await user.reauthenticate(with: credential)
+        
+        try await user.sendEmailVerification(beforeUpdatingEmail: email)
+        try await UserManager.shared.updateUserEmail(userId: user.uid, newEmail: email)
     }
 }
 

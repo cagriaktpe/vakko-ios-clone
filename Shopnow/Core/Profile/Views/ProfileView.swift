@@ -103,7 +103,7 @@ struct ProfileView: View {
             }
 
             ZStack {
-                NavigationLink(destination: Text("EPOSTA DEĞİŞTİRME")) {
+                NavigationLink(destination: UpdateEmailView(vm: viewModel, showSignedInView: $showSignInView, tabSelection: $tabSelection)) {
                     EmptyView()
                 }
                 .opacity(0)

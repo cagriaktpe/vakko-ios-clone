@@ -71,18 +71,18 @@ extension SettingsView {
                 Text("Update password")
             }
 
-            Button {
-                Task {
-                    do {
-                        try await vm.updateEmail()
-                        print("email reset email sent.")
-                    } catch {
-                        print("Error signing out: \(error.localizedDescription)")
-                    }
-                }
-            } label: {
-                Text("Update email")
-            }
+//            Button {
+//                Task {
+//                    do {
+//                        try await vm.updateEmail()
+//                        print("email reset email sent.")
+//                    } catch {
+//                        print("Error signing out: \(error.localizedDescription)")
+//                    }
+//                }
+//            } label: {
+//                Text("Update email")
+//            }
 
             Button {
                 Task {

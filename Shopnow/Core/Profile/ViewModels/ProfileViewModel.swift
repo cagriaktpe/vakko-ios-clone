@@ -50,8 +50,8 @@ final class ProfileViewModel: ObservableObject {
         try await AuthenticationManager.shared.updatePassword(newPassword: newPassword)
     }
 
-    func updateEmail() async throws {
-        try await AuthenticationManager.shared.updateEmail()
+    func updateEmail(newEmail email: String, password: String) async throws {
+        try await AuthenticationManager.shared.updateEmail(newEmail: email, password: password)
     }
 
     func linkEmailAccount() async throws {

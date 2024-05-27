@@ -125,11 +125,23 @@ final class UserManager {
         try await userDocument(userId: userId).getDocument(as: DBUser.self)
     }
     
+    func deleteUser(userId: String) async throws {
+        try await userDocument(userId: userId).delete()
+    }
+    
     func updateUser(userId: String, newName name: String, newSurname surname: String, newPhoneNumber phoneNumber: String) async throws {
         let data: [String: Any] = [
             DBUser.CodingKeys.name.rawValue: name,
             DBUser.CodingKeys.surname.rawValue: surname,
             DBUser.CodingKeys.phoneNumber.rawValue: phoneNumber
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    func updateUserEmail(userId: String, newEmail email: String) async throws {
+        let data: [String: Any] = [
+            DBUser.CodingKeys.email.rawValue: email
         ]
         
         try await userDocument(userId: userId).updateData(data)
