@@ -244,19 +244,7 @@ extension SignUpView {
     }
 
     var signUpButton: some View {
-        Button {
-            Task {
-                do {
-                    if !checkIfInputIsValid() { return }
-                    try await vm.signUp()
-                    showSignedInView = false
-                    return
-                } catch {
-                    alertMessage = error.localizedDescription
-                    showAlert = true
-                }
-            }
-        } label: {
+        Button(action: signUp) {
             Text("ÜYE OL")
                 .font(.headline)
                 .fontWeight(.bold)
@@ -270,6 +258,21 @@ extension SignUpView {
 }
 
 extension SignUpView {
+    
+    func signUp() {
+        Task {
+            do {
+                if !checkIfInputIsValid() { return }
+                try await vm.signUp()
+                showSignedInView = false
+                return
+            } catch {
+                alertMessage = error.localizedDescription
+                showAlert = true
+            }
+        }
+    }
+    
     func checkIfInputIsValid() -> Bool {
         if vm.name.isEmpty || vm.surname.isEmpty || vm.phoneNumber.isEmpty || vm.email.isEmpty || vm.password.isEmpty || vm.birthDate == nil {
             showAlert = true

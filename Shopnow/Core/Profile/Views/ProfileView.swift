@@ -177,6 +177,11 @@ struct ProfileView: View {
         .fullScreenCover(isPresented: $showSignInView, content: {
             NavigationStack {
                 SignInView(showSignedInView: $showSignInView, tabSelection: $tabSelection)
+                    .onDisappear {
+                        Task {
+                            try? await viewModel.loadCurrentUser()
+                        }
+                    }
             }
         })
         .task {
