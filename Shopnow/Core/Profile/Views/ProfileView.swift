@@ -187,15 +187,15 @@ struct ProfileView: View {
         .fullScreenCover(isPresented: $showSignInView, content: {
             NavigationStack {
                 SignInView(showSignedInView: $showSignInView, tabSelection: $tabSelection)
-                    .onDisappear {
-                        Task {
-                            try? await viewModel.loadCurrentUser()
-                        }
-                    }
             }
         })
         .task {
             try? await viewModel.loadCurrentUser()
+        }
+        .onChange(of: showSignInView) { _ in
+            Task {
+                try? await viewModel.loadCurrentUser()
+            }
         }
     }
 }

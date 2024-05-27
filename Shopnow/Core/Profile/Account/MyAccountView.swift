@@ -23,9 +23,7 @@ struct MyAccountView: View {
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     @State private var showAlert: Bool = false
-    
-    
-    
+
     var body: some View {
         ScrollView {
             VStack {
