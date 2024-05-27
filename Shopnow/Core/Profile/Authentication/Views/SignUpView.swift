@@ -14,6 +14,9 @@ struct SignUpView: View {
     @Binding var tabSelection: Int
 
     @State private var showDatePicker = false
+    
+    @State private var showAlert = false
+    @State private var alertMessage = ""
 
     @State private var firstCheckBox = false
     @State private var secondCheckBox = false
@@ -30,9 +33,8 @@ struct SignUpView: View {
         .sheet(isPresented: $showDatePicker) {
             NavigationStack {
                 datePicker
-                    
+
                     .toolbar {
-                        
                         ToolbarItem(placement: .confirmationAction) {
                             Button("TAMAM") {
                                 showDatePicker.toggle()
@@ -42,7 +44,9 @@ struct SignUpView: View {
             }
             .presentationDetents(
                 [.small])
-            
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Hata"), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
         }
     }
 }
@@ -243,11 +247,13 @@ extension SignUpView {
         Button {
             Task {
                 do {
+                    if !checkIfInputIsValid() { return }
                     try await vm.signUp()
                     showSignedInView = false
                     return
                 } catch {
-                    print("Error: \(error.localizedDescription)")
+                    alertMessage = error.localizedDescription
+                    showAlert = true
                 }
             }
         } label: {
@@ -260,6 +266,23 @@ extension SignUpView {
                 .background(Color.accentColor)
         }
         .padding(.top, 24)
+    }
+}
+
+extension SignUpView {
+    func checkIfInputIsValid() -> Bool {
+        if vm.name.isEmpty || vm.surname.isEmpty || vm.phoneNumber.isEmpty || vm.email.isEmpty || vm.password.isEmpty || vm.birthDate == nil {
+            showAlert = true
+            alertMessage = "Lütfen tüm alanları doldurunuz."
+            return false
+        } else if !firstCheckBox || !secondCheckBox || !thirdCheckBox || !fourthCheckBox || !fifthCheckBox {
+            showAlert = true
+            alertMessage = "Lütfen tüm onay kutucuklarını işaretleyiniz."
+            return false
+        } else {
+            showAlert = false
+            return true
+        }
     }
 }
 
