@@ -11,6 +11,9 @@ struct SignInView: View {
     
     @StateObject var vm = AuthenticationViewModel()
     
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    
     @Binding var showSignedInView: Bool
     @Binding var tabSelection: Int
     
@@ -37,6 +40,9 @@ struct SignInView: View {
                         .font(.headline)
                 }
             }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Hata"), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
         }
     }
 }
@@ -143,13 +149,25 @@ extension SignInView {
     func handleSignInButtonTap() {
         Task {            
             do {
+                if !checkIfInputIsValid() { return }
                 try await vm.signIn()
                 showSignedInView = false
                 return
             } catch {
-                print("Error: \(error.localizedDescription)")
+                alertMessage = error.localizedDescription
+                showAlert = true
             }
         }
+    }
+    
+    func checkIfInputIsValid() -> Bool {
+        if vm.email.isEmpty || vm.password.isEmpty {
+            alertMessage = "Lütfen tüm alanları doldurunuz."
+            showAlert = true
+            return false
+        }
+        
+        return true
     }
 }
 
