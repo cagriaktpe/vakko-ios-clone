@@ -77,4 +77,11 @@ final class ProfileViewModel: ObservableObject {
     func verifyEmail() async throws {
         try await AuthenticationManager.shared.verifyEmail()
     }
+    
+    func addAddress(address: AddressModel) async throws {
+        guard let user = user else { return }
+        
+        try await UserManager.shared.addAddress(userId: user.userId, address: address)
+        self.user = try await UserManager.shared.getUser(userId: user.userId)
+    }
 }

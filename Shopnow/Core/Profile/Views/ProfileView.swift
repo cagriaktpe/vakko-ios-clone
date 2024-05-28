@@ -93,7 +93,7 @@ struct ProfileView: View {
 //            .foregroundStyle(Color.secondary)
 
             ZStack {
-                NavigationLink(destination: Text("ADRESLERİM")) {
+                NavigationLink(destination: MyAddressesView(viewModel: viewModel)) {
                     EmptyView()
                 }
                 .opacity(0)

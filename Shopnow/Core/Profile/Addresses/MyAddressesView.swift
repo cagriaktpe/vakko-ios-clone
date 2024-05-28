@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MyAddressesView: View {
+    @ObservedObject var viewModel: ProfileViewModel
+
     var body: some View {
         ScrollView {
             addAddressButton
@@ -18,16 +20,16 @@ struct MyAddressesView: View {
         .toolbarRole(.editor)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button(action: addAddress) {
+                NavigationLink(destination: AddAddressView(viewModel: viewModel)) {
                     Image(systemName: "plus")
                 }
                 .fontWeight(.semibold)
             }
         }
     }
-    
+
     var addAddressButton: some View {
-        Button(action: addAddress) {
+        NavigationLink(destination: AddAddressView(viewModel: viewModel)) {
             Text("Yeni Adres Ekle")
                 .font(.headline)
                 .fontWeight(.bold)
@@ -40,13 +42,8 @@ struct MyAddressesView: View {
     }
 }
 
-extension MyAddressesView {
-    func addAddress() {
-    }
-}
-
 #Preview {
     NavigationStack {
-        MyAddressesView()
+        MyAddressesView(viewModel: ProfileViewModel())
     }
 }

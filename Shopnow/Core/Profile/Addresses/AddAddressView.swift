@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-enum AddressType: String, CaseIterable {
-    case home = "Bireysel"
-    case work = "Kurumsal"
-}
-
 struct AddAddressView: View {
+    
+    @Environment(\.dismiss) var dismiss
+    
+    @ObservedObject var viewModel: ProfileViewModel
+    
     @State private var addressType: AddressType = .home
     @State private var title: String = ""
     @State private var name: String = ""
@@ -23,6 +23,11 @@ struct AddAddressView: View {
     @State private var postCode: String = ""
     @State private var address: String = ""
     @State private var phoneNumber: String = ""
+    
+    @State private var showAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @State private var isSuccessful: Bool = false
 
     var body: some View {
         ScrollView {
@@ -30,6 +35,14 @@ struct AddAddressView: View {
         }
         .navigationTitle("Yeni Adres Ekle")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarRole(.editor)
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam"), action: {
+                if isSuccessful {
+                    dismiss()
+                }
+            }))
+        }
     }
 
     var formSection: some View {
@@ -193,8 +206,7 @@ struct AddAddressView: View {
                 .fontWeight(.light)
 
             TextEditor(text: $address)
-                .padding(12)
-                .padding(.vertical, 24)
+                .frame(height: 100, alignment: .leading)
                 .border(Color.gray, width: 1)
                 .keyboardType(.default)
                 .autocapitalization(.words)
@@ -242,12 +254,46 @@ struct AddAddressView: View {
 }
 
 extension AddAddressView {
+    func checkFields() -> Bool {
+        if title.isEmpty || name.isEmpty || surname.isEmpty || city.isEmpty || district.isEmpty || neighborhood.isEmpty || postCode.isEmpty || address.isEmpty || phoneNumber.isEmpty {
+            setAlert(title: .error, message: "Lütfen tüm alanları doldurun.")
+            return false
+        }
+        
+        return true
+    }
+    
     func save() {
+        
+        guard checkFields() else { return }
+        
+        let address = AddressModel(addressType: addressType, title: title, name: name, surname: surname, city: city, district: district, neighborhood: neighborhood, postCode: postCode, address: address, phoneNumber: phoneNumber)
+        
+        Task {
+            do {
+                try await viewModel.addAddress(address: address)
+                setAlert(title: .success, message: "Adres başarıyla eklendi.")
+            } catch {
+                setAlert(title: .error, message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func setAlert(title: AlertType, message: String) {
+        alertTitle = title.rawValue
+        alertMessage = message
+        showAlert = true
+        
+        if title == .success {
+            isSuccessful = true
+        } else {
+            isSuccessful = false
+        }
     }
 }
 
 #Preview {
     NavigationStack {
-        AddAddressView()
+        AddAddressView(viewModel: ProfileViewModel())
     }
 }
