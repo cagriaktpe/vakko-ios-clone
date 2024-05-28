@@ -28,6 +28,8 @@ struct AddAddressView: View {
         ScrollView {
             formSection
         }
+        .navigationTitle("Yeni Adres Ekle")
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     var formSection: some View {
@@ -245,5 +247,7 @@ extension AddAddressView {
 }
 
 #Preview {
-    AddAddressView()
+    NavigationStack {
+        AddAddressView()
+    }
 }
