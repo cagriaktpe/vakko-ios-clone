@@ -69,7 +69,7 @@ struct AddressCardView: View {
             .padding(.bottom)
         }
         .border(Color.secondary.opacity(0.5), width: 1)
-        .padding()
+        .padding(.vertical)
         .overlay {
             VStack {
                 Circle()
@@ -85,9 +85,6 @@ struct AddressCardView: View {
                 Spacer()
             }
             .offset(y: -20)
-            
-                
-                
         }
     }
 }

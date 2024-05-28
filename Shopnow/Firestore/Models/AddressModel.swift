@@ -13,7 +13,8 @@ enum AddressType: String, CaseIterable, Codable {
 }
 
 
-struct AddressModel: Codable {
+struct AddressModel: Codable, Identifiable {
+    var id = UUID().uuidString
     let addressType: String
     let title: String
     let name: String
