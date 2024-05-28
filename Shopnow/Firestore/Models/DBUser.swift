@@ -18,7 +18,7 @@ struct DBUser: Codable {
     let photoURL: String?
     let dateCreated: Date?
     let addresses: [AddressModel]?
-    let preferredAddress: AddressModel?
+    let preferredAddressId: String?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -31,7 +31,7 @@ struct DBUser: Codable {
         self.phoneNumber = nil
         self.birthDate = nil
         self.addresses = nil
-        self.preferredAddress = nil
+        self.preferredAddressId = nil
     }
     
     init(
@@ -45,7 +45,7 @@ struct DBUser: Codable {
         photoURL: String? = nil,
         dateCreated: Date? = nil,
         addresses: [AddressModel]? = nil,
-        preferredAddress: AddressModel? = nil
+        preferredAddressId: String? = nil
     ) {
         self.userId = userId
         self.name = name
@@ -57,7 +57,7 @@ struct DBUser: Codable {
         self.photoURL = photoURL
         self.dateCreated = dateCreated
         self.addresses = addresses
-        self.preferredAddress = preferredAddress
+        self.preferredAddressId = preferredAddressId
     }
     
     enum CodingKeys: String, CodingKey {
@@ -71,7 +71,7 @@ struct DBUser: Codable {
         case photoURL = "photo_url"
         case dateCreated = "date_created"
         case addresses = "addresses"
-        case preferredAddress = "preferred_address"
+        case preferredAddressId = "preferred_address_id"
     }
     
     init(from decoder: Decoder) throws {
@@ -86,7 +86,7 @@ struct DBUser: Codable {
         self.photoURL = try container.decodeIfPresent(String.self, forKey: .photoURL)
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.addresses = try container.decodeIfPresent([AddressModel].self, forKey: .addresses)
-        self.preferredAddress = try container.decodeIfPresent(AddressModel.self, forKey: .preferredAddress)
+        self.preferredAddressId = try container.decodeIfPresent(String.self, forKey: .preferredAddressId)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -101,7 +101,7 @@ struct DBUser: Codable {
         try container.encode(photoURL, forKey: .photoURL)
         try container.encode(dateCreated, forKey: .dateCreated)
         try container.encode(addresses, forKey: .addresses)
-        try container.encode(preferredAddress, forKey: .preferredAddress)
+        try container.encode(preferredAddressId, forKey: .preferredAddressId)
     }
     
 }

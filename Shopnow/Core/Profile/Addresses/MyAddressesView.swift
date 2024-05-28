@@ -18,7 +18,7 @@ struct MyAddressesView: View {
             if let addresses = viewModel.user?.addresses {
                 VStack(spacing: 28) {
                     ForEach(addresses) { address in
-                        AddressCardView(viewModel: viewModel, address: address)
+                        AddressCardView(vm: viewModel, address: address)
                     }
                 }
                 

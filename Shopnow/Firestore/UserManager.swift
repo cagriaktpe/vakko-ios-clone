@@ -61,9 +61,9 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
-    func setPreferredAddress(userId: String, address: AddressModel) async throws {
+    func setPreferredAddress(userId: String, addressId: String) async throws {
         let data: [String: Any] = [
-            DBUser.CodingKeys.preferredAddress.rawValue: try encoder.encode(address)
+            DBUser.CodingKeys.preferredAddressId.rawValue: addressId
         ]
         
         try await userDocument(userId: userId).updateData(data)
@@ -80,8 +80,8 @@ extension UserManager {
         
         let user = try await getUser(userId: userId)
         
-        if user.preferredAddress == nil {
-            try await setPreferredAddress(userId: userId, address: address)
+        if user.preferredAddressId == nil {
+            try await setPreferredAddress(userId: userId, addressId: address.id)
         }
     }
 }

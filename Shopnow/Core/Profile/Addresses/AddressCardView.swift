@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct AddressCardView: View {
-    @ObservedObject var viewModel: ProfileViewModel
+    @ObservedObject var vm: ProfileViewModel
     
     // TODO: FIX
-    @State private var isPreferred: Bool = true
+    @State private var isPreferred: Bool = false
     
     let address: AddressModel
 
@@ -27,7 +27,7 @@ struct AddressCardView: View {
                 Toggle(isOn: $isPreferred, label: {
                     Text("Varsayılan")
                         .font(.headline)
-                        .fontWeight(.bold)
+                        .fontWeight(isPreferred ? .bold : .regular)
                         .multilineTextAlignment(.leading)
                 })
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -73,7 +73,7 @@ struct AddressCardView: View {
         .overlay {
             VStack {
                 Circle()
-                    .strokeBorder(Color.primary, lineWidth: 2)
+                    .strokeBorder(Color.primary, lineWidth: isPreferred ? 2 : 1)
                     .background(Circle().fill(.white))
                     .frame(width: 58, height: 58)
                     .overlay {
@@ -85,6 +85,12 @@ struct AddressCardView: View {
                 Spacer()
             }
             .offset(y: -20)
+        }
+        .onAppear {
+            isPreferred = vm.user?.preferredAddressId == address.id ? true : false
+        }
+        .onChange(of: isPreferred) { _ in
+            
         }
     }
 }
@@ -101,5 +107,5 @@ extension AddressCardView {
     
     let testAddress = AddressModel(addressType: .home, title: "Ev", name: "Samet", surname: "Aktepe", city: "İstanbul", district: "Beyoğlu", neighborhood: "Karaköy", postCode: "34000", address: "Karaköy Mahallesi, Kemeraltı Caddesi, No: 5", phoneNumber: "5534513358")
     
-    return AddressCardView(viewModel: ProfileViewModel(), address: testAddress)
+    return AddressCardView(vm: ProfileViewModel(), address: testAddress)
 }
