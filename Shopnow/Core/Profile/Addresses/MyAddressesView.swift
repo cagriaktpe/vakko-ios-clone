@@ -13,6 +13,7 @@ struct MyAddressesView: View {
     var body: some View {
         ScrollView {
             addAddressButton
+            addressRow
         }
         .padding(.horizontal)
         .navigationTitle("Adreslerim")
@@ -26,6 +27,19 @@ struct MyAddressesView: View {
                 .fontWeight(.semibold)
             }
         }
+    }
+    
+    var addressRow: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("EV")
+                .font(.headline)
+                .fontWeight(.bold)
+            
+            Text("ADRES")
+            Text("BEYOĞLU İSTANBUL-AVRUPA")
+            Text("5534513358")
+        }
+        .padding(.vertical, 8)
     }
 
     var addAddressButton: some View {

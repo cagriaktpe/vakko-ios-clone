@@ -39,6 +39,7 @@
 		81B6F5F42C05D00900922E12 /* DBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6F5F32C05D00900922E12 /* DBUser.swift */; };
 		81B6F5F62C05D10400922E12 /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6F5F52C05D10400922E12 /* AddressModel.swift */; };
 		81B6F5F82C05D4DA00922E12 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6F5F72C05D4DA00922E12 /* Alert.swift */; };
+		81B6F5FA2C05D7A700922E12 /* AddressCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6F5F92C05D7A700922E12 /* AddressCardView.swift */; };
 		81C4E55C2BF4BDBB00CEC557 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C4E55B2BF4BDBB00CEC557 /* CategoryModel.swift */; };
 		81C4E55E2BF4BE0C00CEC557 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C4E55D2BF4BE0C00CEC557 /* ProductModel.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +74,7 @@
 		81B6F5F32C05D00900922E12 /* DBUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBUser.swift; sourceTree = "<group>"; };
 		81B6F5F52C05D10400922E12 /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		81B6F5F72C05D4DA00922E12 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		81B6F5F92C05D7A700922E12 /* AddressCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCardView.swift; sourceTree = "<group>"; };
 		81C4E55B2BF4BDBB00CEC557 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		81C4E55D2BF4BE0C00CEC557 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +164,7 @@
 			children = (
 				8179D43B2C04EE4000927E8E /* MyAddressesView.swift */,
 				8179D43D2C04EFBA00927E8E /* AddAddressView.swift */,
+				81B6F5F92C05D7A700922E12 /* AddressCardView.swift */,
 			);
 			path = Addresses;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81B6F5FA2C05D7A700922E12 /* AddressCardView.swift in Sources */,
 				81269E122BF393C100A2137D /* CategoriesView.swift in Sources */,
 				81269E102BF393B100A2137D /* FavoriesView.swift in Sources */,
 				81B35BC52C00CE3C008BBF21 /* UserManager.swift in Sources */,

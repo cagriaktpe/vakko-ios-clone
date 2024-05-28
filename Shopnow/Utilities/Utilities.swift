@@ -38,21 +38,38 @@ final class Utilities {
 
 struct iOSCheckboxToggleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
-        // 1
         Button(action: {
-
-            // 2
             configuration.isOn.toggle()
-
         }, label: {
             HStack(alignment: .top) {
-                // 3
                 Image(systemName: configuration.isOn ? "checkmark.square" : "square")
                     .resizable()
                     .frame(width: 20, height: 20)
                     .foregroundColor(configuration.isOn ? Color.accentColor : .gray)
+            
+                configuration.label
+            }
+        })
+    }
+}
+
+struct iOSCheckBoxToggleStyle2: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        Button(action: {
+            configuration.isOn.toggle()
+        }, label: {
+            HStack(alignment: .top) {
                 
-                
+                Image(systemName: "circle")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.secondary.opacity(0.5))
+                    .overlay {
+                        Image(systemName: configuration.isOn ? "circle.fill" : "circle")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                            .foregroundColor(configuration.isOn ? Color.accentColor : .gray)
+                    }
                 configuration.label
             }
         })
