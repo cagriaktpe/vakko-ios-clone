@@ -11,7 +11,7 @@ struct AddressCardView: View {
     @ObservedObject var vm: ProfileViewModel
     
     // TODO: FIX
-    @State private var isPreferred: Bool = false
+    @State var isPreferred: Bool = false
     
     let address: AddressModel
 
@@ -32,6 +32,7 @@ struct AddressCardView: View {
                 })
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 8)
+                .allowsHitTesting(isPreferred ? false : true)
                 
                 .foregroundStyle(.primary)
                 .toggleStyle(iOSCheckBoxToggleStyle2())
@@ -87,10 +88,16 @@ struct AddressCardView: View {
             .offset(y: -20)
         }
         .onAppear {
-            isPreferred = vm.user?.preferredAddressId == address.id ? true : false
+            isPreferred = vm.user?.preferredAddressId == address.id
         }
         .onChange(of: isPreferred) { _ in
-            
+            Task {
+                do {
+                    try await vm.setPreferredAddress(addressId: address.id)
+                } catch {
+                    print(error)
+                }
+            }
         }
     }
 }
@@ -107,5 +114,5 @@ extension AddressCardView {
     
     let testAddress = AddressModel(addressType: .home, title: "Ev", name: "Samet", surname: "Aktepe", city: "İstanbul", district: "Beyoğlu", neighborhood: "Karaköy", postCode: "34000", address: "Karaköy Mahallesi, Kemeraltı Caddesi, No: 5", phoneNumber: "5534513358")
     
-    return AddressCardView(vm: ProfileViewModel(), address: testAddress)
+    return AddressCardView(vm: ProfileViewModel(), isPreferred: false, address: testAddress)
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyAddressesView: View {
     @ObservedObject var viewModel: ProfileViewModel
-
+    
     var body: some View {
         ScrollView {
             addAddressButton
@@ -21,7 +21,6 @@ struct MyAddressesView: View {
                         AddressCardView(vm: viewModel, address: address)
                     }
                 }
-                
             }
         }
         .padding(.horizontal)

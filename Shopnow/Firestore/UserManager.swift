@@ -80,8 +80,7 @@ extension UserManager {
         
         let user = try await getUser(userId: userId)
         
-        if user.preferredAddressId == nil {
-            try await setPreferredAddress(userId: userId, addressId: address.id)
-        }
+        try await setPreferredAddress(userId: userId, addressId: address.id)
+        
     }
 }
