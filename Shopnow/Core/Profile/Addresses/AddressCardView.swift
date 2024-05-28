@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct AddressCardView: View {
+    @ObservedObject var viewModel: ProfileViewModel
+    
+    // TODO: FIX
     @State private var isPreferred: Bool = true
+    
+    let address: AddressModel
 
     var body: some View {
         VStack(alignment: .leading) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("EV")
+            VStack(alignment: .leading, spacing: 10) {
+                Text(address.title.uppercased())
+                    .lineLimit(1)
                     .font(.headline)
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .offset(y: 12)
 
                 Toggle(isOn: $isPreferred, label: {
                     Text("Varsayılan")
@@ -24,12 +31,19 @@ struct AddressCardView: View {
                         .multilineTextAlignment(.leading)
                 })
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 8)
+                
                 .foregroundStyle(.primary)
                 .toggleStyle(iOSCheckBoxToggleStyle2())
 
                 Text("ADRES")
-                Text("BEYOĞLU İSTANBUL-AVRUPA")
-                Text("5534513358")
+                    .lineLimit(1)
+                
+                Text("\(address.district) \(address.city)")
+                    .lineLimit(1)
+                
+                Text(address.phoneNumber)
+                    .lineLimit(1)
             }
             .padding(.horizontal)
             .padding(.top)
@@ -38,27 +52,57 @@ struct AddressCardView: View {
                 .frame(maxWidth: .infinity, maxHeight: 1)
 
             HStack {
-                Button {
-                } label: {
+                Button(action: deleteAddress) {
                     Text("Adresi Sil")
+
                 }
 
                 Spacer()
 
-                Button {
-                } label: {
+                Button(action: editAddress) {
                     Text("Adresi Düzenle")
                 }
             }
-            .padding(.horizontal)
+            .fontWeight(.semibold)
+            .padding(.horizontal, 30)
+            .padding(.top, 5)
             .padding(.bottom)
         }
-
         .border(Color.secondary.opacity(0.5), width: 1)
         .padding()
+        .overlay {
+            VStack {
+                Circle()
+                    .strokeBorder(Color.primary, lineWidth: 2)
+                    .background(Circle().fill(.white))
+                    .frame(width: 58, height: 58)
+                    .overlay {
+                        Text("1")
+                            .font(.title2)
+                            .foregroundColor(.primary)
+                    }
+                
+                Spacer()
+            }
+            .offset(y: -20)
+            
+                
+                
+        }
+    }
+}
+
+extension AddressCardView {
+    func deleteAddress() {
+    }
+    
+    func editAddress() {
     }
 }
 
 #Preview {
-    AddressCardView()
+    
+    let testAddress = AddressModel(addressType: .home, title: "Ev", name: "Samet", surname: "Aktepe", city: "İstanbul", district: "Beyoğlu", neighborhood: "Karaköy", postCode: "34000", address: "Karaköy Mahallesi, Kemeraltı Caddesi, No: 5", phoneNumber: "5534513358")
+    
+    return AddressCardView(viewModel: ProfileViewModel(), address: testAddress)
 }

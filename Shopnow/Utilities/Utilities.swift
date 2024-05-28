@@ -6,20 +6,18 @@
 //
 
 import Foundation
-import UIKit
 import SwiftUI
+import UIKit
 
 final class Utilities {
-    
     static let shared = Utilities()
-    
+
     private init() {}
-    
+
     @MainActor
     func topViewController(controller: UIViewController? = nil) -> UIViewController? {
-        
         let controller = controller ?? UIApplication.shared.keyWindow?.rootViewController
-        
+
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)
         }
@@ -33,7 +31,6 @@ final class Utilities {
         }
         return controller
     }
-
 }
 
 struct iOSCheckboxToggleStyle: ToggleStyle {
@@ -46,7 +43,7 @@ struct iOSCheckboxToggleStyle: ToggleStyle {
                     .resizable()
                     .frame(width: 20, height: 20)
                     .foregroundColor(configuration.isOn ? Color.accentColor : .gray)
-            
+
                 configuration.label
             }
         })
@@ -59,16 +56,17 @@ struct iOSCheckBoxToggleStyle2: ToggleStyle {
             configuration.isOn.toggle()
         }, label: {
             HStack(alignment: .top) {
-                
                 Image(systemName: "circle")
                     .resizable()
                     .frame(width: 20, height: 20)
                     .foregroundColor(.secondary.opacity(0.5))
                     .overlay {
-                        Image(systemName: configuration.isOn ? "circle.fill" : "circle")
-                            .resizable()
-                            .frame(width: 12, height: 12)
-                            .foregroundColor(configuration.isOn ? Color.accentColor : .gray)
+                        if configuration.isOn {
+                            Image(systemName: "circle.fill")
+                                .resizable()
+                                .frame(width: 12, height: 12)
+                                .foregroundColor(configuration.isOn ? Color.accentColor : .gray)
+                        }
                     }
                 configuration.label
             }
