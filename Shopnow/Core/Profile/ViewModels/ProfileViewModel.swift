@@ -85,10 +85,19 @@ final class ProfileViewModel: ObservableObject {
         self.user = try await UserManager.shared.getUser(userId: user.userId)
     }
     
+    func deleteAddress(address: AddressModel) async throws {
+        guard let user = user else { return }
+        
+        try await UserManager.shared.deleteAddress(userId: user.userId, address: address)
+        self.user = try await UserManager.shared.getUser(userId: user.userId)
+    }
+    
     func setPreferredAddress(addressId: String) async throws {
         guard let user = user else { return }
         
         try await UserManager.shared.setPreferredAddress(userId: user.userId, addressId: addressId)
         self.user = try await UserManager.shared.getUser(userId: user.userId)
     }
+    
+    
 }

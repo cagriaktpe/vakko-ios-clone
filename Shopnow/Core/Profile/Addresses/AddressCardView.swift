@@ -55,7 +55,6 @@ struct AddressCardView: View {
             HStack {
                 Button(action: deleteAddress) {
                     Text("Adresi Sil")
-
                 }
 
                 Spacer()
@@ -104,6 +103,14 @@ struct AddressCardView: View {
 
 extension AddressCardView {
     func deleteAddress() {
+        Task {
+            do {
+                try await vm.deleteAddress(address: address)
+            } catch {
+                // TODO: Handle error
+                print(error)
+            }
+        }
     }
     
     func editAddress() {

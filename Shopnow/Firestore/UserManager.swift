@@ -81,6 +81,19 @@ extension UserManager {
         let user = try await getUser(userId: userId)
         
         try await setPreferredAddress(userId: userId, addressId: address.id)
+    }
+    
+    func deleteAddress(userId: String, address: AddressModel) async throws {
+        let data: [String: Any] = [
+            "addresses": FieldValue.arrayRemove([try encoder.encode(address)])
+        ]
         
+        try await userDocument(userId: userId).updateData(data)
+        
+        let user = try await getUser(userId: userId)
+        
+        if user.preferredAddressId == address.id {
+            try await setPreferredAddress(userId: userId, addressId: "")
+        }
     }
 }
