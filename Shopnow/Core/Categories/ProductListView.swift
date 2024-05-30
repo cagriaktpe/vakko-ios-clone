@@ -17,8 +17,21 @@ struct ProductListView: View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                 ForEach(vm.products) { product in
-                    NavigationLink(destination: ProductDetailView(product: product)) {
-                        ProductCard(product: product)
+                    
+                    if category == CategoryType.man.rawValue {
+                        if product.subCategory == ManSubCategoryType(rawValue: subCategory)?.rawValue ?? "" {
+                            NavigationLink(destination: ProductDetailView(product: product)) {
+                                ProductCard(product: product)
+                            }
+                        }
+                        
+                    } else {
+                        if product.subCategory == WomanSubCategoryType(rawValue: subCategory)?.rawValue ?? "" {
+                            NavigationLink(destination: ProductDetailView(product: product)) {
+                                ProductCard(product: product)
+                            }
+                        }
+                        
                     }
                 }
             }
@@ -35,7 +48,7 @@ struct ProductCard: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
-            AsyncImage(url: URL(string: product.thumbnail ?? "")) { image in
+            AsyncImage(url: URL(string: product.thumbnail)) { image in
                 image
                     .resizable()
                     .scaledToFill()
@@ -47,11 +60,11 @@ struct ProductCard: View {
             .frame(width: 200, height: 275)
 
             VStack(alignment: .center) {
-                Text(product.title?.uppercased() ?? "")
+                Text(product.title.uppercased())
                     .font(.headline)
                     .foregroundStyle(Color.primary)
 
-                Text("₺\(product.price ?? 0, specifier: "%.2f")")
+                Text("₺\(product.price, specifier: "%.2f")")
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.accentColor)

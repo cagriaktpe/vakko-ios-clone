@@ -11,6 +11,9 @@ struct ProductDetailView: View {
     
     let product: ProductModel
     
+    @State private var showDescriptionDetail = false
+    @State private var showCareDetail = false
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -19,12 +22,17 @@ struct ProductDetailView: View {
                 Divider()
                 sizeSection
                 Divider()
+                descriptionRow
+                Divider()
+                careRow
+                Divider()
             }
             .padding(.bottom, 100)
         }
-        .navigationTitle(product.title?.uppercased() ?? "")
+        .navigationTitle(product.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
+        .toolbar(.hidden, for: .tabBar)
         .overlay {
             VStack {
                 Spacer()
@@ -59,11 +67,11 @@ extension ProductDetailView {
     var firstSection: some View {
         HStack {
             VStack(alignment: .leading, spacing: 8) {
-                Text(product.title?.uppercased() ?? "")
+                Text(product.title.uppercased())
                     .font(.title2)
                     .foregroundStyle(.primary)
                 
-                Text("₺\(product.price ?? 0, specifier: "%.2f")")
+                Text("₺\(product.price, specifier: "%.2f")")
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.accentColor)
@@ -131,10 +139,65 @@ extension ProductDetailView {
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
     }
+    
+    var descriptionRow: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Button(action: {
+                showDescriptionDetail.toggle()
+            }, label: {
+                HStack {
+                    Text("ÜRÜN ÖZELLİKLERİ")
+                        .tint(.primary)
+                    Spacer()
+                    Image(systemName: showDescriptionDetail ? "chevron.down" : "chevron.right")
+                        .foregroundStyle(.gray)
+                }
+            })
+            
+            
+            if showDescriptionDetail {
+                Text(product.description ?? "")
+                    .font(.body)
+                    .foregroundStyle(Color.primary)
+                
+            }
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 5)
+    }
+    
+    var careRow: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Button(action: {
+                showCareDetail.toggle()
+            }, label: {
+                HStack {
+                    Text("BAKIM")
+                        .tint(.primary)
+                    Spacer()
+                    Image(systemName: showCareDetail ? "chevron.down" : "chevron.right")
+                        .foregroundStyle(.gray)
+                }
+            })
+            
+            
+            if showCareDetail {
+                Text(product.careDetail ?? "")
+                    .font(.body)
+                    .foregroundStyle(Color.primary)
+                
+            }
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 5)
+    }
 }
 
 #Preview {
-    NavigationStack {
-        ProductDetailView(product: ProductModel(id: 1, thumbnail: "https://i.ibb.co/D9JYsjV/orange-forward.jpg", images: ["https://i.ibb.co/D9JYsjV/orange-forward.jpg", "https://i.ibb.co/GsmsHzN/orange-back.jpg"], title: "Turuncu Elbise", description: "Description", price: 100, sizes: ["34", "36", "38", "40", "42"]))
+    
+    let product = ProductModel(id: 1, thumbnail: "https://i.ibb.co/D9JYsjV/orange-forward.jpg", images: ["https://i.ibb.co/D9JYsjV/orange-forward.jpg", "https://i.ibb.co/GsmsHzN/orange-back.jpg"], title: "Turuncu Elbise", description: "Description", price: 100, sizes: ["34", "36", "38", "40", "42"], category: CategoryType.woman.rawValue, subCategory: WomanSubCategoryType.dress.rawValue, careDetail: "This is a care", exchangeDetail: "This is an exchange")
+    
+    return NavigationStack {
+         ProductDetailView(product: product)
     }
 }
