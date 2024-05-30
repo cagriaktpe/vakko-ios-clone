@@ -37,6 +37,9 @@ struct ProductListView: View {
             }
             .padding()
         }
+        .onAppear {
+            print(vm.products)
+        }
         .navigationTitle(subCategory)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
@@ -52,12 +55,12 @@ struct ProductCard: View {
                 image
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 200, height: 275)
+                    .frame(width: 170, height: 280)
                     .clipped()
             } placeholder: {
                 ProgressView()
             }
-            .frame(width: 200, height: 275)
+            .frame(width: 170, height: 280)
 
             VStack(alignment: .center) {
                 Text(product.title.uppercased())
@@ -69,7 +72,6 @@ struct ProductCard: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.accentColor)
             }
-            .padding(.horizontal)
         }
         .background(.ultraThinMaterial)
         .shadow(radius: 5)
