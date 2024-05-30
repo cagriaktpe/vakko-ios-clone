@@ -23,6 +23,7 @@
 		8179D43E2C04EFBA00927E8E /* AddAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179D43D2C04EFBA00927E8E /* AddAddressView.swift */; };
 		818660042C01E282003CBF97 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818660032C01E282003CBF97 /* SignUpView.swift */; };
 		818660062C01E6F5003CBF97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818660052C01E6F5003CBF97 /* Extensions.swift */; };
+		81B2A2FF2C0729B300E31612 /* UpdateAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2A2FE2C0729B300E31612 /* UpdateAddressView.swift */; };
 		81B35B772C00C9B2008BBF21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81B35B762C00C9B2008BBF21 /* GoogleService-Info.plist */; };
 		81B35B7A2C00CAFE008BBF21 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 81B35B792C00CAFE008BBF21 /* FirebaseAnalytics */; };
 		81B35B7E2C00CAFE008BBF21 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 81B35B7D2C00CAFE008BBF21 /* FirebaseAnalyticsSwift */; };
@@ -63,6 +64,7 @@
 		8179D43D2C04EFBA00927E8E /* AddAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressView.swift; sourceTree = "<group>"; };
 		818660032C01E282003CBF97 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		818660052C01E6F5003CBF97 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		81B2A2FE2C0729B300E31612 /* UpdateAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAddressView.swift; sourceTree = "<group>"; };
 		81B35B762C00C9B2008BBF21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81B35BB12C00CB76008BBF21 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		81B35BBD2C00CD7C008BBF21 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				8179D43B2C04EE4000927E8E /* MyAddressesView.swift */,
 				8179D43D2C04EFBA00927E8E /* AddAddressView.swift */,
 				81B6F5F92C05D7A700922E12 /* AddressCardView.swift */,
+				81B2A2FE2C0729B300E31612 /* UpdateAddressView.swift */,
 			);
 			path = Addresses;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				81B6F5F82C05D4DA00922E12 /* Alert.swift in Sources */,
 				81269DFF2BF38F3900A2137D /* ShopnowApp.swift in Sources */,
 				81C4E55C2BF4BDBB00CEC557 /* CategoryModel.swift in Sources */,
+				81B2A2FF2C0729B300E31612 /* UpdateAddressView.swift in Sources */,
 				818660042C01E282003CBF97 /* SignUpView.swift in Sources */,
 				81675A3C2C04B8B400C2E0C7 /* UpdateEmailView.swift in Sources */,
 				81B35BCD2C00D3E4008BBF21 /* SettingsViewModel.swift in Sources */,

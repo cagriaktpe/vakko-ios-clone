@@ -14,7 +14,7 @@ enum AddressType: String, CaseIterable, Codable {
 
 
 struct AddressModel: Codable, Identifiable {
-    var id = UUID().uuidString
+    var id: String
     let addressType: String
     let title: String
     let name: String
@@ -27,6 +27,7 @@ struct AddressModel: Codable, Identifiable {
     let phoneNumber: String
     
     init(
+        id: String = UUID().uuidString,
         addressType: AddressType,
         title: String,
         name: String,
@@ -38,6 +39,7 @@ struct AddressModel: Codable, Identifiable {
         address: String,
         phoneNumber: String
     ) {
+        self.id = id
         self.addressType = addressType.rawValue
         self.title = title
         self.name = name
@@ -51,6 +53,7 @@ struct AddressModel: Codable, Identifiable {
     }
     
     init() {
+        self.id = UUID().uuidString
         self.addressType = AddressType.home.rawValue
         self.title = ""
         self.name = ""

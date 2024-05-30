@@ -59,9 +59,10 @@ struct AddressCardView: View {
 
                 Spacer()
 
-                Button(action: editAddress) {
+                NavigationLink(destination: UpdateAddressView(viewModel: vm, addressToUpdate: address)) {
                     Text("Adresi Düzenle")
                 }
+                
             }
             .fontWeight(.semibold)
             .padding(.horizontal, 30)
@@ -111,9 +112,6 @@ extension AddressCardView {
                 print(error)
             }
         }
-    }
-    
-    func editAddress() {
     }
 }
 
