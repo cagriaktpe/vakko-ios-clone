@@ -8,49 +8,66 @@
 import SwiftUI
 
 struct ProductListView: View {
-    
     @ObservedObject var vm: ProductsViewModel
-    
+
     let category: String
     let subCategory: String
-    
+
     var body: some View {
-        List {
+//        List {
+//            ForEach(vm.products) { product in
+//                NavigationLink(destination: Text("Product Detail")) {
+//                    ProductCard(product: product)
+//                }
+//                .onAppear {
+//                    print(product.title ?? "N/A")
+//                }
+//            }
+//        }
+
+        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
             ForEach(vm.products) { product in
                 NavigationLink(destination: Text("Product Detail")) {
-                    ProductRow(product: product)
+                    ProductCard(product: product)
                 }
                 .onAppear {
                     print(product.title ?? "N/A")
                 }
             }
         }
-        .onAppear {
-            print(vm.products)
-        }
     }
 }
 
-struct ProductRow: View {
+struct ProductCard: View {
     let product: ProductModel
-    
+
     var body: some View {
-        HStack {
-            Image(systemName: "photo")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-            
-            VStack(alignment: .leading) {
-                Text(product.title ?? "N/A")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                
-                Text("\(product.price ?? 0)")
-                    .font(.title3)
-                    .fontWeight(.medium)
+        VStack(alignment: .center, spacing: 8) {
+            AsyncImage(url: URL(string: product.thumbnail ?? "")) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 200, height: 275)
+                    .clipped()
+            } placeholder: {
+                ProgressView()
             }
+            .frame(width: 200, height: 275)
+
+            VStack(alignment: .center) {
+                Text(product.title?.uppercased() ?? "")
+                    .font(.headline)
+                    .foregroundStyle(Color.primary)
+
+                Text("₺\(product.price ?? 0, specifier: "%.2f")")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color.accentColor)
+            }
+            .padding(.horizontal)
         }
+        .background(.ultraThinMaterial)
+        .shadow(radius: 5)
     }
 }
 
