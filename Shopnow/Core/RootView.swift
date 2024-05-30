@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct RootView: View {
-    
     @State var showSignInView: Bool = false
     @State private var tabSelection = 0
-    
+
     var body: some View {
         TabView(selection: $tabSelection) {
             NavigationStack {
@@ -24,13 +23,15 @@ struct RootView: View {
             .tag(0)
             .toolbarBackground(.white, for: .tabBar)
 
-            CategoriesView()
-                .tabItem {
-                    Image(systemName: "list.bullet")
-                    Text("Menü")
-                }
-                .tag(1)
-                .toolbarBackground(.white, for: .tabBar)
+            NavigationStack {
+                CategoriesView()
+            }
+            .tabItem {
+                Image(systemName: "list.bullet")
+                Text("Menü")
+            }
+            .tag(1)
+            .toolbarBackground(.white, for: .tabBar)
 
             FavoriesView()
                 .tabItem {

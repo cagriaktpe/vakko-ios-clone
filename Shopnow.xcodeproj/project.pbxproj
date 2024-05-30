@@ -17,6 +17,7 @@
 		81269E122BF393C100A2137D /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81269E112BF393C100A2137D /* CategoriesView.swift */; };
 		81269E142BF393DD00A2137D /* BasketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81269E132BF393DD00A2137D /* BasketView.swift */; };
 		81269E162BF3940600A2137D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81269E152BF3940600A2137D /* ProfileView.swift */; };
+		815EFA942C0870BD007F106D /* SubCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815EFA932C0870BD007F106D /* SubCategoriesView.swift */; };
 		81675A362C049AD400C2E0C7 /* MyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81675A352C049AD400C2E0C7 /* MyAccountView.swift */; };
 		81675A3C2C04B8B400C2E0C7 /* UpdateEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81675A3B2C04B8B400C2E0C7 /* UpdateEmailView.swift */; };
 		8179D43C2C04EE4000927E8E /* MyAddressesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179D43B2C04EE4000927E8E /* MyAddressesView.swift */; };
@@ -57,6 +58,7 @@
 		81269E112BF393C100A2137D /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		81269E132BF393DD00A2137D /* BasketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketView.swift; sourceTree = "<group>"; };
 		81269E152BF3940600A2137D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		815EFA932C0870BD007F106D /* SubCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoriesView.swift; sourceTree = "<group>"; };
 		81675A352C049AD400C2E0C7 /* MyAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountView.swift; sourceTree = "<group>"; };
 		81675A372C04B13B00C2E0C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		81675A3B2C04B8B400C2E0C7 /* UpdateEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateEmailView.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				81269E112BF393C100A2137D /* CategoriesView.swift */,
+				815EFA932C0870BD007F106D /* SubCategoriesView.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				81B35BCD2C00D3E4008BBF21 /* SettingsViewModel.swift in Sources */,
 				8179D43C2C04EE4000927E8E /* MyAddressesView.swift in Sources */,
 				8179D43E2C04EFBA00927E8E /* AddAddressView.swift in Sources */,
+				815EFA942C0870BD007F106D /* SubCategoriesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
