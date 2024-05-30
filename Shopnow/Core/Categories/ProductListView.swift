@@ -14,27 +14,19 @@ struct ProductListView: View {
     let subCategory: String
 
     var body: some View {
-//        List {
-//            ForEach(vm.products) { product in
-//                NavigationLink(destination: Text("Product Detail")) {
-//                    ProductCard(product: product)
-//                }
-//                .onAppear {
-//                    print(product.title ?? "N/A")
-//                }
-//            }
-//        }
-
-        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-            ForEach(vm.products) { product in
-                NavigationLink(destination: Text("Product Detail")) {
-                    ProductCard(product: product)
-                }
-                .onAppear {
-                    print(product.title ?? "N/A")
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                ForEach(vm.products) { product in
+                    NavigationLink(destination: ProductDetailView(product: product)) {
+                        ProductCard(product: product)
+                    }
                 }
             }
+            .padding()
         }
+        .navigationTitle(subCategory)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbarRole(.editor)
     }
 }
 
@@ -72,5 +64,8 @@ struct ProductCard: View {
 }
 
 #Preview {
-    ProductListView(vm: ProductsViewModel(), category: CategoryType.woman.rawValue, subCategory: WomanSubCategoryType.dress.rawValue)
+    NavigationStack {
+        ProductListView(vm: ProductsViewModel(), category: CategoryType.woman.rawValue, subCategory: WomanSubCategoryType.dress.rawValue)
+    }
+    
 }
