@@ -18,6 +18,10 @@
 		81269E142BF393DD00A2137D /* BasketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81269E132BF393DD00A2137D /* BasketView.swift */; };
 		81269E162BF3940600A2137D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81269E152BF3940600A2137D /* ProfileView.swift */; };
 		815EFA942C0870BD007F106D /* SubCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815EFA932C0870BD007F106D /* SubCategoriesView.swift */; };
+		815EFA962C0879E0007F106D /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815EFA952C0879E0007F106D /* ProductManager.swift */; };
+		815EFA982C087A7D007F106D /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815EFA972C087A7D007F106D /* ProductModel.swift */; };
+		815EFA9A2C087BEA007F106D /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815EFA992C087BEA007F106D /* ProductsViewModel.swift */; };
+		815EFA9C2C087CEB007F106D /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815EFA9B2C087CEB007F106D /* ProductListView.swift */; };
 		81675A362C049AD400C2E0C7 /* MyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81675A352C049AD400C2E0C7 /* MyAccountView.swift */; };
 		81675A3C2C04B8B400C2E0C7 /* UpdateEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81675A3B2C04B8B400C2E0C7 /* UpdateEmailView.swift */; };
 		8179D43C2C04EE4000927E8E /* MyAddressesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179D43B2C04EE4000927E8E /* MyAddressesView.swift */; };
@@ -42,8 +46,6 @@
 		81B6F5F62C05D10400922E12 /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6F5F52C05D10400922E12 /* AddressModel.swift */; };
 		81B6F5F82C05D4DA00922E12 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6F5F72C05D4DA00922E12 /* Alert.swift */; };
 		81B6F5FA2C05D7A700922E12 /* AddressCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6F5F92C05D7A700922E12 /* AddressCardView.swift */; };
-		81C4E55C2BF4BDBB00CEC557 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C4E55B2BF4BDBB00CEC557 /* CategoryModel.swift */; };
-		81C4E55E2BF4BE0C00CEC557 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C4E55D2BF4BE0C00CEC557 /* ProductModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,10 @@
 		81269E132BF393DD00A2137D /* BasketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketView.swift; sourceTree = "<group>"; };
 		81269E152BF3940600A2137D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		815EFA932C0870BD007F106D /* SubCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoriesView.swift; sourceTree = "<group>"; };
+		815EFA952C0879E0007F106D /* ProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
+		815EFA972C087A7D007F106D /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		815EFA992C087BEA007F106D /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
+		815EFA9B2C087CEB007F106D /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 		81675A352C049AD400C2E0C7 /* MyAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountView.swift; sourceTree = "<group>"; };
 		81675A372C04B13B00C2E0C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		81675A3B2C04B8B400C2E0C7 /* UpdateEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateEmailView.swift; sourceTree = "<group>"; };
@@ -79,8 +85,6 @@
 		81B6F5F52C05D10400922E12 /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		81B6F5F72C05D4DA00922E12 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		81B6F5F92C05D7A700922E12 /* AddressCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCardView.swift; sourceTree = "<group>"; };
-		81C4E55B2BF4BDBB00CEC557 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
-		81C4E55D2BF4BE0C00CEC557 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +227,8 @@
 			children = (
 				81269E112BF393C100A2137D /* CategoriesView.swift */,
 				815EFA932C0870BD007F106D /* SubCategoriesView.swift */,
+				815EFA992C087BEA007F106D /* ProductsViewModel.swift */,
+				815EFA9B2C087CEB007F106D /* ProductListView.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -239,18 +245,8 @@
 			isa = PBXGroup;
 			children = (
 				81F8C6DF2C020F28005C701B /* Views */,
-				81B35BBB2C00CD13008BBF21 /* Models */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		81B35BBB2C00CD13008BBF21 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				81C4E55B2BF4BDBB00CEC557 /* CategoryModel.swift */,
-				81C4E55D2BF4BE0C00CEC557 /* ProductModel.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		81B35BBC2C00CD6D008BBF21 /* Utilities */ = {
@@ -282,8 +278,9 @@
 		81B35BC32C00CE2C008BBF21 /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
-				81B6F5F22C05CFF900922E12 /* Models */,
 				81B35BC42C00CE3C008BBF21 /* UserManager.swift */,
+				815EFA952C0879E0007F106D /* ProductManager.swift */,
+				81B6F5F22C05CFF900922E12 /* Models */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
@@ -328,6 +325,7 @@
 			children = (
 				81B6F5F32C05D00900922E12 /* DBUser.swift */,
 				81B6F5F52C05D10400922E12 /* AddressModel.swift */,
+				815EFA972C087A7D007F106D /* ProductModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -421,10 +419,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				81B6F5FA2C05D7A700922E12 /* AddressCardView.swift in Sources */,
+				815EFA962C0879E0007F106D /* ProductManager.swift in Sources */,
 				81269E122BF393C100A2137D /* CategoriesView.swift in Sources */,
 				81269E102BF393B100A2137D /* FavoriesView.swift in Sources */,
 				81B35BC52C00CE3C008BBF21 /* UserManager.swift in Sources */,
 				81B35BB22C00CB76008BBF21 /* AuthenticationManager.swift in Sources */,
+				815EFA982C087A7D007F106D /* ProductModel.swift in Sources */,
+				815EFA9C2C087CEB007F106D /* ProductListView.swift in Sources */,
 				81B6F5F62C05D10400922E12 /* AddressModel.swift in Sources */,
 				81269E0E2BF3939800A2137D /* HomeView.swift in Sources */,
 				81B35BCF2C00D407008BBF21 /* SettingsView.swift in Sources */,
@@ -433,15 +434,14 @@
 				81B35BC92C00D0A8008BBF21 /* AuthenticationViewModel.swift in Sources */,
 				8123BAAE2BF6291B0005434D /* SignInView.swift in Sources */,
 				81B35BBE2C00CD7C008BBF21 /* Utilities.swift in Sources */,
-				81C4E55E2BF4BE0C00CEC557 /* ProductModel.swift in Sources */,
 				81B6F5F42C05D00900922E12 /* DBUser.swift in Sources */,
 				81675A362C049AD400C2E0C7 /* MyAccountView.swift in Sources */,
 				81269E142BF393DD00A2137D /* BasketView.swift in Sources */,
+				815EFA9A2C087BEA007F106D /* ProductsViewModel.swift in Sources */,
 				81269E162BF3940600A2137D /* ProfileView.swift in Sources */,
 				81B35BC22C00CE07008BBF21 /* ProfileViewModel.swift in Sources */,
 				81B6F5F82C05D4DA00922E12 /* Alert.swift in Sources */,
 				81269DFF2BF38F3900A2137D /* ShopnowApp.swift in Sources */,
-				81C4E55C2BF4BDBB00CEC557 /* CategoryModel.swift in Sources */,
 				81B2A2FF2C0729B300E31612 /* UpdateAddressView.swift in Sources */,
 				818660042C01E282003CBF97 /* SignUpView.swift in Sources */,
 				81675A3C2C04B8B400C2E0C7 /* UpdateEmailView.swift in Sources */,

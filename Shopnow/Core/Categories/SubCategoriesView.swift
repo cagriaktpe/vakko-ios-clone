@@ -23,13 +23,15 @@ enum ManSubCategoryType: String, CaseIterable {
 
 struct SubCategoriesView: View {
     let category: CategoryType // main category
+    
+    @ObservedObject var vm: ProductsViewModel
 
     var body: some View {
         List {
             if category == .man {
                 ForEach(ManSubCategoryType.allCases, id: \.self) { subCategory in
                     ZStack {
-                        NavigationLink(destination: Text("Kategoriye ait ürünler listelenecek.")) {
+                        NavigationLink(destination: ProductListView(vm: vm, category: category.rawValue, subCategory: subCategory.rawValue)) {
                             EmptyView()
                         }
 
@@ -44,7 +46,7 @@ struct SubCategoriesView: View {
             } else {
                 ForEach(WomanSubCategoryType.allCases, id: \.self) { subCategory in
                     ZStack {
-                        NavigationLink(destination: Text("Kategoriye ait ürünler listelenecek.")) {
+                        NavigationLink(destination: ProductListView(vm: vm, category: category.rawValue, subCategory: subCategory.rawValue)) {
                             EmptyView()
                         }
 
@@ -67,6 +69,6 @@ struct SubCategoriesView: View {
 
 #Preview {
     NavigationStack {
-        SubCategoriesView(category: .man)
+        SubCategoriesView(category: .man, vm: ProductsViewModel())
     }
 }
