@@ -18,20 +18,15 @@ struct ProductListView: View {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                 ForEach(vm.products) { product in
                     
-                    if category == CategoryType.man.rawValue {
-                        if product.subCategory == ManSubCategoryType(rawValue: subCategory)?.rawValue ?? "" {
-                            NavigationLink(destination: ProductDetailView(product: product)) {
-                                ProductCard(product: product)
-                            }
+                    if category == CategoryType.man.rawValue && subCategory == ManSubCategoryType(rawValue: product.subCategory)?.rawValue {
+                        NavigationLink(destination: ProductDetailView(product: product)) {
+                            ProductCard(product: product)
                         }
                         
-                    } else {
-                        if product.subCategory == WomanSubCategoryType(rawValue: subCategory)?.rawValue ?? "" {
-                            NavigationLink(destination: ProductDetailView(product: product)) {
-                                ProductCard(product: product)
-                            }
+                    } else if category == CategoryType.woman.rawValue && subCategory == WomanSubCategoryType(rawValue: product.subCategory)?.rawValue {
+                        NavigationLink(destination: ProductDetailView(product: product)) {
+                            ProductCard(product: product)
                         }
-                        
                     }
                 }
             }

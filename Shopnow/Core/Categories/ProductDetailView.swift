@@ -13,6 +13,7 @@ struct ProductDetailView: View {
     
     @State private var showDescriptionDetail = false
     @State private var showCareDetail = false
+    @State private var showReturnDetail = false
     
     var body: some View {
         ScrollView {
@@ -25,6 +26,8 @@ struct ProductDetailView: View {
                 descriptionRow
                 Divider()
                 careRow
+                Divider()
+                returnRow
                 Divider()
             }
             .padding(.bottom, 100)
@@ -46,7 +49,7 @@ struct ProductDetailView: View {
 extension ProductDetailView {
     var images: some View {
         TabView {
-            ForEach(product.images ?? [], id: \.self) { image in
+            ForEach(product.images, id: \.self) { image in
                 AsyncImage(url: URL(string: image)) { image in
                     image
                         .resizable()
@@ -107,7 +110,7 @@ extension ProductDetailView {
             }
             
             HStack(spacing: 20) {
-                ForEach(product.sizes ?? [], id: \.self) { size in
+                ForEach(product.sizes, id: \.self) { size in
                     Button {
                         // Select Size
                     } label: {
@@ -156,7 +159,7 @@ extension ProductDetailView {
             
             
             if showDescriptionDetail {
-                Text(product.description ?? "")
+                Text(product.description)
                     .font(.body)
                     .foregroundStyle(Color.primary)
                 
@@ -182,7 +185,33 @@ extension ProductDetailView {
             
             
             if showCareDetail {
-                Text(product.careDetail ?? "")
+                Text(product.careDetail)
+                    .font(.body)
+                    .foregroundStyle(Color.primary)
+                
+            }
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 5)
+    }
+    
+    var returnRow: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Button(action: {
+                showReturnDetail.toggle()
+            }, label: {
+                HStack {
+                    Text("İADE & DEĞİŞİM")
+                        .tint(.primary)
+                    Spacer()
+                    Image(systemName: showReturnDetail ? "chevron.down" : "chevron.right")
+                        .foregroundStyle(.gray)
+                }
+            })
+            
+            
+            if showReturnDetail {
+                Text(product.exchangeDetail)
                     .font(.body)
                     .foregroundStyle(Color.primary)
                 
