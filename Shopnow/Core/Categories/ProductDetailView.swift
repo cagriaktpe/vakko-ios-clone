@@ -20,11 +20,18 @@ struct ProductDetailView: View {
                 sizeSection
                 Divider()
             }
-            
+            .padding(.bottom, 100)
         }
         .navigationTitle(product.title?.uppercased() ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
+        .overlay {
+            VStack {
+                Spacer()
+                addToCartButton
+            }
+        }
+
     }
 }
 
@@ -107,7 +114,22 @@ extension ProductDetailView {
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
-
+    }
+    
+    var addToCartButton: some View {
+        Button {
+            // Add to Cart
+        } label: {
+            Text("SEPETE EKLE")
+                .font(.title2)
+                .fontWeight(.semibold)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.accentColor)
+                .foregroundStyle(.white)
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
     }
 }
 
