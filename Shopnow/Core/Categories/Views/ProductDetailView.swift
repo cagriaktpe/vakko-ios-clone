@@ -40,11 +40,8 @@ struct ProductDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
         .toolbar(.hidden, for: .tabBar)
-        .overlay {
-            VStack {
-                Spacer()
-                addToCartButton
-            }
+        .overlay(alignment: .bottom) {
+            addToCartButton
         }
 
     }

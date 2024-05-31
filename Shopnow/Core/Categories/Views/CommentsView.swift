@@ -88,8 +88,16 @@ extension CommentsView {
         Button {
             
         } label: {
-            Label("Yorum Yap", systemImage: "square.and.pencil")
+            Text("YORUM YAP")
+                .font(.title2)
+                .fontWeight(.semibold)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.accentColor)
+                .foregroundStyle(.white)
         }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
     }
 }
 
