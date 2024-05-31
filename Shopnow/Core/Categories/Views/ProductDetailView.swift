@@ -10,6 +10,7 @@ import SwiftUI
 struct ProductDetailView: View {
     
     @EnvironmentObject var viewModel: ProfileViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel
     
     let product: ProductModel
     
@@ -130,7 +131,7 @@ extension ProductDetailView {
     
     var addToCartButton: some View {
         Button {
-            // Add to Cart
+            handleAddToCart()
         } label: {
             Text("SEPETE EKLE")
                 .font(.title2)
@@ -250,6 +251,10 @@ extension ProductDetailView {
                 print(error)
             }
         }
+    }
+    
+    func handleAddToCart() {
+        cartViewModel.addProduct(product: product, size: "M", quantity: 1)
     }
     
     func isFavorite() -> Bool {

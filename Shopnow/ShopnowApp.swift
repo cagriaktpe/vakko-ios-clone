@@ -23,12 +23,14 @@ struct ShopnowApp: App {
     
     @StateObject var profileViewModel: ProfileViewModel = ProfileViewModel()
     @StateObject var productsViewModel = ProductsViewModel()
+    @StateObject var cartViewModel = CartViewModel()
     
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environmentObject(profileViewModel)
                 .environmentObject(productsViewModel)
+                .environmentObject(cartViewModel)
                 .task {
                     try? await profileViewModel.loadCurrentUser()
                 }

@@ -42,16 +42,17 @@ struct RootView: View {
             }
             .tag(2)
             .toolbarBackground(.white, for: .tabBar)
-            
-                
 
-            BasketView()
-                .tabItem {
-                    Image(systemName: "basket")
-                    Text("Sepetim")
-                }
-                .tag(3)
-                .toolbarBackground(.white, for: .tabBar)
+            NavigationStack {
+                BasketView()
+            }
+
+            .tabItem {
+                Image(systemName: "basket")
+                Text("Sepetim")
+            }
+            .tag(3)
+            .toolbarBackground(.white, for: .tabBar)
 
             NavigationStack {
                 ProfileView(showSignInView: $showSignInView, tabSelection: $tabSelection)
