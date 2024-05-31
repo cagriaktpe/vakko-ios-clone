@@ -20,6 +20,11 @@ struct ProductDetailView: View {
     @State private var showCareDetail = false
     @State private var showReturnDetail = false
     
+    // alert
+    @State private var showAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -43,6 +48,9 @@ struct ProductDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
         .toolbar(.hidden, for: .tabBar)
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
+        }
         .overlay(alignment: .bottom) {
             addToCartButton
         }
@@ -250,20 +258,31 @@ extension ProductDetailView {
             do {
                 try await viewModel.toggleFavoriteProduct(product: product)
             } catch {
-                print(error)
+                makeAlert(title: "Hata", message: error.localizedDescription)
             }
         }
     }
     
     func handleAddToCart() {
-        if selectedSize.isEmpty { return }
+        if selectedSize.isEmpty {
+            makeAlert(title: "Hata", message: "Lütfen bir beden seçiniz.")
+            return
+        }
+        
         cartViewModel.addProduct(product: product, size: selectedSize, quantity: 1)
+        makeAlert(title: "Başarılı", message: "Ürün sepete eklendi.")
     }
     
     func isFavorite() -> Bool {
         guard let user = viewModel.user else { return false }
         
         return user.favoriteProductIDs?.contains(product.productId) ?? false
+    }
+    
+    func makeAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert.toggle()
     }
 }
 
