@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProductListView: View {
-    @ObservedObject var vm: ProductsViewModel
+    @EnvironmentObject var vm: ProductsViewModel
 
     let category: String
     let subCategory: String
@@ -67,7 +67,8 @@ struct ProductCard: View {
 
 #Preview {
     NavigationStack {
-        ProductListView(vm: ProductsViewModel(), category: CategoryType.woman.rawValue, subCategory: WomanSubCategoryType.dress.rawValue)
+        ProductListView(category: CategoryType.woman.rawValue, subCategory: WomanSubCategoryType.dress.rawValue)
+            .environmentObject(ProductsViewModel())
     }
     
 }

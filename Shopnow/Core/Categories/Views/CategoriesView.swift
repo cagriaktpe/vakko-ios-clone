@@ -14,14 +14,14 @@ enum CategoryType: String, CaseIterable {
 
 struct CategoriesView: View {
     
-    @StateObject var vm = ProductsViewModel()
+    @EnvironmentObject var vm: ProductsViewModel
     
     var body: some View {
         List {
             ForEach(CategoryType.allCases, id: \.self) { category in
 
                 ZStack {
-                    NavigationLink(destination: SubCategoriesView(category: category, vm: vm)) {
+                    NavigationLink(destination: SubCategoriesView(category: category)) {
                         EmptyView()
                     }
                     .opacity(0)
@@ -45,5 +45,6 @@ struct CategoriesView: View {
 #Preview {
     NavigationStack {
         CategoriesView()
+            .environmentObject(ProductsViewModel())
     }
 }

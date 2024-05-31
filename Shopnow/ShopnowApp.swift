@@ -22,11 +22,13 @@ struct ShopnowApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     @StateObject var profileViewModel: ProfileViewModel = ProfileViewModel()
+    @StateObject var productsViewModel = ProductsViewModel()
     
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environmentObject(profileViewModel)
+                .environmentObject(productsViewModel)
                 .task {
                     try? await profileViewModel.loadCurrentUser()
                 }

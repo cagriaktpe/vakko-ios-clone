@@ -31,6 +31,8 @@ struct ProductDetailView: View {
                 Divider()
                 returnRow
                 Divider()
+                commentsRow
+                Divider()
             }
             .padding(.bottom, 100)
         }
@@ -222,6 +224,24 @@ extension ProductDetailView {
         .padding(.horizontal)
         .padding(.vertical, 5)
     }
+    
+    var commentsRow: some View {
+        
+        NavigationLink(destination: CommentsView(product: product)) {
+            HStack {
+                Text("YORUMLAR")
+                    .tint(.primary)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(.gray)
+            }
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 5)
+        
+        
+        
+    }
 }
 
 extension ProductDetailView {
@@ -248,5 +268,6 @@ extension ProductDetailView {
     
     return NavigationStack {
          ProductDetailView(product: product)
+            .environmentObject(ProfileViewModel())
     }
 }

@@ -11,11 +11,13 @@ import Foundation
 final class ProductsViewModel: ObservableObject {
     
     @Published var products: [ProductModel] = []
+    @Published var comments: [CommentModel] = []
     
     init() {
         Task {
             do {
                 try await fetchProducts()
+                try await getAllComments()
             } catch {
                 print(error)
             }
@@ -25,6 +27,14 @@ final class ProductsViewModel: ObservableObject {
     func fetchProducts() async throws {
         do {
             products = try await ProductsManager.shared.getAllProducts()
+        } catch {
+            print(error)
+        }
+    }
+    
+    func getAllComments() async throws {
+        do {
+            comments = try await CommentManager.shared.getAllComments()
         } catch {
             print(error)
         }

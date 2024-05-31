@@ -138,3 +138,12 @@ extension ProfileViewModel {
         return favoriteProducts
     }
 }
+
+// comments related
+extension ProfileViewModel {
+    func addComment(comment: CommentModel) throws {
+        guard let user = user else { return }
+        
+        try CommentManager.shared.createComment(comment: comment)
+    }
+}
