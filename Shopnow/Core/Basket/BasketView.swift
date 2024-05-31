@@ -16,6 +16,7 @@ struct BasketView: View {
             VStack {
                 ForEach(cartViewModel.selectedProducts, id: \.self) { selectedProduct in
                     BasketRowView(selectedProduct: selectedProduct)
+                        
                     Divider()
                 }
             }
@@ -63,7 +64,7 @@ extension BasketView {
 
 struct BasketRowView: View {
     let selectedProduct: SelectedProductModel
-    @State private var quantity: Int = 0
+    @State private var quantity: Int = 1
 
     @EnvironmentObject var viewModel: ProfileViewModel
     @EnvironmentObject var cartViewModel: CartViewModel
@@ -98,16 +99,15 @@ struct BasketRowView: View {
                     .padding(.vertical, 5)
                 
                 Picker("Adet", selection: $quantity) {
-                    ForEach(1..<10) { i in
-                        Text("\(i) adet")
+                    ForEach(1...10, id: \.self) { number in
+                        Text("\(number) adet")
+                            .tag(number)
                     }
                 }
                 .pickerStyle(.menu)
                 .border(Color.gray, width: 1)
                 .padding(.top, 10)
-                .onChange(of: quantity) { quantity in
-                    cartViewModel.updateQuantity(product: selectedProduct.product, size: selectedProduct.size, quantity: quantity)
-                }
+                
 
                 Spacer()
             }
@@ -123,8 +123,10 @@ struct BasketRowView: View {
 
             Spacer()
         }
-
         .padding()
+        .onAppear {
+            quantity = selectedProduct.quantity
+        }
     }
 }
 
