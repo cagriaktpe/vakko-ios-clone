@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ProductModel: Identifiable, Codable {
-    var id: Int
+struct ProductModel: Codable, Hashable {
+    var productId: String
     var thumbnail: String
     var images: [String]
     var title: String
@@ -20,8 +20,8 @@ struct ProductModel: Identifiable, Codable {
     var careDetail: String
     var exchangeDetail: String
     
-    init(id: Int, thumbnail: String, images: [String], title: String, description: String, price: Double, sizes: [String], category: String, subCategory: String, careDetail: String, exchangeDetail: String) {
-        self.id = id
+    init(productId: String, thumbnail: String, images: [String], title: String, description: String, price: Double, sizes: [String], category: String, subCategory: String, careDetail: String, exchangeDetail: String) {
+        self.productId = productId
         self.thumbnail = thumbnail
         self.images = images
         self.title = title
@@ -36,7 +36,7 @@ struct ProductModel: Identifiable, Codable {
    
     // coding keys
     enum CodingKeys: String, CodingKey {
-        case id
+        case productId = "product_id"
         case thumbnail
         case images
         case title
@@ -52,7 +52,7 @@ struct ProductModel: Identifiable, Codable {
     // encode
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
+        try container.encode(productId, forKey: .productId)
         try container.encode(thumbnail, forKey: .thumbnail)
         try container.encode(images, forKey: .images)
         try container.encode(title, forKey: .title)
@@ -68,7 +68,7 @@ struct ProductModel: Identifiable, Codable {
     // decode
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int.self, forKey: .id)
+        productId = try container.decode(String.self, forKey: .productId)
         thumbnail = try container.decode(String.self, forKey: .thumbnail)
         images = try container.decode([String].self, forKey: .images)
         title = try container.decode(String.self, forKey: .title)
@@ -81,4 +81,11 @@ struct ProductModel: Identifiable, Codable {
         exchangeDetail = try container.decode(String.self, forKey: .exchangeDetail)
     }
     
+}
+
+extension ProductModel {
+    static let mockData: [ProductModel] = [
+        ProductModel(productId: "1", thumbnail: "https://i.ibb.co/D9JYsjV/orange-forward.jpg", images: ["https://i.ibb.co/D9JYsjV/orange-forward.jpg", "https://i.ibb.co/GsmsHzN/orange-back.jpg"], title: "Turuncu Elbise", description: "Description", price: 100, sizes: ["34", "36", "38", "40"], category: "Kadın", subCategory: "Elbise", careDetail: "This is a care", exchangeDetail: "This is an exchange"),
+        ProductModel(productId: "2", thumbnail: "https://i.ibb.co/7zvZ3Z6/white-forward.jpg", images: ["https://i.ibb.co/7zvZ3Z6/white-forward.jpg", "https://i.ibb.co/7zvZ3Z6/white-forward.jpg"], title: "Beyaz Elbise", description: "Description", price: 150, sizes: ["34", "36", "38", "40"], category: "Kadın", subCategory: "Elbise", careDetail: "This is a care", exchangeDetail: "This is an exchange"),
+    ]
 }

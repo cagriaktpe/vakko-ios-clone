@@ -33,13 +33,17 @@ struct RootView: View {
             .tag(1)
             .toolbarBackground(.white, for: .tabBar)
 
-            FavoriesView()
-                .tabItem {
-                    Image(systemName: "heart")
-                    Text("Favorilerim")
-                }
-                .tag(2)
-                .toolbarBackground(.white, for: .tabBar)
+            NavigationStack {
+                FavoriesView(tabSelection: $tabSelection)
+            }
+            .tabItem {
+                Image(systemName: "heart")
+                Text("Favorilerim")
+            }
+            .tag(2)
+            .toolbarBackground(.white, for: .tabBar)
+            
+                
 
             BasketView()
                 .tabItem {

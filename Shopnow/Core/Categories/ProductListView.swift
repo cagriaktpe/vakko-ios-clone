@@ -16,7 +16,7 @@ struct ProductListView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                ForEach(vm.products) { product in
+                ForEach(vm.products, id: \.self) { product in
                     if category == product.category && subCategory == product.subCategory {
                         NavigationLink(destination: ProductDetailView(product: product)) {
                             ProductCard(product: product)

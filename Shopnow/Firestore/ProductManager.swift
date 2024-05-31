@@ -21,23 +21,45 @@ final class ProductsManager {
         return productsCollection.document(productId)
     }
     
-    func uploadProduct(product: ProductModel) async throws {
-        try productDocument(productId: String(product.id)).setData(from: product, merge: false)
-    }
-    
     func getProduct(productId: String) async throws -> ProductModel {
         try await productDocument(productId: productId).getDocument(as: ProductModel.self)
     }
     
     func getAllProducts() async throws -> [ProductModel] {
-        try await productsCollection.getDocuments(as: ProductModel.self)
+        return try await productsCollection.getDocuments(as: ProductModel.self)
+    }
+    
+    func printJSON() async throws {
+        Task {
+            do {
+                let snapshot = try await productsCollection.getDocuments()
+                for document in snapshot.documents {
+                    print(document.data())
+                }
+
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 
 extension Query {
     func getDocuments<T>(as: T.Type) async throws -> [T] where T : Decodable {
-        let querySnapshot = try await self.getDocuments()
-        
-        return try querySnapshot.documents.compactMap { try $0.data(as: T.self) }
+        return try await withCheckedThrowingContinuation { continuation in
+            self.getDocuments { snapshot, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else {
+                    do {
+                        let documents = try snapshot?.documents.compactMap { try $0.data(as: T.self) } ?? []
+                        continuation.resume(returning: documents)
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                }
+            }
+        }
     }
+    
 }

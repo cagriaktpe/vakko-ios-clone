@@ -90,7 +90,7 @@ extension ProductDetailView {
             } label: {
                 Image(systemName: "heart.fill")
                     .font(.title)
-                    .foregroundStyle(isFavorite() ? .red : .gray)
+                    .foregroundStyle(isFavorite() ? Color.accentColor : .gray)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -238,13 +238,13 @@ extension ProductDetailView {
     func isFavorite() -> Bool {
         guard let user = viewModel.user else { return false }
         
-        return user.favoriteProductIDs?.contains(String(product.id)) ?? false
+        return user.favoriteProductIDs?.contains(product.productId) ?? false
     }
 }
 
 #Preview {
     
-    let product = ProductModel(id: 1, thumbnail: "https://i.ibb.co/D9JYsjV/orange-forward.jpg", images: ["https://i.ibb.co/D9JYsjV/orange-forward.jpg", "https://i.ibb.co/GsmsHzN/orange-back.jpg"], title: "Turuncu Elbise", description: "Description", price: 100, sizes: ["34", "36", "38", "40", "42"], category: CategoryType.woman.rawValue, subCategory: WomanSubCategoryType.dress.rawValue, careDetail: "This is a care", exchangeDetail: "This is an exchange")
+    let product = ProductModel(productId: "1", thumbnail: "https://i.ibb.co/D9JYsjV/orange-forward.jpg", images: ["https://i.ibb.co/D9JYsjV/orange-forward.jpg", "https://i.ibb.co/GsmsHzN/orange-back.jpg"], title: "Turuncu Elbise", description: "Description", price: 100, sizes: ["34", "36", "38", "40", "42"], category: CategoryType.woman.rawValue, subCategory: WomanSubCategoryType.dress.rawValue, careDetail: "This is a care", exchangeDetail: "This is an exchange")
     
     return NavigationStack {
          ProductDetailView(product: product)

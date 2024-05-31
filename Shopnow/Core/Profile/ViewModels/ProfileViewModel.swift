@@ -115,13 +115,26 @@ extension ProfileViewModel {
     func toggleFavoriteProduct(product: ProductModel) async throws {
         guard let user = user else { return }
                 
-        try await UserManager.shared.toggleFavoriteProduct(userId: user.userId, productId: String(product.id))
+        try await UserManager.shared.toggleFavoriteProduct(userId: user.userId, productId: String(product.productId))
         self.user = try await UserManager.shared.getUser(userId: user.userId)
     }
     
     func isFavoriteProduct(product: ProductModel) -> Bool {
         guard let user = user else { return false }
         
-        return ((user.favoriteProductIDs?.contains(String(product.id))) != nil)
+        return ((user.favoriteProductIDs?.contains(String(product.productId))) != nil)
+    }
+    
+    func getFavoriteProducts() async throws -> [ProductModel] {
+        guard let user = user else { return [] }
+        
+        var favoriteProducts: [ProductModel] = []
+        
+        for productId in user.favoriteProductIDs ?? [] {
+            let product = try await ProductsManager.shared.getProduct(productId: productId)
+            favoriteProducts.append(product)
+        }
+        
+        return favoriteProducts
     }
 }
