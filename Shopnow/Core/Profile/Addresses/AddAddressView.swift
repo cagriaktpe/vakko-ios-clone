@@ -11,7 +11,7 @@ struct AddAddressView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var viewModel: ProfileViewModel
+    @EnvironmentObject var viewModel: ProfileViewModel
     
     @State private var addressType: AddressType = .home
     @State private var title: String = ""
@@ -294,6 +294,6 @@ extension AddAddressView {
 
 #Preview {
     NavigationStack {
-        AddAddressView(viewModel: ProfileViewModel())
+        AddAddressView()
     }
 }

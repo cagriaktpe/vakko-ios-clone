@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyAddressesView: View {
-    @ObservedObject var viewModel: ProfileViewModel
+    @EnvironmentObject var viewModel: ProfileViewModel
     
     var body: some View {
         ScrollView {
@@ -18,7 +18,7 @@ struct MyAddressesView: View {
             if let addresses = viewModel.user?.addresses {
                 VStack(spacing: 28) {
                     ForEach(addresses) { address in
-                        AddressCardView(vm: viewModel, address: address)
+                        AddressCardView(address: address)
                     }
                 }
             }
@@ -29,7 +29,7 @@ struct MyAddressesView: View {
         .toolbarRole(.editor)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink(destination: AddAddressView(viewModel: viewModel)) {
+                NavigationLink(destination: AddAddressView()) {
                     Image(systemName: "plus")
                 }
                 .fontWeight(.semibold)
@@ -38,7 +38,7 @@ struct MyAddressesView: View {
     }
 
     var addAddressButton: some View {
-        NavigationLink(destination: AddAddressView(viewModel: viewModel)) {
+        NavigationLink(destination: AddAddressView()) {
             Text("Yeni Adres Ekle")
                 .font(.headline)
                 .fontWeight(.bold)
@@ -53,6 +53,6 @@ struct MyAddressesView: View {
 
 #Preview {
     NavigationStack {
-        MyAddressesView(viewModel: ProfileViewModel())
+        MyAddressesView()
     }
 }

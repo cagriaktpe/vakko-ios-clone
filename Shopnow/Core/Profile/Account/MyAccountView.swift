@@ -11,7 +11,7 @@ struct MyAccountView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var vm: ProfileViewModel
+    @EnvironmentObject var vm: ProfileViewModel
     
     @Binding var showSignedInView: Bool
     @Binding var tabSelection: Int
@@ -170,6 +170,6 @@ extension MyAccountView {
 
 #Preview {
     NavigationStack {
-        MyAccountView(vm: ProfileViewModel(), showSignedInView: .constant(false), tabSelection: .constant(5))
+        MyAccountView(showSignedInView: .constant(false), tabSelection: .constant(5))
     }
 }

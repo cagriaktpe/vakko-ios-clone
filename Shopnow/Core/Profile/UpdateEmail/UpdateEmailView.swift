@@ -11,7 +11,7 @@ struct UpdateEmailView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var vm: ProfileViewModel
+    @EnvironmentObject var vm: ProfileViewModel
     
     @Binding var showSignedInView: Bool
     @Binding var tabSelection: Int
@@ -164,6 +164,6 @@ extension UpdateEmailView {
 
 #Preview {
     NavigationStack {
-        UpdateEmailView(vm: ProfileViewModel(), showSignedInView: .constant(false), tabSelection: .constant(5))
+        UpdateEmailView(showSignedInView: .constant(false), tabSelection: .constant(5))
     }
 }

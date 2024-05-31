@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProductDetailView: View {
     
+    @EnvironmentObject var viewModel: ProfileViewModel
+    
     let product: ProductModel
     
     @State private var showDescriptionDetail = false
@@ -84,11 +86,11 @@ extension ProductDetailView {
             Spacer()
             
             Button {
-                // Add to Cart
+                handleFavoriteButtonClick()
             } label: {
                 Image(systemName: "heart.fill")
                     .font(.title)
-                    .foregroundStyle(Color.secondary)
+                    .foregroundStyle(isFavorite() ? .red : .gray)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -219,6 +221,24 @@ extension ProductDetailView {
         }
         .padding(.horizontal)
         .padding(.vertical, 5)
+    }
+}
+
+extension ProductDetailView {
+    func handleFavoriteButtonClick() {
+        Task {
+            do {
+                try await viewModel.toggleFavoriteProduct(product: product)
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func isFavorite() -> Bool {
+        guard let user = viewModel.user else { return false }
+        
+        return user.favoriteProductIDs?.contains(String(product.id)) ?? false
     }
 }
 

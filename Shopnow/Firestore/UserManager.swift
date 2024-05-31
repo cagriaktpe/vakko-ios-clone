@@ -109,3 +109,56 @@ extension UserManager {
         try await userDocument(userId: userId).updateData(dataToAdd)
     }
 }
+
+extension UserManager {
+    func toggleFavoriteProduct(userId: String, productId: String) async throws {
+        let user = try await getUser(userId: userId)
+        
+        print("I WORKED from UserManager")
+       
+        if user.favoriteProductIDs?.contains(productId) == true {
+            try await removeFavoriteProduct(userId: userId, productId: productId)
+            print("I WORKED from UserManager: removeFavoriteProduct")
+        } else {
+            try await addFavoriteProduct(userId: userId, productId: productId)
+            print("I WORKED from UserManager: addFavoriteProduct")
+        }
+    }
+    
+    private func addFavoriteProduct(userId: String, productId: String) async throws {
+        let data: [String: Any] = [
+            "favorite_product_ids": FieldValue.arrayUnion([productId])
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    private func removeFavoriteProduct(userId: String, productId: String) async throws {
+        let data: [String: Any] = [
+            "favorite_product_ids": FieldValue.arrayRemove([productId])
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    func getFavoriteProducts(userId: String) async throws -> [ProductModel] {
+        let user = try await getUser(userId: userId)
+        
+        let favoriteProductIDs = user.favoriteProductIDs ?? []
+        
+        var favoriteProducts: [ProductModel] = []
+        
+        for productID in favoriteProductIDs {
+            let product = try await ProductsManager.shared.getProduct(productId: productID)
+            favoriteProducts.append(product)
+        }
+        
+        return favoriteProducts
+    }
+    
+    func isProductFavorite(userId: String, productId: String) async throws -> Bool {
+        let user = try await getUser(userId: userId)
+        
+        return user.favoriteProductIDs?.contains(productId) ?? false
+    }
+}

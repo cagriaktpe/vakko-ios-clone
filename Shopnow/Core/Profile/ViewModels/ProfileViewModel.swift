@@ -77,7 +77,10 @@ final class ProfileViewModel: ObservableObject {
     func verifyEmail() async throws {
         try await AuthenticationManager.shared.verifyEmail()
     }
-    
+}
+
+// Address related
+extension ProfileViewModel {
     func addAddress(address: AddressModel) async throws {
         guard let user = user else { return }
         
@@ -105,6 +108,20 @@ final class ProfileViewModel: ObservableObject {
         try await UserManager.shared.setPreferredAddress(userId: user.userId, addressId: addressId)
         self.user = try await UserManager.shared.getUser(userId: user.userId)
     }
+}
+
+// favorities related
+extension ProfileViewModel {
+    func toggleFavoriteProduct(product: ProductModel) async throws {
+        guard let user = user else { return }
+                
+        try await UserManager.shared.toggleFavoriteProduct(userId: user.userId, productId: String(product.id))
+        self.user = try await UserManager.shared.getUser(userId: user.userId)
+    }
     
-    
+    func isFavoriteProduct(product: ProductModel) -> Bool {
+        guard let user = user else { return false }
+        
+        return ((user.favoriteProductIDs?.contains(String(product.id))) != nil)
+    }
 }

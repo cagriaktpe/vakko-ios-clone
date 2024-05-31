@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @StateObject private var viewModel = ProfileViewModel()
+    @EnvironmentObject var viewModel: ProfileViewModel
 
     @Binding var showSignInView: Bool
     @Binding var tabSelection: Int
@@ -63,7 +63,7 @@ struct ProfileView: View {
             }
 
             ZStack {
-                NavigationLink(destination: MyAccountView(vm: viewModel, showSignedInView: $showSignInView, tabSelection: $tabSelection)) {
+                NavigationLink(destination: MyAccountView(showSignedInView: $showSignInView, tabSelection: $tabSelection)) {
                     EmptyView()
                 }
                 .opacity(0)
@@ -93,7 +93,7 @@ struct ProfileView: View {
 //            .foregroundStyle(Color.secondary)
 
             ZStack {
-                NavigationLink(destination: MyAddressesView(viewModel: viewModel)) {
+                NavigationLink(destination: MyAddressesView()) {
                     EmptyView()
                 }
                 .opacity(0)
@@ -201,9 +201,6 @@ struct ProfileView: View {
                 SignInView(showSignedInView: $showSignInView, tabSelection: $tabSelection)
             }
         })
-        .task {
-            try? await viewModel.loadCurrentUser()
-        }
         .onChange(of: showSignInView) { _ in
             Task {
                 try? await viewModel.loadCurrentUser()

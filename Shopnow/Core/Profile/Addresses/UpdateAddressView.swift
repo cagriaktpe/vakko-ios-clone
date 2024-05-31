@@ -11,7 +11,7 @@ struct UpdateAddressView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var viewModel: ProfileViewModel
+    @EnvironmentObject var viewModel: ProfileViewModel
     
     let addressToUpdate: AddressModel
     
@@ -311,6 +311,6 @@ extension UpdateAddressView {
     let addressToUpdate = AddressModel(addressType: .home, title: "Ev", name: "Samet", surname: "Aktepe", city: "İstanbul", district: "Beyoğlu", neighborhood: "Karaköy", postCode: "34000", address: "Karaköy Mahallesi, Kemeraltı Caddesi, No: 5", phoneNumber: "5534513358")
     
     return NavigationStack {
-        UpdateAddressView(viewModel: ProfileViewModel(), addressToUpdate: addressToUpdate)
+        UpdateAddressView(addressToUpdate: addressToUpdate)
     }
 }

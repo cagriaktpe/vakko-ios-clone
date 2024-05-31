@@ -19,6 +19,7 @@ struct DBUser: Codable {
     let dateCreated: Date?
     let addresses: [AddressModel]?
     let preferredAddressId: String?
+    let favoriteProductIDs: [String]?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -32,6 +33,7 @@ struct DBUser: Codable {
         self.birthDate = nil
         self.addresses = nil
         self.preferredAddressId = nil
+        self.favoriteProductIDs = nil
     }
     
     init(
@@ -45,7 +47,8 @@ struct DBUser: Codable {
         photoURL: String? = nil,
         dateCreated: Date? = nil,
         addresses: [AddressModel]? = nil,
-        preferredAddressId: String? = nil
+        preferredAddressId: String? = nil,
+        favoriteProductIDs: [String]? = nil
     ) {
         self.userId = userId
         self.name = name
@@ -58,6 +61,7 @@ struct DBUser: Codable {
         self.dateCreated = dateCreated
         self.addresses = addresses
         self.preferredAddressId = preferredAddressId
+        self.favoriteProductIDs = favoriteProductIDs
     }
     
     enum CodingKeys: String, CodingKey {
@@ -72,6 +76,7 @@ struct DBUser: Codable {
         case dateCreated = "date_created"
         case addresses = "addresses"
         case preferredAddressId = "preferred_address_id"
+        case favoriteProductIDs = "favorite_product_ids"
     }
     
     init(from decoder: Decoder) throws {
@@ -87,6 +92,7 @@ struct DBUser: Codable {
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.addresses = try container.decodeIfPresent([AddressModel].self, forKey: .addresses)
         self.preferredAddressId = try container.decodeIfPresent(String.self, forKey: .preferredAddressId)
+        self.favoriteProductIDs = try container.decodeIfPresent([String].self, forKey: .favoriteProductIDs)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -102,6 +108,7 @@ struct DBUser: Codable {
         try container.encode(dateCreated, forKey: .dateCreated)
         try container.encode(addresses, forKey: .addresses)
         try container.encode(preferredAddressId, forKey: .preferredAddressId)
+        try container.encode(favoriteProductIDs, forKey: .favoriteProductIDs)
     }
     
 }

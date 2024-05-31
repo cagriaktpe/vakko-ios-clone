@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddressCardView: View {
-    @ObservedObject var vm: ProfileViewModel
+    @EnvironmentObject var vm: ProfileViewModel
     
     // TODO: FIX
     @State var isPreferred: Bool = false
@@ -59,7 +59,7 @@ struct AddressCardView: View {
 
                 Spacer()
 
-                NavigationLink(destination: UpdateAddressView(viewModel: vm, addressToUpdate: address)) {
+                NavigationLink(destination: UpdateAddressView(addressToUpdate: address)) {
                     Text("Adresi Düzenle")
                 }
                 
@@ -119,5 +119,5 @@ extension AddressCardView {
     
     let testAddress = AddressModel(addressType: .home, title: "Ev", name: "Samet", surname: "Aktepe", city: "İstanbul", district: "Beyoğlu", neighborhood: "Karaköy", postCode: "34000", address: "Karaköy Mahallesi, Kemeraltı Caddesi, No: 5", phoneNumber: "5534513358")
     
-    return AddressCardView(vm: ProfileViewModel(), isPreferred: false, address: testAddress)
+    return AddressCardView(isPreferred: false, address: testAddress)
 }
