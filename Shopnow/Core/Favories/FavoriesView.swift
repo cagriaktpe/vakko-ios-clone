@@ -54,6 +54,7 @@ struct FavoriesView: View {
         }
         .navigationTitle("FAVORİLERİM")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarRole(.editor)
         .onAppear {
             Task {
                 do {

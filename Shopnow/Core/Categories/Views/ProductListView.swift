@@ -26,7 +26,7 @@ struct ProductListView: View {
             }
             .padding()
         }
-        .navigationTitle(subCategory)
+        .navigationTitle(subCategory.uppercased())
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
     }

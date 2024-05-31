@@ -36,7 +36,7 @@ struct ProductDetailView: View {
             }
             .padding(.bottom, 100)
         }
-        .navigationTitle(product.title)
+        .navigationTitle(product.title.uppercased())
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
         .toolbar(.hidden, for: .tabBar)
