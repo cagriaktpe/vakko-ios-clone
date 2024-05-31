@@ -17,13 +17,7 @@ struct ProductListView: View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                 ForEach(vm.products) { product in
-                    
-                    if category == CategoryType.man.rawValue && subCategory == ManSubCategoryType(rawValue: product.subCategory)?.rawValue {
-                        NavigationLink(destination: ProductDetailView(product: product)) {
-                            ProductCard(product: product)
-                        }
-                        
-                    } else if category == CategoryType.woman.rawValue && subCategory == WomanSubCategoryType(rawValue: product.subCategory)?.rawValue {
+                    if category == product.category && subCategory == product.subCategory {
                         NavigationLink(destination: ProductDetailView(product: product)) {
                             ProductCard(product: product)
                         }
@@ -31,9 +25,6 @@ struct ProductListView: View {
                 }
             }
             .padding()
-        }
-        .onAppear {
-            print(vm.products)
         }
         .navigationTitle(subCategory)
         .navigationBarTitleDisplayMode(.inline)
@@ -60,6 +51,7 @@ struct ProductCard: View {
             VStack(alignment: .center) {
                 Text(product.title.uppercased())
                     .font(.headline)
+                    .lineLimit(1)
                     .foregroundStyle(Color.primary)
 
                 Text("₺\(product.price, specifier: "%.2f")")
