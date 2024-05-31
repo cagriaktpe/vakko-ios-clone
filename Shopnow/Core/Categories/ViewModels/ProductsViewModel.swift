@@ -40,4 +40,9 @@ final class ProductsViewModel: ObservableObject {
         }
     }
     
+    func addComment(comment: CommentModel) throws {
+        try CommentManager.shared.createComment(comment: comment)
+        comments.append(comment)
+    }
+
 }

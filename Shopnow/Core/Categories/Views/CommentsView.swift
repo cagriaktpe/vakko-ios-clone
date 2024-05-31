@@ -12,6 +12,7 @@ struct CommentsView: View {
     @EnvironmentObject var productsViewModel: ProductsViewModel
 
     @State private var comments: [CommentModel] = []
+    @State private var showAddCommentView = false
 
     let product: ProductModel
 
@@ -40,11 +41,18 @@ struct CommentsView: View {
         .overlay(alignment: .bottom) {
             addCommentButton
         }
+        .sheet(isPresented: $showAddCommentView) {
+            AddCommentView(productId: product.productId)
+                .presentationDetents([.medium])
+                .onDisappear {
+                    comments = productsViewModel.comments.filter { $0.productId == product.productId }
+                }
+        }
         .onAppear {
-//            comments = productsViewModel.comments.filter { $0.productId == product.productId }
+            comments = productsViewModel.comments.filter { $0.productId == product.productId }
 
             // for testing
-            comments = CommentModel.mockArray
+//            comments = CommentModel.mockArray
         }
     }
 }
@@ -86,7 +94,7 @@ struct CommentRowView: View {
 extension CommentsView {
     var addCommentButton: some View {
         Button {
-            
+            showAddCommentView.toggle()
         } label: {
             Text("YORUM YAP")
                 .font(.title2)

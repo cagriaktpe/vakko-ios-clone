@@ -17,8 +17,8 @@ struct CommentModel: Codable, Hashable {
     var rating: Int
     var dateCreated: Date
     
-    init(commentId: String, authorId: String, productId: String, authorName: String, title: String, comment: String, rating: Int, dateCreated: Date) {
-        self.commentId = commentId
+    init(authorId: String, productId: String, authorName: String, title: String, comment: String, rating: Int, dateCreated: Date) {
+        self.commentId = UUID().uuidString
         self.authorId = authorId
         self.productId = productId
         self.authorName = authorName
@@ -70,9 +70,9 @@ struct CommentModel: Codable, Hashable {
 }
 
 extension CommentModel {
-    static let mock1 = CommentModel(commentId: "1", authorId: "1", productId: "1", authorName: "Samet Çağrı Aktepe", title: "Başlık", comment: "Yorum", rating: 5, dateCreated: Date())
-    static let mock2 = CommentModel(commentId: "2", authorId: "2", productId: "1", authorName: "Furkan Aktepe", title: "Başlık", comment: "Yorum", rating: 3, dateCreated: Date())
-    static let mock3 = CommentModel(commentId: "3", authorId: "3", productId: "1", authorName: "Alperen Aktepe", title: "Başlık", comment: "Yorum", rating: 1, dateCreated: Date())
+    static let mock1 = CommentModel(authorId: "1", productId: "1", authorName: "Samet Çağrı Aktepe", title: "Başlık", comment: "Yorum", rating: 5, dateCreated: Date())
+    static let mock2 = CommentModel(authorId: "2", productId: "1", authorName: "Furkan Aktepe", title: "Başlık", comment: "Yorum", rating: 3, dateCreated: Date())
+    static let mock3 = CommentModel(authorId: "3", productId: "1", authorName: "Alperen Aktepe", title: "Başlık", comment: "Yorum", rating: 1, dateCreated: Date())
     
     static let mockArray = [mock1, mock2, mock3]
 }

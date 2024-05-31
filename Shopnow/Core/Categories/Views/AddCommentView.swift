@@ -9,6 +9,13 @@ import SwiftUI
 
 struct AddCommentView: View {
     
+    @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var productViewModel: ProductsViewModel
+    
+    @Environment(\.dismiss) var dismiss
+    
+    let productId: String
+    
     @State private var title: String = ""
     @State private var comment: String = ""
     @State private var rating: Int = 0
@@ -21,10 +28,12 @@ struct AddCommentView: View {
                 .padding(.horizontal)
             
             TextEditor(text: $comment)
-                .frame(height: 50)
+                .frame(height: 80)
                 .padding()
                 .scrollContentBackground(.hidden)
+                
                 .background(Color(.systemGray6))
+                
                 .padding(.horizontal)
                 .overlay(alignment: .topLeading) {
                     if comment.isEmpty {
@@ -32,6 +41,7 @@ struct AddCommentView: View {
                             .foregroundColor(.secondary.opacity(0.5))
                             .padding(.leading, 30)
                             .padding(.top)
+                            .allowsHitTesting(false)
                     }
                 }
                 
@@ -53,7 +63,7 @@ struct AddCommentView: View {
             .padding(.horizontal)
             
             Button(action: {
-                // add comment
+                handleAddCommentButtonClick()
             }, label: {
                 Text("Yorum Ekle")
                     .font(.title2)
@@ -68,6 +78,26 @@ struct AddCommentView: View {
     }
 }
 
+extension AddCommentView {
+    func handleAddCommentButtonClick() {
+        
+        guard profileViewModel.user != nil else { return }
+        
+        let comment = CommentModel(authorId: profileViewModel.user?.userId ?? "", productId: productId, authorName: profileViewModel.user?.name ?? "", title: title, comment: comment, rating: rating, dateCreated: Date())
+        
+        Task {
+            do {
+                try productViewModel.addComment(comment: comment)
+                dismiss()
+            } catch {
+                print(error)
+            }
+        }
+        
+    }
+}
+
 #Preview {
-    AddCommentView()
+    AddCommentView(productId: "123213")
+        .environmentObject(ProductsViewModel())
 }
