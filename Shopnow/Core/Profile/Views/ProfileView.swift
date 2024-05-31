@@ -49,7 +49,7 @@ struct ProfileView: View {
 //            .foregroundStyle(Color.secondary)
 
             ZStack {
-                NavigationLink(destination: Text("FAVORİLERİM")) {
+                NavigationLink(destination: FavoriesView(tabSelection: $tabSelection)) {
                     EmptyView()
                 }
                 .opacity(0)
