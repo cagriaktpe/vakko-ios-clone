@@ -22,8 +22,19 @@ struct CommentsView: View {
                 ForEach(comments, id: \.self) { comment in
                     CommentRowView(comment: comment)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .overlay {
+                            if viewModel.user?.userId == comment.authorId {
+                                Button {
+                                    removeComment(comment.commentId)
+                                } label: {
+                                    Image(systemName: "trash")
+                                        .foregroundColor(.red)
+                                }
+                            }
+                        }
                     Divider()
                 }
+                
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -52,7 +63,20 @@ struct CommentsView: View {
             comments = productsViewModel.comments.filter { $0.productId == product.productId }
 
             // for testing
-//            comments = CommentModel.mockArray
+//       comments = CommentModel.mockArray
+        }
+    }
+}
+
+extension CommentsView {
+    func removeComment(_ commentId: String) {
+        Task {
+            do {
+                try await productsViewModel.removeComment(commentId: commentId)
+                comments = comments.filter { $0.commentId != commentId }
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

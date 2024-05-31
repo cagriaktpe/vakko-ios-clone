@@ -44,5 +44,9 @@ final class ProductsViewModel: ObservableObject {
         try CommentManager.shared.createComment(comment: comment)
         comments.append(comment)
     }
-
+    
+    func removeComment(commentId: String) async throws {
+        try await CommentManager.shared.removeComment(commentId: commentId)
+        comments.removeAll { $0.commentId == commentId }
+    }
 }

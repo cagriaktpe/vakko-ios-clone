@@ -33,6 +33,15 @@ final class CommentManager {
         try commentsCollection.addDocument(from: comment)
     }
     
+    func removeComment(commentId: String) async throws {
+        // find the document by name and delete it
+        let snapshot = try await commentsCollection.whereField("comment_id", isEqualTo: commentId).getDocuments()
+        for document in snapshot.documents {
+            try await commentsCollection.document(document.documentID).delete()
+        }
+        
+    }
+    
     func printJSON() async throws {
         Task {
             do {

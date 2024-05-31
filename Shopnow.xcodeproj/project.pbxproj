@@ -174,9 +174,10 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		8152D2C12C09EB3A00794036 /* ViewModels */ = {
+		8152D2C62C0A16E700794036 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				81B35BC12C00CE07008BBF21 /* ProfileViewModel.swift */,
 				815EFA992C087BEA007F106D /* ProductsViewModel.swift */,
 			);
 			path = ViewModels;
@@ -256,7 +257,6 @@
 		81B35BB82C00CCE1008BBF21 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				8152D2C12C09EB3A00794036 /* ViewModels */,
 				8152D2C02C09EB3300794036 /* Views */,
 			);
 			path = Categories;
@@ -273,7 +273,7 @@
 		81B35BBA2C00CD0F008BBF21 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				81F8C6DF2C020F28005C701B /* Views */,
+				8152D2C62C0A16E700794036 /* ViewModels */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -299,7 +299,6 @@
 		81B35BC02C00CDD3008BBF21 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				81B35BC12C00CE07008BBF21 /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -359,13 +358,6 @@
 				8152D2BC2C09EA0D00794036 /* CommentModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		81F8C6DF2C020F28005C701B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
