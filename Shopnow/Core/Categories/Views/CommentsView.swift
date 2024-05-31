@@ -12,11 +12,13 @@ struct CommentsView: View {
     @EnvironmentObject var viewModel: ProfileViewModel
     @EnvironmentObject var productsViewModel: ProductsViewModel
     
+    @State private var comments: [CommentModel] = []
+    
     let product: ProductModel
     
     var body: some View {
-        List {
-            ForEach(productsViewModel.comments, id: \.self) { comment in
+        ScrollView {
+            ForEach(comments, id: \.self) { comment in
                 HStack {
                     
                     VStack(alignment: .leading) {
@@ -27,10 +29,19 @@ struct CommentsView: View {
                     }
                 }
             }
+            
+            if comments.isEmpty {
+                Text("Henüz yorum yapılmamış.")
+                    .font(.title2)
+                    .foregroundColor(.gray)
+            }
         }
         .navigationTitle("YORUMLAR")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
+        .onAppear {
+            comments = productsViewModel.comments.filter { $0.productId == product.productId }
+        }
     }
 }
 
