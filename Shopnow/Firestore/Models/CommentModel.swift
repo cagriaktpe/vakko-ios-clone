@@ -15,6 +15,18 @@ struct CommentModel: Codable, Hashable {
     var title: String
     var comment: String
     var rating: Int
+    var dateCreated: Date
+    
+    init(commentId: String, authorId: String, productId: String, authorName: String, title: String, comment: String, rating: Int, dateCreated: Date) {
+        self.commentId = commentId
+        self.authorId = authorId
+        self.productId = productId
+        self.authorName = authorName
+        self.title = title
+        self.comment = comment
+        self.rating = rating
+        self.dateCreated = dateCreated
+    }
     
     // coding keys
     enum CodingKeys: String, CodingKey {
@@ -25,7 +37,10 @@ struct CommentModel: Codable, Hashable {
         case title
         case comment
         case rating
+        case dateCreated = "date_created"
     }
+    
+    
     
     // encode
     func encode(to encoder: Encoder) throws {
@@ -37,6 +52,7 @@ struct CommentModel: Codable, Hashable {
         try container.encode(title, forKey: .title)
         try container.encode(comment, forKey: .comment)
         try container.encode(rating, forKey: .rating)
+        try container.encode(dateCreated, forKey: .dateCreated)
     }
     
     // decode
@@ -49,5 +65,14 @@ struct CommentModel: Codable, Hashable {
         title = try container.decode(String.self, forKey: .title)
         comment = try container.decode(String.self, forKey: .comment)
         rating = try container.decode(Int.self, forKey: .rating)
+        dateCreated = try container.decode(Date.self, forKey: .dateCreated)
     }
+}
+
+extension CommentModel {
+    static let mock1 = CommentModel(commentId: "1", authorId: "1", productId: "1", authorName: "Samet Çağrı Aktepe", title: "Başlık", comment: "Yorum", rating: 5, dateCreated: Date())
+    static let mock2 = CommentModel(commentId: "2", authorId: "2", productId: "1", authorName: "Furkan Aktepe", title: "Başlık", comment: "Yorum", rating: 3, dateCreated: Date())
+    static let mock3 = CommentModel(commentId: "3", authorId: "3", productId: "1", authorName: "Alperen Aktepe", title: "Başlık", comment: "Yorum", rating: 1, dateCreated: Date())
+    
+    static let mockArray = [mock1, mock2, mock3]
 }
