@@ -75,6 +75,7 @@ struct FavoriRowView: View {
     @Binding var favoriteProducts: [ProductModel]
 
     @EnvironmentObject var viewModel: ProfileViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel
 
     var body: some View {
         HStack {
@@ -150,7 +151,7 @@ extension FavoriRowView {
     }
     
     func handleAddToCart() {
-        
+        cartViewModel.addProduct(product: product, size: "M", quantity: 1)
     }
 }
 

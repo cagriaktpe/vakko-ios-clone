@@ -14,6 +14,8 @@ struct ProductDetailView: View {
     
     let product: ProductModel
     
+    @State private var selectedSize: String = ""
+    
     @State private var showDescriptionDetail = false
     @State private var showCareDetail = false
     @State private var showReturnDetail = false
@@ -114,13 +116,13 @@ extension ProductDetailView {
             HStack(spacing: 20) {
                 ForEach(product.sizes, id: \.self) { size in
                     Button {
-                        // Select Size
+                        selectedSize = size
                     } label: {
                         Text(size)
                             .font(.callout)
                             .padding(12)
-                            .foregroundStyle(Color.primary)
-                            .border(Color.primary, width: 1)
+                            .foregroundStyle(selectedSize == size ? Color.accentColor : .primary)
+                            .border(selectedSize == size ? Color.accentColor : .primary, width: 1)
                     }
                 }
             }
@@ -254,7 +256,8 @@ extension ProductDetailView {
     }
     
     func handleAddToCart() {
-        cartViewModel.addProduct(product: product, size: "M", quantity: 1)
+        if selectedSize.isEmpty { return }
+        cartViewModel.addProduct(product: product, size: selectedSize, quantity: 1)
     }
     
     func isFavorite() -> Bool {
