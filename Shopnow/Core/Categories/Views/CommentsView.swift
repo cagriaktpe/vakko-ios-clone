@@ -22,15 +22,35 @@ struct CommentsView: View {
                 ForEach(comments, id: \.self) { comment in
                     CommentRowView(comment: comment)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .overlay {
+                        .overlay(alignment: .topTrailing) {
                             if viewModel.user?.userId == comment.authorId {
-                                Button {
-                                    removeComment(comment.commentId)
+                                Menu {
+                                    Button(role: .destructive) {
+                                        removeComment(comment.commentId)
+                                    } label: {
+                                        Label("Sil", systemImage: "trash")
+                                    }
                                 } label: {
-                                    Image(systemName: "trash")
-                                        .foregroundColor(.red)
+                                    Image(systemName: "ellipsis")
+                                        .foregroundColor(.gray)
                                 }
+                                .padding(.top, 8)
+                                .padding(.trailing)
                             }
+                            
+                            // for testing
+//                            Menu {
+//                                Button(role: .destructive) {
+//                                    removeComment(comment.commentId)
+//                                } label: {
+//                                    Label("Sil", systemImage: "trash")
+//                                }
+//                            } label: {
+//                                Image(systemName: "ellipsis")
+//                                    .foregroundColor(.gray)
+//                            }
+//                            .padding(.top, 8)
+//                            .padding(.trailing)
                         }
                     Divider()
                 }
