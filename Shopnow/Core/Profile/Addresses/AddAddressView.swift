@@ -24,6 +24,8 @@ struct AddAddressView: View {
     @State private var address: String = ""
     @State private var phoneNumber: String = ""
     
+    @State private var showAddressTypePicker: Bool = false
+    
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
@@ -36,6 +38,20 @@ struct AddAddressView: View {
         .navigationTitle("Yeni Adres Ekle")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
+        .sheet(isPresented: $showAddressTypePicker) {
+            NavigationStack {
+                addressTypePicker
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Tamam") {
+                                showAddressTypePicker.toggle()
+                            }
+                        }
+                    }
+            }
+            .presentationDetents([.height(150)])
+
+        }
         .alert(isPresented: $showAlert) {
             Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam"), action: {
                 if isSuccessful {
@@ -76,6 +92,7 @@ extension AddAddressView {
                 .fontWeight(.light)
 
             Button(action: {
+                showAddressTypePicker.toggle()
             }, label: {
                 HStack {
                     Text(addressType.rawValue)
@@ -259,7 +276,7 @@ extension AddAddressView {
 
 // MARK: - Functions
 extension AddAddressView {
-    func checkFields() -> Bool {
+    func checkFieldsEmpty() -> Bool {
         if title.isEmpty || name.isEmpty || surname.isEmpty || city.isEmpty || district.isEmpty || neighborhood.isEmpty || postCode.isEmpty || address.isEmpty || phoneNumber.isEmpty {
             setAlert(title: .error, message: "Lütfen tüm alanları doldurun.")
             return false
@@ -270,7 +287,7 @@ extension AddAddressView {
     
     func save() {
         
-        guard checkFields() else { return }
+        guard checkFieldsEmpty() else { return }
         
         let address = AddressModel(addressType: addressType, title: title, name: name, surname: surname, city: city, district: district, neighborhood: neighborhood, postCode: postCode, address: address, phoneNumber: phoneNumber)
         
