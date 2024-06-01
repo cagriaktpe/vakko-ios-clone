@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct MyAccountView: View {
-    
     @Environment(\.dismiss) var dismiss
-    
+
     @EnvironmentObject var vm: ProfileViewModel
-    
+
     @Binding var showSignedInView: Bool
     @Binding var tabSelection: Int
-    
+
     @State private var name: String = ""
     @State private var surname: String = ""
     @State private var phoneNumber: String = ""
-    
+
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     @State private var showAlert: Bool = false
@@ -47,7 +46,6 @@ struct MyAccountView: View {
             surname = vm.user?.surname ?? ""
             phoneNumber = vm.user?.phoneNumber ?? ""
         }
-        
     }
 }
 
@@ -69,7 +67,6 @@ extension MyAccountView {
                             .textContentType(.name)
                             .disableAutocorrection(true)
                     }
-                    
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Soyad")
@@ -84,7 +81,7 @@ extension MyAccountView {
                             .textContentType(.familyName)
                             .disableAutocorrection(true)
                     }
-                    
+
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Telefon")
                             .font(.subheadline)
@@ -98,19 +95,17 @@ extension MyAccountView {
                             .textContentType(.telephoneNumber)
                             .disableAutocorrection(true)
                     }
-
                 }
                 saveButton
-
             }
-            
+
             .padding()
             .padding(.top)
             .border(Color.gray.opacity(0.4), width: 1)
             .padding(.horizontal)
         }
     }
-    
+
     var saveButton: some View {
         Button(action: save) {
             Text("KAYDET")
@@ -123,7 +118,7 @@ extension MyAccountView {
         }
         .padding(.top, 24)
     }
-    
+
     var deleteAccountButton: some View {
         Button(action: deleteAccount) {
             Text("Hesabımı Sil")
@@ -131,45 +126,42 @@ extension MyAccountView {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top)
         .padding(.leading)
-
     }
 }
 
 extension MyAccountView {
     func save() {
         if name == vm.user?.name && surname == vm.user?.surname && phoneNumber == vm.user?.phoneNumber {
-            alertTitle = "Hata"
-            alertMessage = "Bir şey değişmedi"
-            showAlert = true
+            makeAlert(title: "Hata", message: "Bir şey değişmedi")
             return
         }
-        
+
         vm.updateUser(newName: name, newSurname: surname, newPhoneNumber: phoneNumber)
-        alertTitle = "Başarılı"
-        alertMessage = "Değişiklikler başarıyla kaydedildi."
-        showAlert = true
-        
+        makeAlert(title: "Başarılı", message: "Hesabınız başarıyla güncellendi.")
     }
-    
+
     func deleteAccount() {
         Task {
             do {
                 try await vm.deleteAccount()
-                alertTitle = "Başarılı"
-                alertMessage = "Hesabınız başarıyla silindi."
-                showAlert = true
+                makeAlert(title: "Başarılı", message: "Hesabınız başarıyla silindi.")
                 showSignedInView = true
             } catch {
-                alertTitle = "Hata"
-                alertMessage = error.localizedDescription
-                showAlert = true
+                makeAlert(title: "Hata", message: "Hesabınız silinirken bir hata oluştu.")
             }
         }
+    }
+
+    func makeAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert = true
     }
 }
 
 #Preview {
     NavigationStack {
         MyAccountView(showSignedInView: .constant(false), tabSelection: .constant(5))
+            .environmentObject(ProfileViewModel())
     }
 }
