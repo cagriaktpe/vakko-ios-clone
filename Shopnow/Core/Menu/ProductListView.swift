@@ -15,6 +15,8 @@ struct ProductListView: View {
 
     var body: some View {
         ScrollView {
+            subCategoriesSlider
+
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                 ForEach(vm.products, id: \.self) { product in
                     if category == product.category && subCategory == product.subCategory {
@@ -30,6 +32,30 @@ struct ProductListView: View {
         .navigationTitle(subCategory.uppercased())
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
+    }
+}
+
+extension ProductListView {
+    var subCategoriesSlider: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 16) {
+                ForEach(WomanSubCategoryType.allCases, id: \.self) { subCategoryIteration in
+                    NavigationLink(destination: ProductListView(category: category, subCategory: subCategoryIteration.rawValue)) {
+                        Text(subCategoryIteration.rawValue.uppercased())
+                            .font(.subheadline)
+                            .foregroundColor(subCategory == subCategoryIteration.rawValue ? Color.white : Color.primary)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.clear)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.primary.opacity(0.8), lineWidth: 1)
+                            )
+                    }
+                }
+            }
+            .padding(.horizontal)
+        }
     }
 }
 
@@ -59,13 +85,12 @@ struct ProductCard: View {
                     Text("₺\(product.price, specifier: "%.2f")")
                         .font(.footnote)
                         .foregroundStyle(Color.accentColor)
-                    
-                    Text ("₺\(product.price + 100, specifier: "%.2f")")
+
+                    Text("₺\(product.price + 100, specifier: "%.2f")")
                         .font(.footnote)
                         .foregroundStyle(.gray)
                         .strikethrough()
                 }
-                
             }
         }
         .background(.ultraThinMaterial)
@@ -78,5 +103,4 @@ struct ProductCard: View {
         ProductListView(category: CategoryType.woman.rawValue, subCategory: WomanSubCategoryType.dress.rawValue)
             .environmentObject(ProductsViewModel())
     }
-    
 }
