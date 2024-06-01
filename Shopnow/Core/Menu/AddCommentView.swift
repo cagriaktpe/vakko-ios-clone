@@ -38,8 +38,8 @@ struct AddCommentView: View {
                     if comment.isEmpty {
                         Text("Yorumunuzu yazın...")
                             .foregroundColor(.secondary.opacity(0.5))
-                            .padding(.leading, 30)
-                            .padding(.top)
+                            .padding(.leading, 36)
+                            .padding(.top, 25)
                             .allowsHitTesting(false)
                     }
                 }
@@ -113,4 +113,10 @@ extension AddCommentView {
         alertMessage = message
         showAlert = true
     }
+}
+
+#Preview {
+    AddCommentView(productId: "1")
+        .environmentObject(ProfileViewModel())
+        .environmentObject(ProductsViewModel())
 }
