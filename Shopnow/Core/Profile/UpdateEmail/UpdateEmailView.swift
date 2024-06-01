@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct UpdateEmailView: View {
-    
     @Environment(\.dismiss) var dismiss
-    
+
     @EnvironmentObject var vm: ProfileViewModel
-    
+
     @Binding var showSignedInView: Bool
     @Binding var tabSelection: Int
-    
+
     @State private var newEposta: String = ""
     @State private var newEpostaAgain: String = ""
     @State private var password: String = ""
-    
+
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     @State private var showAlert: Bool = false
@@ -38,70 +37,73 @@ struct UpdateEmailView: View {
             Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam"), action: {
                 dismiss()
             }))
-                
         }
     }
 }
 
 extension UpdateEmailView {
     var accountSection: some View {
-        Section {
-            VStack(spacing: 0) {
-                VStack(spacing: 12) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Yeni E postanız")
-                            .font(.subheadline)
-                            .fontWeight(.light)
-
-                        TextField("", text: $newEposta)
-                            .padding(12)
-                            .border(Color.gray, width: 1)
-                            .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
-                            .textContentType(.emailAddress)
-                            .disableAutocorrection(true)
-                    }
-                    
-
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Yeni E posta Tekrar")
-                            .font(.subheadline)
-                            .fontWeight(.light)
-
-                        TextField("", text: $newEpostaAgain)
-                            .padding(12)
-                            .border(Color.gray, width: 1)
-                            .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
-                            .textContentType(.emailAddress)
-                            .disableAutocorrection(true)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Şifreniz")
-                            .font(.subheadline)
-                            .fontWeight(.light)
-
-                        SecureField("", text: $password)
-                            .padding(12)
-                            .border(Color.gray, width: 1)
-                            .textContentType(.password)
-                            .disableAutocorrection(true)
-                            .keyboardType(.default)
-                    }
-
-                }
-                saveButton
-
+        VStack(spacing: 0) {
+            VStack(spacing: 12) {
+                newEmailSection
+                againEmailSection
+                passwordSection
             }
-            
-            .padding()
-            .padding(.top)
-            .border(Color.gray.opacity(0.4), width: 1)
-            .padding(.horizontal)
+            saveButton
+        }
+        .padding()
+        .padding(.top)
+        .border(Color.gray.opacity(0.4), width: 1)
+        .padding(.horizontal)
+    }
+
+    var newEmailSection: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Yeni E postanız")
+                .font(.subheadline)
+                .fontWeight(.light)
+
+            TextField("", text: $newEposta)
+                .padding(12)
+                .border(Color.gray, width: 1)
+                .keyboardType(.emailAddress)
+                .autocapitalization(.none)
+                .textContentType(.emailAddress)
+                .disableAutocorrection(true)
         }
     }
-    
+
+    var againEmailSection: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Yeni E posta Tekrar")
+                .font(.subheadline)
+                .fontWeight(.light)
+
+            TextField("", text: $newEpostaAgain)
+                .padding(12)
+                .border(Color.gray, width: 1)
+                .keyboardType(.emailAddress)
+                .autocapitalization(.none)
+                .textContentType(.emailAddress)
+                .disableAutocorrection(true)
+        }
+    }
+
+    var passwordSection: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Şifreniz")
+                .font(.subheadline)
+                .fontWeight(.light)
+
+            SecureField("", text: $password)
+                .padding(12)
+                .border(Color.gray, width: 1)
+                .textContentType(.password)
+                .disableAutocorrection(true)
+                .keyboardType(.default)
+        }
+    }
+
     var saveButton: some View {
         Button(action: save) {
             Text("KAYDET")
@@ -119,51 +121,47 @@ extension UpdateEmailView {
 extension UpdateEmailView {
     func save() {
         guard !newEposta.isEmpty else {
-            alertTitle = "Hata"
-            alertMessage = "Lütfen yeni e postanızı giriniz."
-            showAlert = true
+            makeAlert(title: "Hata", message: "Lütfen yeni e postanızı giriniz.")
             return
         }
-        
+
         guard !newEpostaAgain.isEmpty else {
-            alertTitle = "Hata"
-            alertMessage = "Lütfen yeni e postanızı tekrar giriniz."
-            showAlert = true
+            makeAlert(title: "Hata", message: "Lütfen yeni e postanızı tekrar giriniz.")
             return
         }
-        
+
         guard newEposta == newEpostaAgain else {
-            alertTitle = "Hata"
-            alertMessage = "Girdiğiniz e postalar birbirleri ile uyuşmuyor."
-            showAlert = true
+            makeAlert(title: "Hata", message: "Girdiğiniz e postalar birbirleriyle uyuşmuyor.")
             return
         }
-        
+
         guard !password.isEmpty else {
-            alertTitle = "Hata"
-            alertMessage = "Lütfen şifrenizi giriniz."
-            showAlert = true
+            makeAlert(title: "Hata", message: "Lütfen şifrenizi giriniz.")
             return
         }
-        
+
         Task {
             do {
                 try await vm.updateEmail(newEmail: newEposta, password: password)
-                alertTitle = "Başarılı"
-                alertMessage = "E posta adresiniz başarıyla güncellendi."
-                showAlert = true
+                makeAlert(title: "Başarılı", message: "E posta adresiniz başarıyla güncellendi.")
             } catch {
                 alertTitle = "Hata"
                 alertMessage = error.localizedDescription
                 showAlert = true
             }
         }
-        
+    }
+
+    func makeAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert = true
     }
 }
 
 #Preview {
     NavigationStack {
         UpdateEmailView(showSignedInView: .constant(false), tabSelection: .constant(5))
+            .environmentObject(ProfileViewModel())
     }
 }

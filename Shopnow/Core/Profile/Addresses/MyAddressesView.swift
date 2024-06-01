@@ -9,11 +9,11 @@ import SwiftUI
 
 struct MyAddressesView: View {
     @EnvironmentObject var viewModel: ProfileViewModel
-    
+
     @State private var showAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
-    
+
     var body: some View {
         ScrollView {
             addAddressButton
@@ -22,11 +22,17 @@ struct MyAddressesView: View {
             if let addresses = viewModel.user?.addresses {
                 VStack(spacing: 28) {
                     ForEach(addresses) { address in
-                        AddressCardView(address: address, isPreferred: Binding(get: {
-                            checkIfPreferred(address: address)
-                        }, set: { _ in
-                            setPreferredAddress(addressId: address.id)
-                        }))
+                        AddressCardView(
+                            address: address,
+                            isPreferred: Binding(get:
+                                { checkIfPreferred(address: address) },
+                                set: { _ in
+                                    setPreferredAddress(addressId: address.id)
+                                }),
+                            showAlert: $showAlert,
+                            alertTitle: $alertTitle,
+                            alertMessage: $alertMessage
+                        )
                     }
                 }
             }
@@ -66,7 +72,7 @@ extension MyAddressesView {
     func checkIfPreferred(address: AddressModel) -> Bool {
         return viewModel.user?.preferredAddressId == address.id
     }
-    
+
     func setPreferredAddress(addressId: String) {
         Task {
             do {
@@ -76,7 +82,7 @@ extension MyAddressesView {
             }
         }
     }
-    
+
     func makeAlert(title: String, message: String) {
         alertTitle = title
         alertMessage = message

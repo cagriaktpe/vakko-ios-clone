@@ -9,13 +9,14 @@ import SwiftUI
 
 struct AddressCardView: View {
     @EnvironmentObject var vm: ProfileViewModel
-    
+
     let address: AddressModel
-    
-    // TODO: FIX
+
     @Binding var isPreferred: Bool
-    
-    
+
+    @Binding var showAlert: Bool
+    @Binding var alertTitle: String
+    @Binding var alertMessage: String
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -35,16 +36,16 @@ struct AddressCardView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 8)
                 .allowsHitTesting(isPreferred ? false : true)
-                
+
                 .foregroundStyle(.primary)
                 .toggleStyle(iOSCheckBoxToggleStyle2())
 
                 Text("ADRES")
                     .lineLimit(1)
-                
+
                 Text("\(address.district) \(address.city)")
                     .lineLimit(1)
-                
+
                 Text(address.phoneNumber)
                     .lineLimit(1)
             }
@@ -64,7 +65,6 @@ struct AddressCardView: View {
                 NavigationLink(destination: UpdateAddressView(addressToUpdate: address)) {
                     Text("Adresi Düzenle")
                 }
-                
             }
             .fontWeight(.semibold)
             .padding(.horizontal, 30)
@@ -84,7 +84,7 @@ struct AddressCardView: View {
                             .font(.title2)
                             .foregroundColor(.primary)
                     }
-                
+
                 Spacer()
             }
             .offset(y: -20)
@@ -98,14 +98,19 @@ extension AddressCardView {
             do {
                 try await vm.deleteAddress(address: address)
             } catch {
-                // TODO: Handle error
-                print(error)
+                makeAlert(title: "Hata", message: "Adres silinirken bir hata oluştu.")
             }
         }
+    }
+
+    func makeAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert = true
     }
 }
 
 #Preview {
-    return (AddressCardView(address: AddressModel.dummyData, isPreferred: .constant(false))
-        .environmentObject(ProfileViewModel()))
+    AddressCardView(address: AddressModel.dummyData, isPreferred: .constant(false), showAlert: .constant(false), alertTitle: .constant(""), alertMessage: .constant(""))
+        .environmentObject(ProfileViewModel())
 }
