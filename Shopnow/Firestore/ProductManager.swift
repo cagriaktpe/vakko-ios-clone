@@ -41,21 +41,6 @@ final class ProductsManager {
             }
         }
     }
-
-
-    func enAzBanknot(_ miktar: Int) {
-        let banknotlar = [20, 10, 5, 1]
-        var kalanMiktar = miktar
-        
-        for banknot in banknotlar {
-            let adet = kalanMiktar / banknot
-            kalanMiktar = kalanMiktar % banknot
-        
-            if adet > 0 {
-                print("\(banknot)\(adet)", terminator: "")
-            }
-        }
-    }
 }
 
 extension Query {
