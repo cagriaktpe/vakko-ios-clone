@@ -18,7 +18,17 @@ struct MyAddressesView: View {
             if let addresses = viewModel.user?.addresses {
                 VStack(spacing: 28) {
                     ForEach(addresses) { address in
-                        AddressCardView(address: address)
+                        AddressCardView(address: address, isPreferred: Binding(get: {
+                            checkIfPreferred(address: address)
+                        }, set: { _ in
+                            Task {
+                                do {
+                                    try await viewModel.setPreferredAddress(addressId: address.id)
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
+                            }
+                        }))
                     }
                 }
             }
@@ -48,6 +58,12 @@ struct MyAddressesView: View {
                 .background(Color.accentColor)
         }
         .padding(.top, 24)
+    }
+}
+
+extension MyAddressesView {
+    func checkIfPreferred(address: AddressModel) -> Bool {
+        return viewModel.user?.preferredAddressId == address.id
     }
 }
 

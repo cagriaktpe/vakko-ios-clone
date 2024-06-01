@@ -10,10 +10,12 @@ import SwiftUI
 struct AddressCardView: View {
     @EnvironmentObject var vm: ProfileViewModel
     
-    // TODO: FIX
-    @State var isPreferred: Bool = false
-    
     let address: AddressModel
+    
+    // TODO: FIX
+    @Binding var isPreferred: Bool
+    
+    
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -87,9 +89,6 @@ struct AddressCardView: View {
             }
             .offset(y: -20)
         }
-        .onAppear {
-            isPreferred = vm.user?.preferredAddressId == address.id
-        }
         .onChange(of: isPreferred) { _ in
             Task {
                 do {
@@ -116,6 +115,6 @@ extension AddressCardView {
 }
 
 #Preview {
-    return (AddressCardView(isPreferred: false, address: AddressModel.dummyData)
+    return (AddressCardView(address: AddressModel.dummyData, isPreferred: .constant(false))
         .environmentObject(ProfileViewModel()))
 }
