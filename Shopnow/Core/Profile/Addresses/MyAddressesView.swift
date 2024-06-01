@@ -21,13 +21,7 @@ struct MyAddressesView: View {
                         AddressCardView(address: address, isPreferred: Binding(get: {
                             checkIfPreferred(address: address)
                         }, set: { _ in
-                            Task {
-                                do {
-                                    try await viewModel.setPreferredAddress(addressId: address.id)
-                                } catch {
-                                    print(error.localizedDescription)
-                                }
-                            }
+                            setPreferredAddress(addressId: address.id)
                         }))
                     }
                 }
@@ -64,6 +58,16 @@ struct MyAddressesView: View {
 extension MyAddressesView {
     func checkIfPreferred(address: AddressModel) -> Bool {
         return viewModel.user?.preferredAddressId == address.id
+    }
+    
+    func setPreferredAddress(addressId: String) {
+        Task {
+            do {
+                try await viewModel.setPreferredAddress(addressId: addressId)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
