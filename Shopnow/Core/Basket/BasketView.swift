@@ -12,6 +12,10 @@ struct BasketView: View {
     
     @Binding var tabSelection: Int
     
+    @State private var showAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -27,13 +31,17 @@ struct BasketView: View {
                 
                 if !cartViewModel.selectedProducts.isEmpty { priceRow }
                 
+                if cartViewModel.selectedProducts.isEmpty { emptyView }
             }
+            .padding(.bottom, 100)
             
-            if cartViewModel.selectedProducts.isEmpty { emptyView }
         }
         .navigationTitle("SEPETİM")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
+        }
         .overlay(alignment: .bottom) {
             if !cartViewModel.selectedProducts.isEmpty {
                 approveButton
@@ -108,7 +116,14 @@ extension BasketView {
     
 extension BasketView {
     func handleApproveButtonClick() {
-        
+        cartViewModel.clearCart()
+        makeAlert(title: "Başarılı", message: "Siparişiniz alınmıştır.")
+    }
+    
+    func makeAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert.toggle()
     }
 }
 
