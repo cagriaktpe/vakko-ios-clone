@@ -20,6 +20,10 @@ struct AddCommentView: View {
     @State private var comment: String = ""
     @State private var rating: Int = 0
     
+    @Binding var showAlert: Bool
+    @Binding var alertTitle: String
+    @Binding var alertMessage: String
+    
     var body: some View {
         VStack {
             TextField("Başlık", text: $title)
@@ -90,14 +94,15 @@ extension AddCommentView {
                 try productViewModel.addComment(comment: comment)
                 dismiss()
             } catch {
-                print(error)
+                makeAlert(title: "Hata", message: error.localizedDescription)
             }
         }
         
     }
-}
-
-#Preview {
-    AddCommentView(productId: "123213")
-        .environmentObject(ProductsViewModel())
+    
+    func makeAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert = true
+    }
 }

@@ -13,6 +13,10 @@ struct CommentsView: View {
 
     @State private var comments: [CommentModel] = []
     @State private var showAddCommentView = false
+    
+    @State private var showAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
 
     let product: ProductModel
 
@@ -37,20 +41,6 @@ struct CommentsView: View {
                                 .padding(.top, 8)
                                 .padding(.trailing)
                             }
-                            
-                            // for testing
-//                            Menu {
-//                                Button(role: .destructive) {
-//                                    removeComment(comment.commentId)
-//                                } label: {
-//                                    Label("Sil", systemImage: "trash")
-//                                }
-//                            } label: {
-//                                Image(systemName: "ellipsis")
-//                                    .foregroundColor(.gray)
-//                            }
-//                            .padding(.top, 8)
-//                            .padding(.trailing)
                         }
                     Divider()
                 }
@@ -73,11 +63,14 @@ struct CommentsView: View {
             addCommentButton
         }
         .sheet(isPresented: $showAddCommentView) {
-            AddCommentView(productId: product.productId)
+            AddCommentView(productId: product.productId, showAlert: $showAlert, alertTitle: $alertTitle, alertMessage: $alertMessage)
                 .presentationDetents([.medium])
                 .onDisappear {
                     comments = productsViewModel.comments.filter { $0.productId == product.productId }
                 }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
         }
         .onAppear {
             comments = productsViewModel.comments.filter { $0.productId == product.productId }
@@ -95,9 +88,15 @@ extension CommentsView {
                 try await productsViewModel.removeComment(commentId: commentId)
                 comments = comments.filter { $0.commentId != commentId }
             } catch {
-                print(error.localizedDescription)
+                makeAlert(title: "Hata", message: "Yorum silinemedi.")
             }
         }
+    }
+    
+    func makeAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert.toggle()
     }
 }
 
@@ -138,7 +137,11 @@ struct CommentRowView: View {
 extension CommentsView {
     var addCommentButton: some View {
         Button {
-            showAddCommentView.toggle()
+            do {
+                try handleAddCommentButtonClick()
+            } catch {
+                makeAlert(title: "Hata", message: error.localizedDescription)
+            }
         } label: {
             Text("YORUM YAP")
                 .font(.title2)
@@ -153,12 +156,37 @@ extension CommentsView {
     }
 }
 
-#Preview {
-    let product = ProductModel(productId: "1", thumbnail: "https://i.ibb.co/D9JYsjV/orange-forward.jpg", images: ["https://i.ibb.co/D9JYsjV/orange-forward.jpg", "https://i.ibb.co/GsmsHzN/orange-back.jpg"], title: "Turuncu Elbise", description: "Description", price: 100, sizes: ["34", "36", "38", "40", "42"], category: CategoryType.woman.rawValue, subCategory: WomanSubCategoryType.dress.rawValue, careDetail: "This is a care", exchangeDetail: "This is an exchange")
+extension CommentsView {
+    func handleAddCommentButtonClick() throws {
+        
+        guard viewModel.user != nil else {
+            throw NSError(domain: "CommentsView", code: 0, userInfo: [NSLocalizedDescriptionKey: "Yorum yapabilmek için giriş yapmalısınız."])
+        }
+        
+        showAddCommentView.toggle()
+        
+    }
+}
 
+#Preview {
     return NavigationStack {
-        CommentsView(product: product)
+        CommentsView(product: ProductModel.mockData[0])
             .environmentObject(ProfileViewModel())
             .environmentObject(ProductsViewModel())
     }
 }
+
+
+// for testing
+//                            Menu {
+//                                Button(role: .destructive) {
+//                                    removeComment(comment.commentId)
+//                                } label: {
+//                                    Label("Sil", systemImage: "trash")
+//                                }
+//                            } label: {
+//                                Image(systemName: "ellipsis")
+//                                    .foregroundColor(.gray)
+//                            }
+//                            .padding(.top, 8)
+//                            .padding(.trailing)

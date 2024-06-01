@@ -116,14 +116,11 @@ extension UserManager {
     func toggleFavoriteProduct(userId: String, productId: String) async throws {
         let user = try await getUser(userId: userId)
         
-        print("I WORKED from UserManager")
        
         if user.favoriteProductIDs?.contains(productId) == true {
             try await removeFavoriteProduct(userId: userId, productId: productId)
-            print("I WORKED from UserManager: removeFavoriteProduct")
         } else {
             try await addFavoriteProduct(userId: userId, productId: productId)
-            print("I WORKED from UserManager: addFavoriteProduct")
         }
     }
     

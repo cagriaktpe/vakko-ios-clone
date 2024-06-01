@@ -12,6 +12,10 @@ struct ProfileView: View {
 
     @Binding var showSignInView: Bool
     @Binding var tabSelection: Int
+    
+    @State private var showAlert = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage = ""
 
     var body: some View {
         List {
@@ -35,6 +39,9 @@ struct ProfileView: View {
                 SignInView(showSignedInView: $showSignInView, tabSelection: $tabSelection)
             }
         })
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
+        }
         .onChange(of: showSignInView) { _ in
             Task {
                 try? await viewModel.loadCurrentUser()
@@ -150,8 +157,14 @@ extension ProfileView {
             try viewModel.signOut()
             showSignInView = true
         } catch {
-            print("Error signing out: \(error.localizedDescription)")
+            makeAlert(title: "Hata", message: "Çıkış yapılırken bir hata oluştu.")
         }
+    }
+    
+    func makeAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert = true
     }
 }
 

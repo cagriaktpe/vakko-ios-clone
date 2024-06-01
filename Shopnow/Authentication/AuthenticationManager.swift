@@ -53,7 +53,6 @@ final class AuthenticationManager {
             }
         }
         
-        print("Providers: \(providers)")
         return providers
     }
     

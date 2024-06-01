@@ -113,7 +113,9 @@ extension ProfileViewModel {
 // favorities related
 extension ProfileViewModel {
     func toggleFavoriteProduct(product: ProductModel) async throws {
-        guard let user = user else { return }
+        guard let user = user else {
+            throw NSError(domain: "ProfileViewModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "Favorilere eklemek için lütfen giriş yapınız."])
+        }
                 
         try await UserManager.shared.toggleFavoriteProduct(userId: user.userId, productId: String(product.productId))
         self.user = try await UserManager.shared.getUser(userId: user.userId)
