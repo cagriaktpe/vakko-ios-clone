@@ -21,7 +21,6 @@ struct ProfileView: View {
         List {
             header
                 .listRowInsets(EdgeInsets())
-            orders
             favorites
             account
             addresses
@@ -71,22 +70,6 @@ extension ProfileView {
         .frame(maxHeight: .infinity, alignment: .center)
         .padding(.vertical, 5)
         .background(Color.accentColor)
-    }
-
-    var orders: some View {
-        ZStack {
-            NavigationLink(destination: Text("SİPARİŞLERİM")) {
-                EmptyView()
-            }
-            .opacity(0)
-
-            HStack {
-                Text("SİPARİŞLERİM")
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundStyle(.gray)
-            }
-        }
     }
 
     var favorites: some View {
@@ -271,3 +254,20 @@ extension ProfileView {
 //            }
 //            .disabled(true)
 //            .foregroundStyle(Color.secondary)
+
+//
+//var orders: some View {
+//    ZStack {
+//        NavigationLink(destination: Text("SİPARİŞLERİM")) {
+//            EmptyView()
+//        }
+//        .opacity(0)
+//
+//        HStack {
+//            Text("SİPARİŞLERİM")
+//            Spacer()
+//            Image(systemName: "chevron.right")
+//                .foregroundStyle(.gray)
+//        }
+//    }
+//}
