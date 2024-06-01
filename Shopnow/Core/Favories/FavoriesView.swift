@@ -12,21 +12,13 @@ struct FavoriesView: View {
     @Binding var tabSelection: Int
 
     @State var favoriteProducts: [ProductModel] = []
-    
-    // alert
-    @State private var showAlert = false
-    @State private var alertTitle = ""
-    @State private var alertMessage = ""
-    
-    // size picker
-    @State private var showSizePicker = false
 
     var body: some View {
         ScrollView {
             VStack {
                 ForEach(favoriteProducts, id: \.self) { product in
                     NavigationLink(destination: ProductDetailView(product: product)) {
-                        FavoriRowView(product: product, favoriteProducts: $favoriteProducts, showSizePicker: $showSizePicker, showAlert: $showAlert, alertTitle: $alertTitle, alertMessage: $alertMessage)
+                        FavoriRowView(product: product, favoriteProducts: $favoriteProducts)
                     }
                     Divider()
                         .padding(.leading)
@@ -63,9 +55,6 @@ struct FavoriesView: View {
         .navigationTitle("FAVORİLERİM")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
-        }
         .onAppear {
             Task {
                 do {
@@ -87,15 +76,6 @@ struct FavoriRowView: View {
 
     @EnvironmentObject var viewModel: ProfileViewModel
     @EnvironmentObject var cartViewModel: CartViewModel
-    
-    // size
-    @State private var selectedSize = ""
-    @Binding var showSizePicker: Bool
-    
-    // alert
-    @Binding var showAlert: Bool
-    @Binding var alertTitle: String
-    @Binding var alertMessage: String
 
     var body: some View {
         HStack {
@@ -125,8 +105,8 @@ struct FavoriRowView: View {
 
                 Spacer()
 
-                Button(action: handleAddToCart) {
-                    Text("Sepete Ekle")
+                NavigationLink(destination: ProductDetailView(product: product)) {
+                    Text("Ürünü İncele")
                         .font(.headline)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.accentColor)
@@ -134,6 +114,8 @@ struct FavoriRowView: View {
                         .border(Color.accentColor, width: 1)
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
+               
+                
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .overlay(alignment: .topTrailing) {
@@ -146,10 +128,6 @@ struct FavoriRowView: View {
             .padding(.top, 1)
 
             Spacer()
-        }
-        .sheet(isPresented: $showSizePicker) {
-            SizePicker(selectedSize: $selectedSize, showSizePicker: $showSizePicker, showAlert: $showAlert, alertTitle: $alertTitle, alertMessage: $alertMessage, product: product)
-                .presentationDetents([.height(250)])
         }
         .padding()
     }
@@ -171,71 +149,6 @@ extension FavoriRowView {
         guard let user = viewModel.user else { return false }
 
         return user.favoriteProductIDs?.contains(product.productId) ?? false
-    }
-    
-    func handleAddToCart() {
-        if selectedSize.isEmpty {
-            showSizePicker.toggle()
-            return
-        }
-        
-        cartViewModel.addProduct(product: product, size: selectedSize, quantity: 1)
-        
-        alertTitle = "Başarılı"
-        alertMessage = "Ürün sepete eklendi."
-        showAlert = true
-    }
-}
-
-struct SizePicker: View {
-    @Binding var selectedSize: String
-    @Binding var showSizePicker: Bool
-    
-    @EnvironmentObject var cartViewModel: CartViewModel
-    
-    // alert
-    @Binding var showAlert: Bool
-    @Binding var alertTitle: String
-    @Binding var alertMessage: String
-    
-    let product: ProductModel
-
-    var body: some View {
-        
-        Picker("Beden Seçimi", selection: $selectedSize) {
-            ForEach(product.sizes, id: \.self) { size in
-                Text(size)
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.primary)
-                    .padding()
-            }
-        }
-        .pickerStyle(.wheel)
-        .overlay(alignment: .topTrailing) {
-            Button(action: {
-                showSizePicker = false
-                handleAddToCart()
-            }) {
-                Text("Tamam")
-                    .font(.headline)
-                    .foregroundColor(Color.accentColor)
-            }
-            .padding(.trailing)
-        }
-    }
-    
-    func handleAddToCart() {
-        if selectedSize.isEmpty {
-            showSizePicker.toggle()
-            return
-        }
-        
-        cartViewModel.addProduct(product: product, size: selectedSize, quantity: 1)
-        
-        alertTitle = "Başarılı"
-        alertMessage = "Ürün sepete eklendi."
-        showAlert = true
     }
 }
 
