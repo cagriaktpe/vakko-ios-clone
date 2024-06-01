@@ -204,6 +204,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		813752CD2C0B123600BC389A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				81B6F5F92C05D7A700922E12 /* AddressCardView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		8152D2C62C0A16E700794036 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,9 +241,9 @@
 		8179D43A2C04EE2200927E8E /* Addresses */ = {
 			isa = PBXGroup;
 			children = (
+				813752CD2C0B123600BC389A /* Components */,
 				8179D43B2C04EE4000927E8E /* MyAddressesView.swift */,
 				8179D43D2C04EFBA00927E8E /* AddAddressView.swift */,
-				81B6F5F92C05D7A700922E12 /* AddressCardView.swift */,
 				81B2A2FE2C0729B300E31612 /* UpdateAddressView.swift */,
 			);
 			path = Addresses;

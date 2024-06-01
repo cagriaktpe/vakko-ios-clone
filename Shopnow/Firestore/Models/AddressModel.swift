@@ -66,3 +66,19 @@ struct AddressModel: Codable, Identifiable {
         self.phoneNumber = ""
     }
 }
+
+extension AddressModel {
+    static let dummyData = AddressModel(
+        id: "1",
+        addressType: .home,
+        title: "Ev",
+        name: "Samet Çağrı",
+        surname: "Aktepe",
+        city: "İstanbul",
+        district: "Ümraniye",
+        neighborhood: "Çakmak",
+        postCode: "34770",
+        address: "Çakmak Mah. 123. Sok. No: 4",
+        phoneNumber: "5555555555"
+    )
+}

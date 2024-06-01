@@ -116,8 +116,6 @@ extension AddressCardView {
 }
 
 #Preview {
-    
-    let testAddress = AddressModel(addressType: .home, title: "Ev", name: "Samet", surname: "Aktepe", city: "İstanbul", district: "Beyoğlu", neighborhood: "Karaköy", postCode: "34000", address: "Karaköy Mahallesi, Kemeraltı Caddesi, No: 5", phoneNumber: "5534513358")
-    
-    return AddressCardView(isPreferred: false, address: testAddress)
+    return (AddressCardView(isPreferred: false, address: AddressModel.dummyData)
+        .environmentObject(ProfileViewModel()))
 }
