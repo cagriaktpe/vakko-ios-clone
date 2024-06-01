@@ -16,21 +16,16 @@ struct AddCommentView: View {
     
     let productId: String
     
-    @State private var title: String = ""
+    @State private var title: String = "" // TODO: unused, delete it
     @State private var comment: String = ""
     @State private var rating: Int = 0
     
-    @Binding var showAlert: Bool
-    @Binding var alertTitle: String
-    @Binding var alertMessage: String
+    @State var showAlert: Bool = false
+    @State var alertTitle: String = ""
+    @State var alertMessage: String = ""
     
     var body: some View {
         VStack {
-            TextField("Başlık", text: $title)
-                .padding()
-                .background(Color(.systemGray6))
-                .padding(.horizontal)
-            
             TextEditor(text: $comment)
                 .frame(height: 80)
                 .padding()
@@ -49,7 +44,6 @@ struct AddCommentView: View {
                     }
                 }
                 
-            
             HStack {
                 Text("Puan:")
                 Spacer()
@@ -79,13 +73,22 @@ struct AddCommentView: View {
             .padding()
         }
         .padding()
+        .alert(isPresented: $showAlert, content: {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
+        })
     }
 }
 
 extension AddCommentView {
     func handleAddCommentButtonClick() {
-        
         guard profileViewModel.user != nil else { return }
+        
+        do {
+            try checkFields()
+        } catch {
+            makeAlert(title: "Hata", message: error.localizedDescription)
+            return
+        }
         
         let comment = CommentModel(authorId: profileViewModel.user?.userId ?? "", productId: productId, authorName: profileViewModel.user?.name ?? "", title: title, comment: comment, rating: rating, dateCreated: Date())
         
@@ -97,7 +100,12 @@ extension AddCommentView {
                 makeAlert(title: "Hata", message: error.localizedDescription)
             }
         }
-        
+    }
+    
+    func checkFields() throws {
+        if comment.isEmpty || rating == 0 {
+            throw NSError(domain: "Hata", code: 0, userInfo: [NSLocalizedDescriptionKey: "Yorum ve puan alanları boş bırakılamaz."])
+        }
     }
     
     func makeAlert(title: String, message: String) {

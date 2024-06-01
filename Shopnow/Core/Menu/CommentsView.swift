@@ -63,11 +63,20 @@ struct CommentsView: View {
             addCommentButton
         }
         .sheet(isPresented: $showAddCommentView) {
-            AddCommentView(productId: product.productId, showAlert: $showAlert, alertTitle: $alertTitle, alertMessage: $alertMessage)
-                .presentationDetents([.medium])
-                .onDisappear {
-                    comments = productsViewModel.comments.filter { $0.productId == product.productId }
-                }
+            NavigationStack {
+                AddCommentView(productId: product.productId)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Kapat") {
+                                showAddCommentView.toggle()
+                            }
+                        }
+                    }
+            }
+            .presentationDetents([.height(350)])
+            .onDisappear {
+                comments = productsViewModel.comments.filter { $0.productId == product.productId }
+            }
         }
         .alert(isPresented: $showAlert) {
             Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
