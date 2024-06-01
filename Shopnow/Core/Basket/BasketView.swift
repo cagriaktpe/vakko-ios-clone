@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct BasketView: View {
-    
     @EnvironmentObject var cartViewModel: CartViewModel
     
     @Binding var tabSelection: Int
@@ -17,38 +16,17 @@ struct BasketView: View {
         ScrollView {
             VStack {
                 ForEach(cartViewModel.selectedProducts, id: \.self) { selectedProduct in
-                    BasketRowView(selectedProduct: selectedProduct)
+                    BasketRowView(selectedProduct: selectedProduct, quantity: Binding(get: {
+                        cartViewModel.selectedProducts.first(where: { $0.product.productId == selectedProduct.product.productId && $0.size == selectedProduct.size })?.quantity ?? 1
+                    }, set: { newValue in
+                        cartViewModel.updateQuantity(product: selectedProduct.product, size: selectedProduct.size, quantity: newValue)
+                    }))
                         
                     Divider()
                 }
             }
             
-            if cartViewModel.selectedProducts.isEmpty {
-                VStack(spacing: 20) {
-                    Text("Sepetinizde ürün bulunmamaktadır.")
-                        .font(.headline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.primary)
-                        .padding()
-                    
-                    Button(action: {
-                        tabSelection = 0
-                    }) {
-                        Text("Ürünleri Keşfet")
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.accentColor)
-                    }
-                }
-                .frame(maxWidth: .infinity)
-                .frame(height: 600)
-                .padding(36)
-            }
-            
-            
+            if cartViewModel.selectedProducts.isEmpty { emptyView }
         }
         .navigationTitle("SEPETİM")
         .navigationBarTitleDisplayMode(.inline)
@@ -67,6 +45,31 @@ struct BasketView: View {
 }
 
 extension BasketView {
+    var emptyView: some View {
+        VStack(spacing: 20) {
+            Text("Sepetinizde ürün bulunmamaktadır.")
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundColor(.primary)
+                .padding()
+            
+            Button(action: {
+                tabSelection = 0
+            }) {
+                Text("Ürünleri Keşfet")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.accentColor)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 600)
+        .padding(36)
+    }
+    
     var approveButton: some View {
         Button(action: handleApproveButtonClick) {
             Text("SEPETİ ONAYLA")
@@ -89,86 +92,10 @@ extension BasketView {
     }
 }
 
-struct BasketRowView: View {
-    let selectedProduct: SelectedProductModel
-    @State private var quantity: Int = 1
-
-    @EnvironmentObject var viewModel: ProfileViewModel
-    @EnvironmentObject var cartViewModel: CartViewModel
-
-    var body: some View {
-        HStack {
-            AsyncImage(url: URL(string: selectedProduct.product.images.first ?? "")) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 120, height: 150)
-                    .clipped()
-            } placeholder: {
-                ProgressView()
-            }
-            .frame(width: 120, height: 150)
-            .border(Color.gray, width: 1)
-
-            VStack(alignment: .leading) {
-                Text(selectedProduct.product.title.uppercased())
-                    .font(.headline)
-                    .fontWeight(.regular)
-                    .lineLimit(2)
-                    .foregroundColor(.primary)
-
-                Text("₺\(selectedProduct.product.price, specifier: "%.2f")")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color.accentColor)
-                
-                Text("Beden: \(selectedProduct.size)")
-                    .padding(.vertical, 5)
-                
-                Picker("Adet", selection: $quantity) {
-                    ForEach(1...10, id: \.self) { number in
-                        Text("\(number) adet")
-                            .tag(number)
-                    }
-                }
-                .pickerStyle(.menu)
-                .border(Color.gray, width: 1)
-                .padding(.top, 10)
-                
-
-                Spacer()
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .overlay(alignment: .topTrailing) {
-                Button(action: handleDiscardButtonClick) {
-                    Image(systemName: "xmark")
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                }
-            }
-            .padding(.top, 1)
-
-            Spacer()
-        }
-        .padding()
-        .onAppear {
-            quantity = selectedProduct.quantity
-        }
-    }
-}
-
-extension BasketRowView {
-    func handleDiscardButtonClick() {
-        cartViewModel.removeProduct(product: selectedProduct.product, size: selectedProduct.size)
-    }
-
-}
-
 #Preview {
     NavigationStack {
         BasketView(tabSelection: .constant(3))
             .environmentObject(CartViewModel())
             .environmentObject(ProfileViewModel())
     }
-    
 }

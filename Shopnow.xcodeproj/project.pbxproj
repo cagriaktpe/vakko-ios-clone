@@ -19,6 +19,7 @@
 		81269E162BF3940600A2137D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81269E152BF3940600A2137D /* ProfileView.swift */; };
 		813752C22C0B064B00BC389A /* iOSCheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813752C12C0B064B00BC389A /* iOSCheckboxToggleStyle.swift */; };
 		813752C42C0B065E00BC389A /* iOSCheckBoxToggleStyle2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813752C32C0B065E00BC389A /* iOSCheckBoxToggleStyle2.swift */; };
+		813752EC2C0B1D9500BC389A /* BasketRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813752EB2C0B1D9500BC389A /* BasketRowView.swift */; };
 		8152D2BD2C09EA0D00794036 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152D2BC2C09EA0D00794036 /* CommentModel.swift */; };
 		8152D2BF2C09EAA300794036 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152D2BE2C09EAA300794036 /* CommentManager.swift */; };
 		8152D2C32C09EBF200794036 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152D2C22C09EBF200794036 /* CommentsView.swift */; };
@@ -71,6 +72,7 @@
 		81269E152BF3940600A2137D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		813752C12C0B064B00BC389A /* iOSCheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		813752C32C0B065E00BC389A /* iOSCheckBoxToggleStyle2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCheckBoxToggleStyle2.swift; sourceTree = "<group>"; };
+		813752EB2C0B1D9500BC389A /* BasketRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketRowView.swift; sourceTree = "<group>"; };
 		8152D2BC2C09EA0D00794036 /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		8152D2BE2C09EAA300794036 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
 		8152D2C22C09EBF200794036 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				81269E132BF393DD00A2137D /* BasketView.swift */,
+				813752EB2C0B1D9500BC389A /* BasketRowView.swift */,
 			);
 			path = Basket;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				81B35BC22C00CE07008BBF21 /* ProfileViewModel.swift in Sources */,
 				81B6F5F82C05D4DA00922E12 /* Alert.swift in Sources */,
 				81269DFF2BF38F3900A2137D /* ShopnowApp.swift in Sources */,
+				813752EC2C0B1D9500BC389A /* BasketRowView.swift in Sources */,
 				81B2A2FF2C0729B300E31612 /* UpdateAddressView.swift in Sources */,
 				8152D2C32C09EBF200794036 /* CommentsView.swift in Sources */,
 				818660042C01E282003CBF97 /* SignUpView.swift in Sources */,
