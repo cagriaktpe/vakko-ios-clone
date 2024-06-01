@@ -38,7 +38,7 @@ struct MyAddressesView: View {
             }
         }
         .padding(.horizontal)
-        .navigationTitle("Adreslerim")
+        .navigationTitle("ADRESLERİM")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
         .toolbar {

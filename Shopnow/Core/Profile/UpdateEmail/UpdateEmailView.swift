@@ -30,7 +30,7 @@ struct UpdateEmailView: View {
             }
             .padding(.top)
         }
-        .navigationTitle("E posta Güncelle")
+        .navigationTitle("E POSTA GÜNCELLE")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
         .alert(isPresented: $showAlert) {

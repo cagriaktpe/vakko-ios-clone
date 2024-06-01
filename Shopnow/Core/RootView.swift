@@ -44,7 +44,7 @@ struct RootView: View {
             .toolbarBackground(.white, for: .tabBar)
 
             NavigationStack {
-                BasketView()
+                BasketView(tabSelection: $tabSelection)
             }
 
             .tabItem {

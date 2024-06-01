@@ -53,7 +53,7 @@ struct SettingsView: View {
             vm.loadAuthProviders()
             vm.loadAuthUser()
         }
-        .navigationTitle("Settings")
+        .navigationTitle("SETTINGS")
     }
 }
 

@@ -28,7 +28,7 @@ struct SignUpView: View {
         ScrollView {
             signInSection
         }
-        .navigationTitle("Üye Ol")
+        .navigationTitle("ÜYE OL")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
         .sheet(isPresented: $showDatePicker) {

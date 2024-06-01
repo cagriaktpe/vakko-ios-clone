@@ -29,7 +29,7 @@ struct SignInView: View {
             }
             .padding(.top)
         }
-        .navigationTitle("Giriş")
+        .navigationTitle("GİRİŞ")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

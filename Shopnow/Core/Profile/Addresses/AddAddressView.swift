@@ -35,7 +35,7 @@ struct AddAddressView: View {
         ScrollView {
             formSection
         }
-        .navigationTitle("Yeni Adres Ekle")
+        .navigationTitle("YENİ ADRES EKLE")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
         .sheet(isPresented: $showAddressTypePicker) {

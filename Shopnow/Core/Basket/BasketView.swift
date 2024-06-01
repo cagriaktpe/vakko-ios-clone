@@ -11,6 +11,8 @@ struct BasketView: View {
     
     @EnvironmentObject var cartViewModel: CartViewModel
     
+    @Binding var tabSelection: Int
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -19,6 +21,31 @@ struct BasketView: View {
                         
                     Divider()
                 }
+            }
+            
+            if cartViewModel.selectedProducts.isEmpty {
+                VStack(spacing: 20) {
+                    Text("Sepetinizde ürün bulunmamaktadır.")
+                        .font(.headline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+                        .padding()
+                    
+                    Button(action: {
+                        tabSelection = 0
+                    }) {
+                        Text("Ürünleri Keşfet")
+                            .font(.headline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.accentColor)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 600)
+                .padding(36)
             }
             
             
@@ -139,7 +166,7 @@ extension BasketRowView {
 
 #Preview {
     NavigationStack {
-        BasketView()
+        BasketView(tabSelection: .constant(3))
             .environmentObject(CartViewModel())
             .environmentObject(ProfileViewModel())
     }

@@ -31,7 +31,7 @@ struct MyAccountView: View {
             }
             .padding(.top)
         }
-        .navigationTitle("Hesabım")
+        .navigationTitle("HESABIM")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
         .alert(isPresented: $showAlert) {

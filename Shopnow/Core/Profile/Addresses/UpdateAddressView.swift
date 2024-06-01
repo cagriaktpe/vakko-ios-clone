@@ -35,7 +35,7 @@ struct UpdateAddressView: View {
         ScrollView {
             formSection
         }
-        .navigationTitle("Adresi Düzenle")
+        .navigationTitle("ADRESİ DÜZENLE")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
         .onAppear {
