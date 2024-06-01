@@ -15,7 +15,11 @@ struct ProductListView: View {
 
     var body: some View {
         ScrollView {
-            subCategoriesSlider
+            if category == "Erkek" {
+                manSubCategoriesSlider
+            } else {
+                womanSubCategoriesSlider
+            }
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                 ForEach(vm.products, id: \.self) { product in
@@ -36,10 +40,31 @@ struct ProductListView: View {
 }
 
 extension ProductListView {
-    var subCategoriesSlider: some View {
+    var womanSubCategoriesSlider: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
                 ForEach(WomanSubCategoryType.allCases, id: \.self) { subCategoryIteration in
+                    NavigationLink(destination: ProductListView(category: category, subCategory: subCategoryIteration.rawValue)) {
+                        Text(subCategoryIteration.rawValue.uppercased())
+                            .font(.subheadline)
+                            .foregroundColor(subCategory == subCategoryIteration.rawValue ? Color.white : Color.primary)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.clear)
+                            .cornerRadius(5)
+                            .border(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.primary, width: 1)
+                    }
+                    
+                }
+            }
+            .padding(.horizontal)
+        }
+    }
+    
+    var manSubCategoriesSlider: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 16) {
+                ForEach(ManSubCategoryType.allCases, id: \.self) { subCategoryIteration in
                     NavigationLink(destination: ProductListView(category: category, subCategory: subCategoryIteration.rawValue)) {
                         Text(subCategoryIteration.rawValue.uppercased())
                             .font(.subheadline)
