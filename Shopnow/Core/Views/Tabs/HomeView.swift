@@ -12,9 +12,18 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 0) {
+                    
                     HomeCardView(title: "İLKBAHAR/YAZ '24", image: "Man-Woman-Home")
-                    HomeCardView(title: "KADIN", image: "Woman-Home")
-                    HomeCardView(title: "ERKEK", image: "Man-Home")
+                    
+                    NavigationLink(destination: SubCategoriesView(category: CategoryType.woman)) {
+                        HomeCardView(title: "KADIN", image: "Woman-Home")
+
+                    }
+                    
+                    NavigationLink(destination: SubCategoriesView(category: CategoryType.man)) {
+                        HomeCardView(title: "ERKEK", image: "Man-Home")
+
+                    }
                 }
             }
             .ignoresSafeArea()

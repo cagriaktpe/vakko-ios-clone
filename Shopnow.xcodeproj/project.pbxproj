@@ -255,7 +255,7 @@
 				81269E002BF38F3900A2137D /* RootView.swift */,
 				81B35BBA2C00CD0F008BBF21 /* Shared */,
 				81B35BB92C00CCE6008BBF21 /* Basket */,
-				81B35BB82C00CCE1008BBF21 /* Categories */,
+				81B35BB82C00CCE1008BBF21 /* Menu */,
 				81B35BB72C00CCD9008BBF21 /* Favories */,
 				81B35BB52C00CC3D008BBF21 /* Profile */,
 				81B35BB42C00CC2B008BBF21 /* Home */,
@@ -292,7 +292,7 @@
 			path = Favories;
 			sourceTree = "<group>";
 		};
-		81B35BB82C00CCE1008BBF21 /* Categories */ = {
+		81B35BB82C00CCE1008BBF21 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				81269E112BF393C100A2137D /* CategoriesView.swift */,
@@ -302,7 +302,7 @@
 				8152D2C22C09EBF200794036 /* CommentsView.swift */,
 				8152D2C42C09FA6C00794036 /* AddCommentView.swift */,
 			);
-			path = Categories;
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		81B35BB92C00CCE6008BBF21 /* Basket */ = {
