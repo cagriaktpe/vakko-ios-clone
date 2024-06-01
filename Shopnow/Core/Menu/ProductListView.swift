@@ -47,11 +47,10 @@ extension ProductListView {
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
                             .background(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.clear)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.primary.opacity(0.8), lineWidth: 1)
-                            )
+                            .cornerRadius(5)
+                            .border(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.primary, width: 1)
                     }
+                    
                 }
             }
             .padding(.horizontal)
