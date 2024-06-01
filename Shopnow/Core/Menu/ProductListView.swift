@@ -24,7 +24,8 @@ struct ProductListView: View {
                     }
                 }
             }
-            .padding()
+            .padding(.vertical)
+            .padding(.horizontal, 8)
         }
         .navigationTitle(subCategory.uppercased())
         .navigationBarTitleDisplayMode(.inline)
@@ -41,27 +42,34 @@ struct ProductCard: View {
                 image
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 170, height: 280)
+                    .frame(width: 180, height: 280)
                     .clipped()
             } placeholder: {
                 ProgressView()
             }
-            .frame(width: 170, height: 280)
+            .frame(width: 180, height: 280)
 
             VStack(alignment: .center) {
                 Text(product.title.uppercased())
-                    .font(.headline)
+                    .font(.subheadline)
                     .lineLimit(1)
                     .foregroundStyle(Color.primary)
 
-                Text("₺\(product.price, specifier: "%.2f")")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(Color.accentColor)
+                HStack {
+                    Text("₺\(product.price, specifier: "%.2f")")
+                        .font(.footnote)
+                        .foregroundStyle(Color.accentColor)
+                    
+                    Text ("₺\(product.price + 100, specifier: "%.2f")")
+                        .font(.footnote)
+                        .foregroundStyle(.gray)
+                        .strikethrough()
+                }
+                
             }
         }
         .background(.ultraThinMaterial)
-        .shadow(radius: 5)
+        .shadow(color: Color.primary.opacity(0.1), radius: 5, x: 0, y: 2)
     }
 }
 
