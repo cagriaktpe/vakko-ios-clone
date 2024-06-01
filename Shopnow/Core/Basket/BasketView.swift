@@ -24,6 +24,9 @@ struct BasketView: View {
                         
                     Divider()
                 }
+                
+                if !cartViewModel.selectedProducts.isEmpty { priceRow }
+                
             }
             
             if cartViewModel.selectedProducts.isEmpty { emptyView }
@@ -68,6 +71,23 @@ extension BasketView {
         .frame(maxWidth: .infinity)
         .frame(height: 600)
         .padding(36)
+    }
+    
+    var priceRow: some View {
+        HStack {
+            Text("Toplam Tutar")
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundColor(.primary)
+            
+            Spacer()
+            
+            Text("₺\(cartViewModel.total, specifier: "%.2f")")
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundColor(.accentColor)
+        }
+        .padding()
     }
     
     var approveButton: some View {

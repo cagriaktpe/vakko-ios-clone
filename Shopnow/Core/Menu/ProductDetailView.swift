@@ -269,7 +269,13 @@ extension ProductDetailView {
             return
         }
         
-        cartViewModel.addProduct(product: product, size: selectedSize, quantity: 1)
+        do {
+            try cartViewModel.addProduct(product: product, size: selectedSize, quantity: 1)
+        } catch {
+            makeAlert(title: "Hata", message: error.localizedDescription)
+            return
+        }
+        
         makeAlert(title: "Başarılı", message: "Ürün sepete eklendi.")
     }
     
