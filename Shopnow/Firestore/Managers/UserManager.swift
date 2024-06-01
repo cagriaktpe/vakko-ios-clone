@@ -70,6 +70,7 @@ final class UserManager {
     }
 }
 
+// address management
 extension UserManager {
     func addAddress(userId: String, address: AddressModel) async throws {
         let data: [String: Any] = [
@@ -110,6 +111,7 @@ extension UserManager {
     }
 }
 
+// favorite management
 extension UserManager {
     func toggleFavoriteProduct(userId: String, productId: String) async throws {
         let user = try await getUser(userId: userId)

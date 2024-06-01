@@ -17,6 +17,8 @@
 		81269E122BF393C100A2137D /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81269E112BF393C100A2137D /* CategoriesView.swift */; };
 		81269E142BF393DD00A2137D /* BasketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81269E132BF393DD00A2137D /* BasketView.swift */; };
 		81269E162BF3940600A2137D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81269E152BF3940600A2137D /* ProfileView.swift */; };
+		813752C22C0B064B00BC389A /* iOSCheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813752C12C0B064B00BC389A /* iOSCheckboxToggleStyle.swift */; };
+		813752C42C0B065E00BC389A /* iOSCheckBoxToggleStyle2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813752C32C0B065E00BC389A /* iOSCheckBoxToggleStyle2.swift */; };
 		8152D2BD2C09EA0D00794036 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152D2BC2C09EA0D00794036 /* CommentModel.swift */; };
 		8152D2BF2C09EAA300794036 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152D2BE2C09EAA300794036 /* CommentManager.swift */; };
 		8152D2C32C09EBF200794036 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8152D2C22C09EBF200794036 /* CommentsView.swift */; };
@@ -67,6 +69,8 @@
 		81269E112BF393C100A2137D /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		81269E132BF393DD00A2137D /* BasketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketView.swift; sourceTree = "<group>"; };
 		81269E152BF3940600A2137D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		813752C12C0B064B00BC389A /* iOSCheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCheckboxToggleStyle.swift; sourceTree = "<group>"; };
+		813752C32C0B065E00BC389A /* iOSCheckBoxToggleStyle2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCheckBoxToggleStyle2.swift; sourceTree = "<group>"; };
 		8152D2BC2C09EA0D00794036 /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		8152D2BE2C09EAA300794036 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
 		8152D2C22C09EBF200794036 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
@@ -165,15 +169,37 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		8152D2C02C09EB3300794036 /* Views */ = {
+		813752BF2C0B05BA00BC389A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				81269E112BF393C100A2137D /* CategoriesView.swift */,
-				815EFA932C0870BD007F106D /* SubCategoriesView.swift */,
-				815EFA9B2C087CEB007F106D /* ProductListView.swift */,
-				815EFA9D2C08995F007F106D /* ProductDetailView.swift */,
-				8152D2C22C09EBF200794036 /* CommentsView.swift */,
-				8152D2C42C09FA6C00794036 /* AddCommentView.swift */,
+				8152D2BE2C09EAA300794036 /* CommentManager.swift */,
+				81B35BC42C00CE3C008BBF21 /* UserManager.swift */,
+				815EFA952C0879E0007F106D /* ProductManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		813752C02C0B061F00BC389A /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				813752C12C0B064B00BC389A /* iOSCheckboxToggleStyle.swift */,
+				813752C32C0B065E00BC389A /* iOSCheckBoxToggleStyle2.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		813752C52C0B070D00BC389A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				81B35BCC2C00D3E4008BBF21 /* SettingsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		813752C62C0B071500BC389A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				81B35BCE2C00D407008BBF21 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -240,13 +266,12 @@
 		81B35BB52C00CC3D008BBF21 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				81269E152BF3940600A2137D /* ProfileView.swift */,
 				8179D43A2C04EE2200927E8E /* Addresses */,
 				81675A3A2C04B8A400C2E0C7 /* UpdateEmail */,
 				81675A342C049AC300C2E0C7 /* Account */,
 				81B35BCB2C00D3D8008BBF21 /* Settings */,
 				81B35BC62C00D07D008BBF21 /* Authentication */,
-				81B35BC02C00CDD3008BBF21 /* ViewModels */,
-				81B35BBF2C00CDCA008BBF21 /* Views */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -262,7 +287,12 @@
 		81B35BB82C00CCE1008BBF21 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				8152D2C02C09EB3300794036 /* Views */,
+				81269E112BF393C100A2137D /* CategoriesView.swift */,
+				815EFA932C0870BD007F106D /* SubCategoriesView.swift */,
+				815EFA9B2C087CEB007F106D /* ProductListView.swift */,
+				815EFA9D2C08995F007F106D /* ProductDetailView.swift */,
+				8152D2C22C09EBF200794036 /* CommentsView.swift */,
+				8152D2C42C09FA6C00794036 /* AddCommentView.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -278,6 +308,7 @@
 		81B35BBA2C00CD0F008BBF21 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				813752C02C0B061F00BC389A /* Styles */,
 				8152D2C62C0A16E700794036 /* ViewModels */,
 			);
 			path = Shared;
@@ -293,27 +324,10 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		81B35BBF2C00CDCA008BBF21 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				81269E152BF3940600A2137D /* ProfileView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		81B35BC02C00CDD3008BBF21 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		81B35BC32C00CE2C008BBF21 /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
-				8152D2BE2C09EAA300794036 /* CommentManager.swift */,
-				81B35BC42C00CE3C008BBF21 /* UserManager.swift */,
-				815EFA952C0879E0007F106D /* ProductManager.swift */,
+				813752BF2C0B05BA00BC389A /* Managers */,
 				81B6F5F22C05CFF900922E12 /* Models */,
 			);
 			path = Firestore;
@@ -348,8 +362,8 @@
 		81B35BCB2C00D3D8008BBF21 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				81B35BCC2C00D3E4008BBF21 /* SettingsViewModel.swift */,
-				81B35BCE2C00D407008BBF21 /* SettingsView.swift */,
+				813752C52C0B070D00BC389A /* ViewModels */,
+				813752C62C0B071500BC389A /* Views */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -454,8 +468,10 @@
 				81269E102BF393B100A2137D /* FavoriesView.swift in Sources */,
 				81B35BC52C00CE3C008BBF21 /* UserManager.swift in Sources */,
 				81B35BB22C00CB76008BBF21 /* AuthenticationManager.swift in Sources */,
+				813752C42C0B065E00BC389A /* iOSCheckBoxToggleStyle2.swift in Sources */,
 				8152D2BD2C09EA0D00794036 /* CommentModel.swift in Sources */,
 				815EFA982C087A7D007F106D /* ProductModel.swift in Sources */,
+				813752C22C0B064B00BC389A /* iOSCheckboxToggleStyle.swift in Sources */,
 				815EFA9C2C087CEB007F106D /* ProductListView.swift in Sources */,
 				81B6F5F62C05D10400922E12 /* AddressModel.swift in Sources */,
 				81269E0E2BF3939800A2137D /* HomeView.swift in Sources */,

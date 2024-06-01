@@ -28,6 +28,7 @@ final class ProductsManager {
         return try await productsCollection.getDocuments(as: ProductModel.self)
     }
 
+    // this is a test function
     func printJSON() async throws {
         Task {
             do {

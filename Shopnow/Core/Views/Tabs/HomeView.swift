@@ -27,7 +27,7 @@ struct HomeView: View {
 struct HomeCardView: View {
     let title: String
     let image: String
-    
+
     var body: some View {
         Image(image)
             .resizable()
