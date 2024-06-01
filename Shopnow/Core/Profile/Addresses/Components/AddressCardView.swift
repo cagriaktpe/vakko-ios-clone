@@ -89,15 +89,6 @@ struct AddressCardView: View {
             }
             .offset(y: -20)
         }
-        .onChange(of: isPreferred) { _ in
-            Task {
-                do {
-                    try await vm.setPreferredAddress(addressId: address.id)
-                } catch {
-                    print(error)
-                }
-            }
-        }
     }
 }
 

@@ -10,6 +10,10 @@ import SwiftUI
 struct MyAddressesView: View {
     @EnvironmentObject var viewModel: ProfileViewModel
     
+    @State private var showAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    
     var body: some View {
         ScrollView {
             addAddressButton
@@ -39,6 +43,9 @@ struct MyAddressesView: View {
                 .fontWeight(.semibold)
             }
         }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
+        }
     }
 
     var addAddressButton: some View {
@@ -65,9 +72,15 @@ extension MyAddressesView {
             do {
                 try await viewModel.setPreferredAddress(addressId: addressId)
             } catch {
-                print(error.localizedDescription)
+                makeAlert(title: "Hata", message: "Adres tercih edilemedi.")
             }
         }
+    }
+    
+    func makeAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert.toggle()
     }
 }
 
