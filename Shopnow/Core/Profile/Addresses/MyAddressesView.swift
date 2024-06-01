@@ -54,5 +54,6 @@ struct MyAddressesView: View {
 #Preview {
     NavigationStack {
         MyAddressesView()
+            .environmentObject(ProfileViewModel())
     }
 }

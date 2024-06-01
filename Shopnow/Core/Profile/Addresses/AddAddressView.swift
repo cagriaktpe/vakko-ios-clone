@@ -44,7 +44,10 @@ struct AddAddressView: View {
             }))
         }
     }
+}
 
+// MARK: - Subviews
+extension AddAddressView {
     var formSection: some View {
         VStack(spacing: 12) {
             selectAddressTypeRow
@@ -65,7 +68,7 @@ struct AddAddressView: View {
         .border(Color.gray.opacity(0.4), width: 1)
         .padding(.horizontal)
     }
-
+    
     var selectAddressTypeRow: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Address")
@@ -253,6 +256,8 @@ struct AddAddressView: View {
     }
 }
 
+
+// MARK: - Functions
 extension AddAddressView {
     func checkFields() -> Bool {
         if title.isEmpty || name.isEmpty || surname.isEmpty || city.isEmpty || district.isEmpty || neighborhood.isEmpty || postCode.isEmpty || address.isEmpty || phoneNumber.isEmpty {
@@ -295,5 +300,6 @@ extension AddAddressView {
 #Preview {
     NavigationStack {
         AddAddressView()
+            .environmentObject(ProfileViewModel())
     }
 }
