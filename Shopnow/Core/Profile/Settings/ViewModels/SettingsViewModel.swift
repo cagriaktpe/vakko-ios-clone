@@ -5,6 +5,7 @@
 //  Created by Samet Çağrı Aktepe on 24.05.2024.
 //
 
+// NOTE: THIS VIEWMODEL IS WRITTEN FOR TESTING PURPOSES. IT IS NOT USED IN THE PROJECT
 import Foundation
 
 @MainActor

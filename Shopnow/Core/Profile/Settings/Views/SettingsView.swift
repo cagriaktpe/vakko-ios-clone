@@ -5,6 +5,8 @@
 //  Created by Samet Çağrı Aktepe on 24.05.2024.
 //
 
+
+// NOTE: THIS VIEW IS WRITTEN FOR TESTING PURPOSES. IT IS NOT USED IN THE PROJECT.
 import SwiftUI
 
 struct SettingsView: View {
