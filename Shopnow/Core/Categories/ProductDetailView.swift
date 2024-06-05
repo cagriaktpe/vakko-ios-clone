@@ -44,10 +44,17 @@ struct ProductDetailView: View {
             }
             .padding(.bottom, 100)
         }
-        .navigationTitle(product.title.uppercased())
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
         .toolbar(.hidden, for: .tabBar)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(product.title.uppercased())
+                    .font(.title3)
+                    .fontWeight(.regular)
+                    .foregroundStyle(.primary)
+            }
+        }
         .alert(isPresented: $showAlert) {
             Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
         }
@@ -83,17 +90,18 @@ extension ProductDetailView {
         HStack {
             VStack(alignment: .leading, spacing: 8) {
                 Text(product.title.uppercased())
-                    .font(.title2)
+                    .font(.title3)
+                    .fontWeight(.regular)
                     .foregroundStyle(.primary)
                 
                 HStack {
                     Text("₺\(product.price, specifier: "%.2f")")
-                        .font(.title2)
-                        .fontWeight(.semibold)
+                        .font(.title3)
+                        .fontWeight(.regular)
                         .foregroundStyle(Color.accentColor)
                     
                     Text("₺\(product.price + 100, specifier: "%.2f")")
-                        .font(.title3)
+                        .font(.system(size: 18))
                         .foregroundStyle(.gray)
                         .strikethrough()
                 }
