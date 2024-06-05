@@ -18,7 +18,7 @@ struct RootView: View {
             }
             .tabItem {
                 Image(systemName: "house")
-                Text("Shopnow")
+                Text("Anasayfa")
             }
             .tag(0)
             .toolbarBackground(.white, for: .tabBar)
@@ -28,7 +28,7 @@ struct RootView: View {
             }
             .tabItem {
                 Image(systemName: "list.bullet")
-                Text("Menü")
+                Text("Kategoriler")
             }
             .tag(1)
             .toolbarBackground(.white, for: .tabBar)
@@ -49,7 +49,7 @@ struct RootView: View {
 
             .tabItem {
                 Image(systemName: "basket")
-                Text("Sepetim")
+                Text("Sepet")
             }
             .tag(3)
             .toolbarBackground(.white, for: .tabBar)
@@ -59,7 +59,7 @@ struct RootView: View {
             }
             .tabItem {
                 Image(systemName: "person")
-                Text("Profilim")
+                Text("Hesabım")
             }
             .tag(4)
             .toolbarBackground(.white, for: .tabBar)
