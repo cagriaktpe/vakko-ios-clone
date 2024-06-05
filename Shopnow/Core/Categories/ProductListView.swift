@@ -50,17 +50,23 @@ extension ProductListView {
                             .foregroundColor(subCategory == subCategoryIteration.rawValue ? Color.white : Color.primary)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
-                            .background(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.clear)
-                            .cornerRadius(5)
-                            .border(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.primary, width: 1)
+                            .background(
+                                RoundedRectangle(cornerRadius: 5)
+
+                                    .fill(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.clear)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(subCategory == subCategoryIteration.rawValue ? Color.clear : Color.black, lineWidth: 1)
+                            )
+                            .padding(.vertical, 1)
                     }
-                    
                 }
             }
             .padding(.horizontal)
         }
     }
-    
+
     var manSubCategoriesSlider: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
@@ -75,7 +81,6 @@ extension ProductListView {
                             .cornerRadius(5)
                             .border(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.primary, width: 1)
                     }
-                    
                 }
             }
             .padding(.horizontal)
