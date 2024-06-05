@@ -86,11 +86,17 @@ extension ProductDetailView {
                     .font(.title2)
                     .foregroundStyle(.primary)
                 
-                Text("₺\(product.price, specifier: "%.2f")")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(Color.accentColor)
-                
+                HStack {
+                    Text("₺\(product.price, specifier: "%.2f")")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Color.accentColor)
+                    
+                    Text("₺\(product.price + 100, specifier: "%.2f")")
+                        .font(.title3)
+                        .foregroundStyle(.gray)
+                        .strikethrough()
+                }
             }
             
             Spacer()
