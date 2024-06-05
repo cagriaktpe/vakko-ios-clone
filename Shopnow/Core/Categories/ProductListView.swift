@@ -12,6 +12,8 @@ struct ProductListView: View {
 
     let category: String
     let subCategory: String
+    
+    @State private var productCount: Int = 0
 
     var body: some View {
         ScrollView {
