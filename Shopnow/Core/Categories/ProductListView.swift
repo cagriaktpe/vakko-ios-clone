@@ -35,7 +35,11 @@ struct ProductListView: View {
             .padding(.vertical)
             .padding(.horizontal, 8)
         }
-        .navigationTitle(subCategory.uppercased())
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(subCategory)
+            }
+        }
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
     }
@@ -47,25 +51,26 @@ extension ProductListView {
             HStack(spacing: 16) {
                 ForEach(WomanSubCategoryType.allCases, id: \.self) { subCategoryIteration in
                     NavigationLink(destination: ProductListView(category: category, subCategory: subCategoryIteration.rawValue)) {
-                        Text(subCategoryIteration.rawValue.uppercased())
+                        Text(subCategoryIteration.rawValue)
                             .font(.subheadline)
                             .foregroundColor(subCategory == subCategoryIteration.rawValue ? Color.white : Color.primary)
-                            .padding(.horizontal, 16)
+                            .padding(.horizontal, 10)
                             .padding(.vertical, 8)
                             .background(
-                                RoundedRectangle(cornerRadius: 5)
+                                RoundedRectangle(cornerRadius: 4)
 
                                     .fill(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.clear)
                             )
                             .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(subCategory == subCategoryIteration.rawValue ? Color.clear : Color.black, lineWidth: 1)
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(subCategory == subCategoryIteration.rawValue ? Color.clear : Color.black, lineWidth: 0.8)
                             )
                             .padding(.vertical, 1)
                     }
                 }
             }
             .padding(.horizontal)
+            
         }
     }
 
@@ -77,11 +82,18 @@ extension ProductListView {
                         Text(subCategoryIteration.rawValue.uppercased())
                             .font(.subheadline)
                             .foregroundColor(subCategory == subCategoryIteration.rawValue ? Color.white : Color.primary)
-                            .padding(.horizontal, 16)
+                            .padding(.horizontal, 10)
                             .padding(.vertical, 8)
-                            .background(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.clear)
-                            .cornerRadius(5)
-                            .border(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.primary, width: 1)
+                            .background(
+                                RoundedRectangle(cornerRadius: 4)
+
+                                    .fill(subCategory == subCategoryIteration.rawValue ? Color.accentColor : Color.clear)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(subCategory == subCategoryIteration.rawValue ? Color.clear : Color.black, lineWidth: 0.8)
+                            )
+                            .padding(.vertical, 1)
                     }
                 }
             }
